@@ -206,7 +206,7 @@ header .menu-bar__main-dropdown {
 }
 
 /* Hide last activity button from dropdown */
-a.button__text-secondary[href="/last_activities"], 
+a.button__text-secondary[href="/last_activities"],
 a.button__text-secondary[href="/last_activities?locale=en"],
 a.button__text-secondary[href="/last_activities?locale=de"],
 a.button__text-secondary[href="/processes/pilotquartier/f/664/last_activities?locale=en"],

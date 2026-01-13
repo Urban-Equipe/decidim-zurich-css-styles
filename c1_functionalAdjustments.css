@@ -4,82 +4,81 @@
 #hero-cta {
     display: none;
   }
-  
+
   /*Hide latest meetings & activitiest from topbar*/
   header .main-bar__links-desktop__item-wrapper{
     display: none;
   }
-  
+
   /*TEMP remove card styling improvement introduced in 0.29.4, as it messes with the layout. Will be fixed.*/
   .card__highlight-metadata>*:first-child, .card__grid-metadata>*:first-child {
-   width: auto;
+    width: auto;
   }
-  
+
   /*TEMP remove mobile logo (from favicon) and display normal logo*/
   /*Last checked 15.07.25 LK*/
   /*Replace logo with VBZ logo*/
-  @media (max-width: 1024px){
+  @media (max-width: 1024px) {
     header .main-bar__logo-desktop {
       display: block;
     }
   }
-  
+
   header .main-bar__logo-mobile a {
     display: none;
   }
-  
+
   /*Hide floating helper tooltip*/
   #floating-helper-tip {
     display: none;
   }
-  
-  /* Hide "About this Process" title */ 
+
+  /* Hide "About this Process" title */
   .participatory-space__content-block > .space-y-8 > .h2.decorator {
     display: none;
   }
-  
+
   /* Hide public participation for meeting registrations on entire platform*/
-  
+
   .public-participation, #public-participation  {
     display: none;
   }
-  
+
   .answer-questionnaire__footer > .form__wrapper-checkbox-label,
   .answer-questionnaire__footer > div:first-child > input,
   .answer-questionnaire__footer > div:first-child > label,
-  .answer-questionnaire__footer > div:first-child > select,
+  .answer-questionnaire__footer > div:first-child > select
   {
     display: none;
   }
-  
+
   /* Hide filters for type and activity on entire platform*/
   .filter-container:has(#trigger-menu-activity, #trigger-menu-type) {
     display: none;
   }
-  
+
   /* Hide participatory space references*/
   .participatory-space__block-reference {
     display: none;
   }
-  
+
   /* Hide participation avatars in steps */
   .participatory-space__metadata-link-endorsers {
     display: none;
   }
-  
+
   /* Hide reference and versions in meetings */
   .metadata__container.layout-main__section > .metadata__item:first-child, .metadata__container.layout-main__section > .metadata__item:nth-child(2) {
     display: none;
   }
-  
-  @media (min-width:1024px) {
+
+  @media (min-width: 1024px) {
     .metadata__container {
       justify-content: left;
     }
   }
-  
+
   .metadata__container.layout-main__section > .metadata__item:nth-child(3) {
     border-left: 0;
     padding-left: 0;
   }
-  

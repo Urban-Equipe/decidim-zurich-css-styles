@@ -9,24 +9,30 @@ font-weight: var(--stzh-font-weight-heavy);
 font-size: var(--stzh-font-mega-font-size);
 line-height: var(--stzh-font-mega-text-line-height);
 }
-@media screen and (min-width: 640px){
+@media screen and (min-width: 640px) {
 .text-5xl {
 font-size: var(--stzh-font-giga-font-size);
 line-height: var(--stzh-font-giga-text-line-height);
 letter-spacing: var(--stzh-font-giga-text-letter-spacing);
-  }}
-@media (min-width: 1280px){
+
+  }
+}
+@media (min-width: 1280px) {
 .text-5xl {
 font-size: var(--stzh-font-peta-font-size);
 line-height: var(--stzh-font-peta-text-line-height);
 letter-spacing: var(--stzh-font-peta-text-letter-spacing);
-  }}
-@media (min-width: 1536px){
+
+  }
+}
+@media (min-width: 1536px) {
 .text-5xl {
 font-size: var(--stzh-font-exa-font-size);
 line-height: var(--stzh-font-exa-text-line-height);
 letter-spacing: var(--stzh-font-exa-text-letter-spacing);
-  }}
+
+  }
+}
 
 
 section:has(.participatory-space__hero) {
@@ -102,7 +108,7 @@ max-width: 65ch;
 .participatory-space__container>[id^=html-block] :where(h2):not(:where([class~=not-prose],[class~=not-prose] *)) {
   font-family: var(--stzh-font-family-heavy);
   color: var(--stzh-heading-color);
-  font-weight: var(--stzh-font-weight-heavy);  
+  font-weight: var(--stzh-font-weight-heavy);
   margin-top: inherit;
   margin-bottom: inherit;
   font-size: 32px;
@@ -133,32 +139,42 @@ padding-right: 1rem;
 padding-left: 1rem;
 }
 
-@media (min-width: 640px){
+@media (min-width: 640px) {
 .participatory-space__container>[id^=html-block]:not([id^=hero]):not([id^=floating-helper]) {
 max-width: 640px;
-  }}
 
-@media (min-width: 768px){
+  }
+}
+
+@media (min-width: 768px) {
 .participatory-space__container>[id^=html-block]:not([id^=hero]):not([id^=floating-helper]) {
 max-width: 768px;
-  }}
 
-@media (min-width: 1024px){
+  }
+}
+
+@media (min-width: 1024px) {
 .participatory-space__container>[id^=html-block]:not([id^=hero]):not([id^=floating-helper]) {
 max-width: 1024px;
 padding-right: 4rem;
 padding-left: 4rem;
-  }}
 
-@media (min-width: 1280px){
+  }
+}
+
+@media (min-width: 1280px) {
 .participatory-space__container>[id^=html-block]:not([id^=hero]):not([id^=floating-helper]) {
 max-width: 1280px;
-  }}
 
-@media (min-width: 1536px){
+  }
+}
+
+@media (min-width: 1536px) {
 .participatory-space__container>[id^=html-block]:not([id^=hero]):not([id^=floating-helper]) {
 max-width: 1536px;
-  }}
+
+  }
+}
 
 .participatory-space__container>[id^=html-block] :where(img):not(:where([class~=not-prose],[class~=not-prose] *)) {
 margin-top: 0;
@@ -214,28 +230,34 @@ padding-top: var(--stzh-space-xsmall);
 padding-bottom: var(--stzh-space-xsmall);
 }
 
-@media screen and (min-width: 640px){
+@media screen and (min-width: 640px) {
 .card__grid-text {
     padding-top: var(--stzh-space-large);
     padding-right: var(--stzh-space-large);
     padding-left: var(--stzh-space-large);
-  }}
 
-@media screen and (min-width: 1024px){
+  }
+}
+
+@media screen and (min-width: 1024px) {
 .card__grid-text {
     padding-bottom: var(--stzh-space-xxxlarge);
     padding-top: var(--stzh-space-xlarge);
     padding-right: var(--stzh-space-xlarge);
     padding-left: var(--stzh-space-xlarge);
-  }}
 
-@media screen and (min-width: 1280px){
+  }
+}
+
+@media screen and (min-width: 1280px) {
 .card__grid-text {
     padding-bottom: var(--stzh-space-xxxxlarge);
     padding-top: var(--stzh-space-xxlarge);
     padding-right: var(--stzh-space-xxlarge);
     padding-left: var(--stzh-space-xxlarge);
-  }}
+
+  }
+}
 
 /*Subtitle & description text*/
 
@@ -249,23 +271,24 @@ padding-bottom: var(--stzh-space-xsmall);
 }
 
 
-@media screen and (min-width: 640px){
+@media screen and (min-width: 640px) {
 .card__grid-metadata, .participatory-space__container>[id^=html-block] :where(h3+*):not(:where([class~=not-prose],[class~=not-prose] *)) {
     margin-bottom: var(--stzh-space-small);
     margin-top: var(--stzh-space-small);
-  }}
 
-@media screen and (min-width: 1024px){
-.card__grid-metadata, .participatory-space__container>[id^=html-block] :where(h3+*):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .card__grid-metadata, .participatory-space__container>[id^=html-block] :where(h3+*):not(:where([class~=not-prose],[class~=not-prose] *)) {
     margin-bottom: var(--stzh-space-medium);
     margin-top: var(--stzh-space-medium);
-  }}
+  }
+}
 
-@media screen and (min-width: 1280px){
-.card__grid-metadata, .participatory-space__container>[id^=html-block] :where(h3+*):not(:where([class~=not-prose],[class~=not-prose] *)) {
+@media screen and (min-width: 1280px) {
+  .card__grid-metadata, .participatory-space__container>[id^=html-block] :where(h3+*):not(:where([class~=not-prose],[class~=not-prose] *)) {
     margin-bottom: var(--stzh-space-xlarge);
     margin-top: var(--stzh-space-xlarge);
-  }}
-
-
-  
+  }
+}

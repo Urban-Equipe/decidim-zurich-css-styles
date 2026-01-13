@@ -15,18 +15,18 @@ font-weight: inherit;
   color: var(--stzh-color-black);
 }
 
-.answer-questionnaire__question-description, 
-.answer-questionnaire__step-heading div, 
-.answer-questionnaire__multiple-option label, 
+.answer-questionnaire__question-description,
+.answer-questionnaire__step-heading div,
+.answer-questionnaire__multiple-option label,
 .answer-questionnaire__single-option label,
 .answer-questionnaire__sorting,
-.answer-questionnaire__multiple-matrix thead td, 
-.answer-questionnaire__multiple-matrix th, 
-.answer-questionnaire__single-matrix thead td, 
+.answer-questionnaire__multiple-matrix thead td,
+.answer-questionnaire__multiple-matrix th,
+.answer-questionnaire__single-matrix thead td,
 .answer-questionnaire__single-matrix th
-.answer-questionnaire__multiple-matrix th, 
+.answer-questionnaire__multiple-matrix th,
 .answer-questionnaire__multiple-matrix td,
-.answer-questionnaire__single-matrix th, 
+.answer-questionnaire__single-matrix th,
 .answer-questionnaire__single-matrix td,
 .answer-questionnaire__tos{
   font-family: var(--stzh-font-family-medium);
@@ -134,19 +134,19 @@ label[for="questionnaire_name"]{
   line-height: 1.5rem;
 }
 
-.form-defaults input[type=checkbox]:not(.reset-defaults), 
+.form-defaults input[type=checkbox]:not(.reset-defaults),
 .form-defaults input[type=radio]:not(.reset-defaults),
-.form__wrapper-checkbox-label:hover, 
+.form__wrapper-checkbox-label:hover,
 .form__wrapper-radio-label:hover,
-.filter-container input[type=checkbox], 
+.filter-container input[type=checkbox],
 .filter-container input[type=radio]{
   border-color: var(--stzh-link-color);
   color: var(--stzh-link-color);
 }
 
-.form-defaults input[type=checkbox]:not(.reset-defaults), 
+.form-defaults input[type=checkbox]:not(.reset-defaults),
 .form-defaults input[type=radio]:not(.reset-defaults)
-.filter-container input[type=checkbox], 
+.filter-container input[type=checkbox],
 .filter-container input[type=radio]{
   -webkit-appearance: none;
   border: 0.125rem solid var(--stzh-color-black);
@@ -262,7 +262,7 @@ label[for="questionnaire_name"]{
   top: 1rem;
   color: var(--stzh-link-color);
 }
-  
+
 
 .form-error.is-visible, .is-invalid-input, .is-invalid-label, .form__wrapper label:not(.form__wrapper-checkbox-label).is-invalid-label, .form__wrapper-block label:not(.form__wrapper-checkbox-label).is-invalid-label {
   color: var(--stzh-color-error60);
