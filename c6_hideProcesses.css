@@ -1,0 +1,6 @@
+/*Umfragen mittels CSS ausblenden, so dass sie nur per Link/Suche auffindebar sind*/
+
+/*Quarz-Prozess (96), Digitalisierungsprozess (103), strbGPT(105), Zusammenarbeit DigiPlus (107), Über Mitwirken an Zürichs Zukunft (8)*/
+#participatory_process_120, #participatory_process_96, #participatory_process_103, #participatory_process_105, #participatory_process_107, #participatory_process_8, #participatory_process_114, #participatory_process_115, #participatory_process_116{
+  display:none;
+}

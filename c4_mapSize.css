@@ -1,0 +1,15 @@
+.proposal__container [data-decidim-map] {
+  aspect-ratio: 2/1;
+}
+
+html[data-rails-controller-name="proposals"][data-rails-action-name="preview"] .proposal__container:has(#map) {
+  margin-bottom: 40rem;
+}
+
+html[data-rails-controller-name="proposals"][data-rails-action-name="show"] .static-map__container:has(#map) {
+  margin-bottom: 20rem;
+}
+
+html[data-rails-controller-name="proposals"][data-rails-action-name="show"] .static-map__container #map {
+  height: 20rem;
+}

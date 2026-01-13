@@ -1,0 +1,271 @@
+/* based on the deSy page "Homepage Hauptthemen" */
+h1, .h1 {
+font-family: var(--stzh-font-family-heavy);
+color: var(--stzh-color-secondary50);
+font-weight: var(--stzh-font-weight-heavy);
+}
+
+.text-5xl {
+font-size: var(--stzh-font-mega-font-size);
+line-height: var(--stzh-font-mega-text-line-height);
+}
+@media screen and (min-width: 640px){
+.text-5xl {
+font-size: var(--stzh-font-giga-font-size);
+line-height: var(--stzh-font-giga-text-line-height);
+letter-spacing: var(--stzh-font-giga-text-letter-spacing);
+  }}
+@media (min-width: 1280px){
+.text-5xl {
+font-size: var(--stzh-font-peta-font-size);
+line-height: var(--stzh-font-peta-text-line-height);
+letter-spacing: var(--stzh-font-peta-text-letter-spacing);
+  }}
+@media (min-width: 1536px){
+.text-5xl {
+font-size: var(--stzh-font-exa-font-size);
+line-height: var(--stzh-font-exa-text-line-height);
+letter-spacing: var(--stzh-font-exa-text-letter-spacing);
+  }}
+
+
+section:has(.participatory-space__hero) {
+  background-color: var(--stzh-color-white);
+}
+
+.participatory-space__hero::before {
+  /*background-color: var(--stzh-color-white);*/
+  display:none;
+}
+
+.participatory-space__hero-text {
+  margin-right: auto;
+  width: 100%;
+}
+
+
+/*Restyle html blocks */
+/*.participatory-space__container>[id^=html-block] {
+ width: inherit;
+ max-width: none;
+}*/
+.participatory-space__container>[id^=html-block] {
+--tw-prose-body: inherit;
+--tw-prose-headings: inherit;
+--tw-prose-lead: inherit;
+--tw-prose-links: inherit;
+--tw-prose-bold: inherit;
+--tw-prose-counters: inherit;
+--tw-prose-bullets: inherit;
+--tw-prose-hr: inherit;
+--tw-prose-quotes: inherit;
+--tw-prose-quote-borders: inherit;
+--tw-prose-captions: inherit;
+--tw-prose-kbd: inherit;
+--tw-prose-kbd-shadows: inherit;
+--tw-prose-code: inherit;
+--tw-prose-pre-code: inherit;
+--tw-prose-pre-bg: inherit;
+--tw-prose-th-borders: inherit;
+--tw-prose-td-borders: inherit;
+--tw-prose-invert-body: inherit;
+--tw-prose-invert-headings: inherit;
+--tw-prose-invert-lead: inherit;
+--tw-prose-invert-links: inherit;
+--tw-prose-invert-bold: inherit;
+--tw-prose-invert-counters: inherit;
+--tw-prose-invert-bullets: inherit;
+--tw-prose-invert-hr: inherit;
+--tw-prose-invert-quotes: inherit;
+--tw-prose-invert-quote-borders: inherit;
+--tw-prose-invert-captions: inherit;
+--tw-prose-invert-kbd: inherit;
+--tw-prose-invert-kbd-shadows: inherit;
+--tw-prose-invert-code: inherit;
+--tw-prose-invert-pre-code: inherit;
+--tw-prose-invert-pre-bg: inherit;
+--tw-prose-invert-th-borders: inherit;
+--tw-prose-invert-td-borders: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+/*
+.participatory-space__container>[id^=html-block] {
+color: var(--tw-prose-body);
+max-width: 65ch;
+}*/
+
+/*.participatory-space__container>[id^=html-block] {
+  all: unset!important;
+}*/
+
+.participatory-space__container>[id^=html-block] :where(h2):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  font-family: var(--stzh-font-family-heavy);
+  color: var(--stzh-heading-color);
+  font-weight: var(--stzh-font-weight-heavy);  
+  margin-top: inherit;
+  margin-bottom: inherit;
+  font-size: 32px;
+}
+
+.participatory-space__container>[id^=html-block] :where(h3):not(:where([class~=not-prose],[class~=not-prose] *)) {
+ font-family: var(--stzh-font-family-heavy);
+ color: var(--stzh-heading-color);
+ font-weight: var(--stzh-font-weight-heavy);
+ font-size: 20px;
+ margin-top: inherit;
+ margin-bottom: inherit;
+ line-height: 25px;
+ text-decoration-line: none;
+}
+
+.participatory-space__container>[id^=html-block] :where(a):not(:where([class~=not-prose],[class~=not-prose] *)) {
+color: var(--stzh-heading-color);
+text-decoration: none;
+font-weight: var(--stzh-font-weight-heavy);
+}
+
+.participatory-space__container>[id^=html-block]:not([id^=hero]):not([id^=floating-helper]) {
+width: 100%;
+margin-right: auto;
+margin-left: auto;
+padding-right: 1rem;
+padding-left: 1rem;
+}
+
+@media (min-width: 640px){
+.participatory-space__container>[id^=html-block]:not([id^=hero]):not([id^=floating-helper]) {
+max-width: 640px;
+  }}
+
+@media (min-width: 768px){
+.participatory-space__container>[id^=html-block]:not([id^=hero]):not([id^=floating-helper]) {
+max-width: 768px;
+  }}
+
+@media (min-width: 1024px){
+.participatory-space__container>[id^=html-block]:not([id^=hero]):not([id^=floating-helper]) {
+max-width: 1024px;
+padding-right: 4rem;
+padding-left: 4rem;
+  }}
+
+@media (min-width: 1280px){
+.participatory-space__container>[id^=html-block]:not([id^=hero]):not([id^=floating-helper]) {
+max-width: 1280px;
+  }}
+
+@media (min-width: 1536px){
+.participatory-space__container>[id^=html-block]:not([id^=hero]):not([id^=floating-helper]) {
+max-width: 1536px;
+  }}
+
+.participatory-space__container>[id^=html-block] :where(img):not(:where([class~=not-prose],[class~=not-prose] *)) {
+margin-top: 0;
+margin-bottom: 0;
+}
+
+/*Arrow on card*/
+.stzh-card-navigation__arrow.sc-stzh-card-navigation {
+position: absolute;
+right: 0;
+bottom: 0;
+width: 2.75rem;
+height: 2.75rem;
+}
+
+.stzh-card-navigation__arrow.sc-stzh-card-navigation {
+flex-shrink: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+/*width: 4rem;
+height: 4rem;*/
+color: var(--stzh-color-primary70);
+background-color: var(--stzh-color-secondary30);
+}
+
+.card__grid {
+  position: relative;
+}
+
+.card__grid:hover .stzh-card-navigation__arrow > svg {
+ transform: translateX(0.25rem);
+}
+
+.stzh-card-navigation__arrow-icon.sc-stzh-card-navigation {
+transition: transform 150ms ease;
+--size: var(--stzh-icon-size-large);
+}
+
+.stzh-card-navigation__arrow > svg {
+  transition: transform 150ms ease;
+  height: 2rem;
+  width: 2rem;
+}
+
+/* Responsive padding on cards*/
+.card__grid-text {
+padding-left: var(--stzh-space-medium);
+display: flex;
+align-items: flex-start;
+flex-grow: 1;
+padding-top: var(--stzh-space-xsmall);
+padding-bottom: var(--stzh-space-xsmall);
+}
+
+@media screen and (min-width: 640px){
+.card__grid-text {
+    padding-top: var(--stzh-space-large);
+    padding-right: var(--stzh-space-large);
+    padding-left: var(--stzh-space-large);
+  }}
+
+@media screen and (min-width: 1024px){
+.card__grid-text {
+    padding-bottom: var(--stzh-space-xxxlarge);
+    padding-top: var(--stzh-space-xlarge);
+    padding-right: var(--stzh-space-xlarge);
+    padding-left: var(--stzh-space-xlarge);
+  }}
+
+@media screen and (min-width: 1280px){
+.card__grid-text {
+    padding-bottom: var(--stzh-space-xxxxlarge);
+    padding-top: var(--stzh-space-xxlarge);
+    padding-right: var(--stzh-space-xxlarge);
+    padding-left: var(--stzh-space-xxlarge);
+  }}
+
+/*Subtitle & description text*/
+
+.card__grid-metadata, .participatory-space__container>[id^=html-block] :where(h3+*):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  color: var(--stzh-base-color);
+}
+
+.card__grid-metadata, .participatory-space__container>[id^=html-block] :where(h3+*):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  margin-top: var(--stzh-space-xsmall);
+  margin-bottom: var(--stzh-space-xsmall);
+}
+
+
+@media screen and (min-width: 640px){
+.card__grid-metadata, .participatory-space__container>[id^=html-block] :where(h3+*):not(:where([class~=not-prose],[class~=not-prose] *)) {
+    margin-bottom: var(--stzh-space-small);
+    margin-top: var(--stzh-space-small);
+  }}
+
+@media screen and (min-width: 1024px){
+.card__grid-metadata, .participatory-space__container>[id^=html-block] :where(h3+*):not(:where([class~=not-prose],[class~=not-prose] *)) {
+    margin-bottom: var(--stzh-space-medium);
+    margin-top: var(--stzh-space-medium);
+  }}
+
+@media screen and (min-width: 1280px){
+.card__grid-metadata, .participatory-space__container>[id^=html-block] :where(h3+*):not(:where([class~=not-prose],[class~=not-prose] *)) {
+    margin-bottom: var(--stzh-space-xlarge);
+    margin-top: var(--stzh-space-xlarge);
+  }}
+
+
+  

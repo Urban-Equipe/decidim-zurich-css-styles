@@ -1,0 +1,14 @@
+/*–––– VBZ adjustments –––––*/
+
+
+/*Replace logo with VBZ logo*/
+header .main-bar__logo-desktop/*, header .main-bar__logo-mobile*/ {
+  background: url(https://www.stadt-zuerich.ch/content/dam/corporate-design/de/logos/vbz.svg) no-repeat fill;
+  width: 221px;
+  height: 79px;
+  padding-left: 19rem;
+}
+
+header .main-bar__logo-mobile a {
+  display: none;
+}

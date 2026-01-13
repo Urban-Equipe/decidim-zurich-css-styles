@@ -1,0 +1,4 @@
+/* Hide unpublished component warning in surveys using share tokens */
+.flash.flex-col.warning {
+  display: none;
+}

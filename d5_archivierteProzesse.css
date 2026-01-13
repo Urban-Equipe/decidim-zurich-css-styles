@@ -1,0 +1,12 @@
+/*Adjustments for terminated processes*/
+
+
+/*Hide process menu*/
+#process-nav-content {
+  display: none;
+}
+
+/*hide follow button*/
+.card__content {
+  display: none;
+}

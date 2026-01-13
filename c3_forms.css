@@ -1,0 +1,275 @@
+/*–––––– Forms styling–––––*/
+
+/*Nullify exclusive classes*/
+.form__wrapper label:not(.form__wrapper-checkbox-label), .form__wrapper-block label:not(.form__wrapper-checkbox-label) {
+font-size: inherit;
+line-height: inherit;
+font-weight: inherit;
+}
+
+/* Style texts*/
+.form__wrapper-checkbox-label {
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-style: var(--stzh-font-style-medium);
+  color: var(--stzh-color-black);
+}
+
+.answer-questionnaire__question-description, 
+.answer-questionnaire__step-heading div, 
+.answer-questionnaire__multiple-option label, 
+.answer-questionnaire__single-option label,
+.answer-questionnaire__sorting,
+.answer-questionnaire__multiple-matrix thead td, 
+.answer-questionnaire__multiple-matrix th, 
+.answer-questionnaire__single-matrix thead td, 
+.answer-questionnaire__single-matrix th
+.answer-questionnaire__multiple-matrix th, 
+.answer-questionnaire__multiple-matrix td,
+.answer-questionnaire__single-matrix th, 
+.answer-questionnaire__single-matrix td,
+.answer-questionnaire__tos{
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-style: var(--stzh-font-style-medium);
+  font-size: var(--stzh-font-milli-font-size);
+  line-height: var(--stzh-font-milli-text-line-height);
+  letter-spacing: var(--stzh-font-curve---text-letter-spacing);
+  -webkit-user-select: none;
+  color: var(--stzh-color-black);
+}
+
+.answer-questionnaire__question-label,
+.tos-agreement,
+label[for="questionnaire_email"],
+label[for="questionnaire_name"],
+label[for="questionnaire_tos_agreement"],
+label[for="proposal_title"],
+label[for="proposal_address"],
+label[for="proposal_body"],
+label[for="proposal_category_id"],
+label[for="proposal_scope_id"],
+label[for="proposal_user_group_id"],
+.upload-modal__files-container.upload-container-for-documents.with-title label,
+.formbuilder-textarea-label,
+.formbuilder-text-label,
+.formbuilder-select-label
+{
+  font-family: var(--stzh-font-family-heavy);
+  font-weight: var(--stzh-font-weight-heavy);
+  font-style: var(--stzh-font-style-heavy);
+  font-size: var(--stzh-font-micro-font-size);
+  line-height: var(--stzh-font-micro-text-line-height);
+  color: var(--stzh-heading-color);
+  margin-bottom: var(--stzh-space-small);
+}
+
+/*Apply STZH tag*/
+.answer-questionnaire__step-counter {
+  font-family: var(--stzh-font-family-heavy);
+  font-weight: var(--stzh-font-weight-heavy);
+  font-style: var(--stzh-font-style-heavy);
+  color: var(--stzh-color-white);
+  background-color: var(--stzh-color-secondary60);
+  padding: var(--stzh-space-xsmall);
+}
+
+
+/* Buttons*/
+.survey-section-buttons>button:last-child, .survey-section-buttons>button:first-child {
+  font-weight: var(--stzh-font-weight-heavy);
+}
+
+@media (min-width: 768px){
+  .survey-section-buttons>button:last-child, .survey-section-buttons>button:first-child {
+  padding: var(--stzh-space-medium);
+  font-size: var(--stzh-font-centi-font-size);
+  line-height: var(--stzh-font-centi-text-line-height);
+}
+}
+
+/*Number*/
+.answer-questionnaire__question-label::before {
+  content: attr(data-answer-idx);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+
+  background-color: var(--stzh-link-color);
+  border: 1px solid var(--stzh-link-color);
+  color: var(--stzh-color-white);
+
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+
+  margin-right: 0.5rem;
+}
+
+/*Spacings*/
+.row.column.answer.question,
+label[for="questionnaire_email"],
+label[for="questionnaire_name"]{
+  padding-top: var(--stzh-space-large);
+}
+
+.questionnaire-question {
+  margin-top: var(--stzh-space-medium);
+}
+
+.tos-agreement, label[for="questionnaire_tos_agreement"] {
+  padding-top: var(--stzh-space-xxlarge);
+}
+/*Checkboxes & Radios*/
+/* WIP, currently no checkbox fill svg
+.form__wrapper-checkbox-label{
+  display: flex;
+  transition: color var(--stzh-base-transition-animation-speed);
+  margin-left: var(--stzh-space-small);
+  line-height: 1.5rem;
+}
+
+.form-defaults input[type=checkbox]:not(.reset-defaults), 
+.form-defaults input[type=radio]:not(.reset-defaults),
+.form__wrapper-checkbox-label:hover, 
+.form__wrapper-radio-label:hover,
+.filter-container input[type=checkbox], 
+.filter-container input[type=radio]{
+  border-color: var(--stzh-link-color);
+  color: var(--stzh-link-color);
+}
+
+.form-defaults input[type=checkbox]:not(.reset-defaults), 
+.form-defaults input[type=radio]:not(.reset-defaults)
+.filter-container input[type=checkbox], 
+.filter-container input[type=radio]{
+  -webkit-appearance: none;
+  border: 0.125rem solid var(--stzh-color-black);
+  background-color: var(--stzh-color-white);
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  border-radius: var(--stzh-form-input-border-radius);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: border-color var(--stzh-base-transition-animation-speed);
+}
+
+.form-defaults input[type=checkbox]:not(.reset-defaults):checked{
+  -webkit-appearance: none;
+  border: 0.125rem solid var(--stzh-link-color);
+  background-color: var(--stzh-color-white);
+  background-image: url("/decidim-packs/media/images/remixicon.symbol-e643e553623ffcd49f94.svg#ri-direction-line");
+}*/
+
+/*Text-fields*/
+.form-defaults :is(
+  input[type="date"],
+  input[type="datetime-local"],
+  input[type="email"],
+  input[type="month"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="text"],
+  input[type="time"],
+  input[type="url"],
+  input[type="week"],
+  select,
+  textarea
+):not(.reset-defaults) {
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-style: var(--stzh-font-style-medium);
+  font-size: var(--stzh-font-milli-font-size);
+  line-height: var(--stzh-font-milli-text-line-height);
+  letter-spacing: var(--stzh-font-curve---text-letter-spacing);
+  border: 0.125rem solid var(--stzh-color-grey70);
+  transition-property: color, border-color, background-color;
+  transition-duration: var(--stzh-base-transition-animation-speed);
+  border-radius: 0;
+  padding-top: var(--stzh-space-xsmall);
+  padding-bottom: var(--stzh-space-xsmall);
+  padding-left: var(--stzh-space-medium);
+  padding-right: var(--stzh-space-medium);
+  margin: 0;
+  color: var(--stzh-color-secondary60);
+  background-color: var(--stzh-color-white);
+  appearance: none;
+  text-align: var(--text-align);
+}
+
+/*Text-fields focus*/
+.form-defaults
+  :is(
+    input[type="date"],
+    input[type="datetime-local"],
+    input[type="email"],
+    input[type="month"],
+    input[type="number"],
+    input[type="password"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="text"],
+    input[type="time"],
+    input[type="url"],
+    input[type="week"],
+    select,
+    textarea
+  ):not(.reset-defaults):focus {
+  color: var(--stzh-color-black);
+  border-color: var(--stzh-color-secondary50);
+  background-color: var(--stzh-color-secondary20);
+  outline-width: 0;
+  outline-color: 0;
+}
+
+/*Text-fields invalid input*/
+.form-defaults
+  :is(
+    input[type="date"],
+    input[type="datetime-local"],
+    input[type="email"],
+    input[type="month"],
+    input[type="number"],
+    input[type="password"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="text"],
+    input[type="time"],
+    input[type="url"],
+    input[type="week"],
+    select,
+    textarea
+  ):not(.reset-defaults).is-invalid-input:not(:focus) {
+  color: var(--stzh-color-error60);
+  border-color: var(--stzh-color-error60);
+  background-color: var(--stzh-color-white);
+  outline-width: 0;
+  outline-color: 0;
+}
+
+/* Password SVG*/
+.input-group__password button {
+  width: auto;
+  top: 1rem;
+  color: var(--stzh-link-color);
+}
+  
+
+.form-error.is-visible, .is-invalid-input, .is-invalid-label, .form__wrapper label:not(.form__wrapper-checkbox-label).is-invalid-label, .form__wrapper-block label:not(.form__wrapper-checkbox-label).is-invalid-label {
+  color: var(--stzh-color-error60);
+}
+
+.form-error {
+  font-family: var(--stzh-font-family-regular);
+  font-weight: var(--stzh-font-weight-regular);
+  font-style: var(--stzh-font-style-regular);
+}

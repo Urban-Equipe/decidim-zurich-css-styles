@@ -1,0 +1,283 @@
+/* Netto-Null theme variables*/
+/*Diluno uses the following colors on pilotquartier.ch
+--c-00: #1d1d1b; no equivalent
+--c-10: #dfecea; no equivalent
+--c-20: #bee1da; no equivalent
+--c-30: #009f9d; equals --stzh-color-petrol50
+--c-40: #007c78; equals --stzh-color-petrol60
+--c-50: #003c40; equals --stzh-color-petrol80
+*/
+
+body {
+  --c-00: #1d1d1b;
+  --c-10: #dfecea;
+  --c-20: #bee1da;
+  --stzh-color-primary10-rgb: var(--stzh-color-petrol10-rgb);
+  --stzh-color-primary10: rgba(var(--stzh-color-primary10-rgb) / 1);
+  --stzh-color-primary20-rgb: var(--stzh-color-petrol20-rgb);
+  --stzh-color-primary20: rgba(var(--stzh-color-primary20-rgb) / 1);
+  --stzh-color-primary30-rgb: var(--stzh-color-petrol30-rgb);
+  --stzh-color-primary30: rgba(var(--stzh-color-primary30-rgb) / 1);
+  --stzh-color-primary40-rgb: var(--stzh-color-vbz-petrol40-rgb);
+  --stzh-color-primary40: rgba(var(--stzh-color-primary40-rgb) / 1);
+  --stzh-color-primary50-rgb: var(--stzh-color-vbz-petrol50-rgb);
+  --stzh-color-primary50: rgba(var(--stzh-color-primary50-rgb) / 1);
+  --stzh-color-primary60-rgb: var(--stzh-color-petrol60-rgb);
+  --stzh-color-primary60: rgba(var(--stzh-color-primary60-rgb) / 1);
+  --stzh-color-primary70-rgb: var(--stzh-color-petrol70-rgb);
+  --stzh-color-primary70: rgba(var(--stzh-color-primary70-rgb) / 1);
+  --stzh-color-primary80-rgb: var(--stzh-color-petrol80-rgb);
+  --stzh-color-primary80: rgba(var(--stzh-color-primary80-rgb) / 1);
+  --stzh-color-primary90-rgb: var(--stzh-color-petrol90-rgb);
+  --stzh-color-primary90: rgba(var(--stzh-color-primary90-rgb) / 1);
+  --stzh-color-primary100-rgb: var(--stzh-color-petrol100-rgb);
+  --stzh-color-primary100: rgba(var(--stzh-color-primary100-rgb) / 1);
+  --stzh-color-secondary10-rgb: var(--stzh-color-petrol10-rgb);
+  --stzh-color-secondary10: var(--c-20);
+  --stzh-color-secondary20-rgb: var(--stzh-color-petrol20-rgb);
+  --stzh-color-secondary20: rgba(var(--stzh-color-secondary20-rgb) / 1);
+  --stzh-color-secondary30-rgb: var(--stzh-color-petrol30-rgb);
+  --stzh-color-secondary30: rgba(var(--stzh-color-secondary30-rgb) / 1);
+  --stzh-color-secondary40-rgb: var(--stzh-color-petrol40-rgb);
+  --stzh-color-secondary40: rgba(var(--stzh-color-secondary40-rgb) / 1);
+  --stzh-color-secondary50-rgb: var(--stzh-color-petrol50-rgb);
+  --stzh-color-secondary50: rgba(var(--stzh-color-secondary50-rgb) / 1);
+  --stzh-color-secondary60-rgb: var(--stzh-color-petrol60-rgb);
+  --stzh-color-secondary60: rgba(var(--stzh-color-secondary60-rgb) / 1);
+  --stzh-color-secondary70-rgb: var(--stzh-color-petrol70-rgb);
+  --stzh-color-secondary70: rgba(var(--stzh-color-secondary70-rgb) / 1);
+  --stzh-color-secondary80-rgb: var(--stzh-color-petrol80-rgb);
+  --stzh-color-secondary80: rgba(var(--stzh-color-secondary80-rgb) / 1);
+  --stzh-color-secondary90-rgb: var(--stzh-color-petrol90-rgb);
+  --stzh-color-secondary90: rgba(var(--stzh-color-secondary90-rgb) / 1);
+  --stzh-color-secondary100-rgb: var(--stzh-color-petrol100-rgb);
+  --stzh-color-secondary100: rgba(var(--stzh-color-secondary100-rgb) / 1);
+  /*Override some colors with template*/
+  --stzh-color-secondary10: var(--c-10);
+  --stzh-color-secondary30: var(--stzh-color-secondary50);
+  --stzh-color-grey20: var(--c-20);
+  --stzh-color-grey80: var(--stzh-color-secondary80);
+  /*--stzh-color-info10-rgb: var(--stzh-color-cobaltblue10-rgb);
+  --stzh-color-info10: rgba(var(--stzh-color-info10-rgb) / 1);
+  --stzh-color-info20-rgb: var(--stzh-color-cobaltblue20-rgb);
+  --stzh-color-info20: rgba(var(--stzh-color-info20-rgb) / 1);
+  --stzh-color-info30-rgb: var(--stzh-color-cobaltblue30-rgb);
+  --stzh-color-info30: rgba(var(--stzh-color-info30-rgb) / 1);
+  --stzh-color-info40-rgb: var(--stzh-color-cobaltblue40-rgb);
+  --stzh-color-info40: rgba(var(--stzh-color-info40-rgb) / 1);
+  --stzh-color-info50-rgb: var(--stzh-color-cobaltblue50-rgb);
+  --stzh-color-info50: rgba(var(--stzh-color-info50-rgb) / 1);
+  --stzh-color-info60-rgb: var(--stzh-color-cobaltblue60-rgb);
+  --stzh-color-info60: rgba(var(--stzh-color-info60-rgb) / 1);
+  --stzh-color-info70-rgb: var(--stzh-color-cobaltblue70-rgb);
+  --stzh-color-info70: rgba(var(--stzh-color-info70-rgb) / 1);
+  --stzh-color-info80-rgb: var(--stzh-color-cobaltblue80-rgb);
+  --stzh-color-info80: rgba(var(--stzh-color-info80-rgb) / 1);
+  --stzh-color-info90-rgb: var(--stzh-color-cobaltblue90-rgb);
+  --stzh-color-info90: rgba(var(--stzh-color-info90-rgb) / 1);
+  --stzh-color-info100-rgb: var(--stzh-color-cobaltblue100-rgb);
+  --stzh-color-info100: rgba(var(--stzh-color-info100-rgb) / 1);*/
+  --stzh-font-family-title: var(--stzh-font-family-regular);
+  --stzh-font-weight-regular: normal;
+  --stzh-font-weight-medium: 400;
+  --stzh-font-weight-medium-italic: 400;
+  --stzh-font-weight-bold: 500;
+  --stzh-font-weight-heavy: 500;
+  --stzh-font-family-regular: 'HelveticaNeueLTW01_55Roman', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --stzh-font-family-medium: 'HelveticaNeueLTW01_55Roman', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --stzh-font-family-medium-italic: 'HelveticaNeueLTW05_66MediumIt', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --stzh-font-family-bold: 'HelveticaNeueLTW05_65Medium', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --stzh-button-background-color: var(--stzh-color-secondary60);
+  --stzh-button-hover-background-color: var(--stzh-color-secondary80);
+  --stzh-button-disabled-background-color: var(--stzh-color-grey70);
+  --stzh-button-secondary-background-color: var(--stzh-color-secondary30);
+  --stzh-button-secondary-hover-background-color: var(--stzh-color-secondary50);
+  --stzh-button-secondary-disabled-background-color: var(--stzh-color-grey20);
+  --stzh-button-secondary-color: var(--stzh-color-secondary60);
+  --stzh-button-secondary-hover-color: var(--stzh-color-secondary80);
+  --stzh-button-secondary-disabled-color: var(--stzh-color-grey70);
+  --stzh-button-tertiary-color: var(--stzh-color-secondary80);
+  --stzh-button-tertiary-hover-color: var(--stzh-color-secondary80);
+  --stzh-button-tertiary-disabled-color: var(--stzh-color-grey70);
+  --stzh-link-color: var(--stzh-color-secondary50);
+  --stzh-link-hover-color: var(--stzh-color-secondary20);
+  --stzh-link-secondary-color: var(--stzh-color-secondary80);
+  --stzh-header-logobar-background-color: transparent;
+  --stzh-tooltip-color: var(--stzh-color-secondary80);
+  --stzh-tooltip-background-color: var(--stzh-color-secondary10);
+  --stzh-tooltip-link-color: var(--stzh-color-secondary60);
+  --stzh-tooltip-hover-link-color: var(--stzh-color-secondary50);
+  --stzh-cardlist-background-color: var(--stzh-color-coolgrey10);
+  --stzh-cardlist-description-color: var(--stzh-color-secondary80);
+  /*manual additions*/
+  --stzh-heading-color: var(--stzh-color-secondary80);
+  --stzh-topnews-background-color: var(--stzh-color-secondary80);
+  --secondary-rgb: var(--stzh-color-secondary60-rgb);
+}
+
+/*Replace logo with Netto-Null color*/
+header .main-bar__logo-desktop {
+  background: url(https://mitwirken.stadt-zuerich.ch/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbEJ3IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--4cf2fc2a891f55e648f419de81cec989d0465330/logoDEV_nettonull.png) no-repeat;
+  width: 0;
+  background-size: auto 79px;
+  height: 79px;
+  padding-left: 19rem;
+}
+
+/*adjust background color*/
+.participatory-space__hero::before, section:has(.participatory-space__hero) {
+  background-color: var(--c-20);
+}
+
+
+/*Adjust bold fonts*/
+.font-bold, strong, .bold, .content-block__description strong, .editor-content strong {
+font-family: var(--stzh-font-family-bold);
+font-weight: var(--stzh-font-weight-bold);
+}
+
+/*List elements*/
+.flash.editor-content .flash__message ul > li::marker {
+  color: var(--stzh-color-primary70) !important;
+}
+
+/*Secondary button tweaks*/
+.button__transparent-secondary {
+  background-color: var(--c-10);
+}
+
+.button__transparent-secondary:hover {
+  background-color: var(--c-20)!important;
+}
+
+/* hide text in lower hero banner*/
+section:last-of-type > .participatory-space__hero > .participatory-space__hero-text, section:last-of-type > .participatory-space__hero::before {
+  display: none;
+}
+
+section:last-of-type:has(.participatory-space__hero) {
+background-position: center;
+}
+
+/*adjust menu*/
+header .menu-bar__dropdown-menu, .menu-bar__secondary-dropdown>nav[role="navigation"] {
+background-color: var(--stzh-color-secondary80);
+}
+
+.menu-bar__secondary-dropdown__title, .menu-bar__secondary-dropdown__metadata, .menu-bar__main-dropdown__title, header .menu-bar__main-dropdown__subtitle {
+  color: var(--c-20);
+}
+
+header .menu-bar__main-dropdown {
+    color: var(--c-20);
+  }
+
+/*adjust nav*/
+.participatory-space__nav-item {
+  color: var(--stzh-color-secondary80);
+}
+
+.participatory-space__nav-item:hover {
+  color: var(--stzh-color-secondary60);
+}
+
+.editor-content :where(blockquote):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  font-weight: inherit;
+  font-style: inherit;
+  color: inherit;
+  background-color: var(--c-10);
+  box-shadow: 0 0 0 var(--stzh-space-large) var(--c-10); /* expands background outward */
+  border-inline-start-width: 0rem;
+  border-inline-start-color: var(--tw-prose-quote-borders);
+  quotes: "\201c""\201d""\2018""\2019";
+  margin-top: 1.6em;
+  margin-bottom: 1.6em;
+  padding-inline-start: 0em;
+}
+
+/*adjust callout*/
+[data-announcement] > .flash__message {
+  color: var(--stzh-color-secondary80);
+}
+
+/* Hide last activity from dropdown*/
+.activity__container {
+  display:none;
+}
+
+/* Hide last activity button from dropdown */
+a.button__text-secondary[href="/last_activities"], 
+a.button__text-secondary[href="/last_activities?locale=en"],
+a.button__text-secondary[href="/last_activities?locale=de"],
+a.button__text-secondary[href="/processes/pilotquartier/f/664/last_activities?locale=en"],
+a.button__text-secondary[href="/processes/pilotquartier/f/664/last_activities?locale=de"],
+a.button__text-secondary[href="/processes/pilotquartier/f/664/last_activities"],
+.menu-bar__secondary-dropdown__left > a.button__text-secondary{
+  display: none;
+}
+
+/* Improve spacing of headings within editor blocks */
+:is(.editor-content, .content-block__description) :is(h1, h2, h3, h4, h5):not(:first-child) {
+margin-top: var(--stzh-space-xxxlarge);
+}
+
+/*Hide opinion in comments*/
+.comment__opinion-label, .comment__opinion-container {
+  display: none;
+}
+
+/*Format data upload*/
+.upload-modal__files-container.upload-container-for-documents.with-title label, label[for="proposal_address"] {
+  font-size: 24px!important;
+  line-height: 30px!important;
+  font-family: var(--stzh-font-family-heavy)!important;
+  color: var(--stzh-heading-color)!important;
+  font-weight: var(--stzh-font-weight-heavy)!important;
+}
+
+.autoComplete_wrapper{
+  margin-top: var(--stzh-space-medium);
+}
+
+.upload-modal__files-container.upload-container-for-documents.with-title span.help-text {
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-size: var(--stzh-font-curve-p1-default-font-size, var(--stzh-font-milli-font-size));
+  line-height: var(--stzh-font-curve-p1-default-text-line-height, var(--stzh-font-milli-text-line-height));
+  letter-spacing: var(--stzh-font-curve-p1-default-text-letter-spacing);
+  color: var(--stzh-base-color);
+}
+
+/*Make data upload button less prominent*/
+@media (min-width: 768px){
+  #proposal_documents_button.w-full {
+    width: 30%;
+  }
+}
+
+/*Style steps*/
+.participatory-space__metadata-item>a, .participatory-space__metadata-item>button {
+  color: var(--stzh-link-color);
+}
+
+.participatory-space__metadata-modal__step-current {
+  color: var(--stzh-color-secondary60);
+  font-style: normal;
+  font-weight: var(--stzh-font-weight-medium);
+}
+
+
+/*Remove unnecessary filters*/
+#panel-dropdown-menu-state, #trigger-menu-state, #trigger-menu-scope, #panel-dropdown-menu-scope {
+  display: none;
+}
+
+/* Hide scope selection for proposal input */
+label[for="proposal_scope_id"]{
+  display: none;
+}
+
+/*–––Hotfix hide amendments––––*/
+#amendments {
+  display: none;
+}

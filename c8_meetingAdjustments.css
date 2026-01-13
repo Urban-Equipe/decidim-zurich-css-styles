@@ -1,0 +1,111 @@
+#panel-participants, #trigger-participants {
+  display: none;
+}
+
+/*Hide meeting authors, as long as we only have official meetings anyway*/
+.layout-author {
+  display: none;
+}
+
+/*Improve guest meeting form layout & spacing*/
+/* ===== Global form rhythm ===== */
+.form__wrapper > * + * {
+  margin-top: var(--stzh-space-large);
+}
+
+/* Labels: make vertical spacing effective */
+.form__wrapper label {
+  display: block;
+  margin-bottom: var(--stzh-space-small);
+}
+
+/* ===== Radios & checkboxes aligned with labels ===== */
+/* Adjacent pattern: <input> + <label> */
+input[type="checkbox"] + label,
+input[type="radio"] + label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--stzh-space-small);
+}
+
+/* Nested pattern: <label><input …> Text</label> */
+label > input[type="checkbox"],
+label > input[type="radio"] {
+  margin-right: var(--stzh-space-small);
+  vertical-align: middle;
+}
+
+/* Tiny optical nudge so controls sit dead-center on the text line */
+input[type="checkbox"],
+input[type="radio"] {
+  vertical-align: middle;
+  transform: translateY(-0.5px);
+}
+
+/* ===== Tables: full width + spaced control columns ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.answer-questionnaire__multiple-matrix td:not(:first-child), .answer-questionnaire__single-matrix td:not(:first-child) {
+  text-align: center;
+}
+
+.answer-questionnaire__multiple-matrix thead td, .answer-questionnaire__multiple-matrix th, .answer-questionnaire__single-matrix thead td, .answer-questionnaire__single-matrix th {
+  background-color: rgb(243,244,247);
+}
+
+.answer-questionnaire__multiple-matrix th, .answer-questionnaire__multiple-matrix td, .answer-questionnaire__single-matrix th, .answer-questionnaire__single-matrix td {
+border-width: 1px;
+border-color: #f3f4f7;
+padding: .625rem .5rem;
+}
+
+.js-collection-input > input[type=checkbox], .js-collection-input > input[type=radio] {
+ margin-right: 0!important; 
+ display: inline-block;
+}
+.js-collection-input > input[type=checkbox], .js-collection-input > input[type=radio] {
+ margin-top: 0;
+}
+
+.form__wrapper input[type=checkbox], .form__wrapper input[type=radio] {
+  margin-top: 0;
+}
+
+.answer-questionnaire__question>:not([hidden])~:not([hidden]) {
+--tw-space-y-reverse: 0;
+margin-top: 1rem;
+margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+margin-bottom: 0rem;
+margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+
+/*Numbering*/
+.answer-questionnaire__question-label::before {
+content: attr(data-answer-idx);
+display: inline-flex;
+align-items: center;
+justify-content: center;
+height: 2rem;
+width: 2rem;
+border-radius: 50%;
+background-color: var(--stzh-link-color);
+border: 1px solid var(--stzh-link-color);
+color: var(--stzh-color-white);
+font-size: 1rem;
+font-weight: 600;
+line-height: 1;
+margin-right: 0.5rem;
+}
+
+
+/*Hide checkmarks _ leave below*/
+.answer-questionnaire__footer > .form__wrapper-checkbox-label,
+.answer-questionnaire__footer > div:first-child,
+label[for="questionnaire_public_participation"],
+label[for="simple_public_participation"]
+{
+  display: none;
+}

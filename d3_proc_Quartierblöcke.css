@@ -1,0 +1,14 @@
+/*change color of shp-areas to primary*/
+.leaflet-interactive {
+  stroke: var(--primary);
+  fill: var(--primary);
+}
+
+.decidimGeo__marker.leaflet-interactive{
+    fill: #fff;
+}
+
+/*Hide unnecessary meeting filters*/
+.filters__section.with_any_type_check_boxes_tree_filter, .filters__section.with_any_scope_check_boxes_tree_filter, .filters__section.activity_collection_radio_buttons_filter {
+  display:none;
+}

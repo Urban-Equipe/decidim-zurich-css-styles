@@ -1,0 +1,10 @@
+/* Hide agenda filters */
+
+#trigger-menu-activity, #panel-dropdown-menu-activity, #trigger-menu-category, #panel-dropdown-menu-category {
+  display: none;
+}
+
+/* Hide withdrawn meetings*/
+.layout-main__section.layout-main__heading > .button__text-secondary {
+  display: none;
+}
