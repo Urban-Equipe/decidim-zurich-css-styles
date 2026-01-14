@@ -1,6 +1,6 @@
-# CSS Files for Decidim Awesome - Mitwirken an Zürich's Zukunft
+# CSS Files for Decidim Awesome - Mitwirken an Zürichs Zukunft
 
-This directory contains CSS files used with [Decidim Awesome](https://github.com/decidim-ice/decidim-module-decidim_awesome) on the [Decidim installation](https://github.com/decidim/decidim) of Zürich: **"Mitwirken an Zürich's Zukunft"** (https://mitwirken.stadt-zuerich.ch).
+This directory contains CSS files used with [Decidim Awesome](https://github.com/decidim-ice/decidim-module-decidim_awesome) on the [Decidim installation](https://github.com/decidim/decidim) of Zürich: **"Mitwirken an Zürichs Zukunft"** (https://mitwirken.stadt-zuerich.ch).
 
 ## Overview
 
