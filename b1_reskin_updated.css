@@ -16,7 +16,7 @@
  * - Decidim-specific modules
  */
 
-html {
+ html {
   font-family: var(--stzh-font-family-regular);
   -webkit-font-smoothing: antialiased;
 }
@@ -623,20 +623,20 @@ header .main-bar__dropdown>:not([hidden])~:not([hidden]){
         text-decoration-line: none;
     }
 
-    nav[role="navigation"]:not([aria-label="Legal"]) li {
+    nav[role="navigation"]:has([role="menuitem"]) li {
         color: var(--stzh-link-color);
     }
 
-    nav[role="navigation"]:not([aria-label="Legal"]) li:hover {
+    nav[role="navigation"]:has([role="menuitem"]) li:hover {
         color: var(--stzh-link-hover-color);
     }
 
-    nav[role="navigation"]:not([aria-label="Legal"]) a {
+    nav[role="navigation"]:has([role="menuitem"]) a {
         text-decoration-line: line;
         transition-duration: var(--stzh-base-transition-animation-speed);
     }
 
-    nav[role="navigation"]:not([aria-label="Legal"]) a::after {
+    nav[role="navigation"]:has([role="menuitem"]) a::after {
         content: "";
         width: var(--stzh-icon-size-small);
         height: var(--stzh-icon-size-small);
