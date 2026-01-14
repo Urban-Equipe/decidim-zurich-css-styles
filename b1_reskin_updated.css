@@ -2031,6 +2031,16 @@ background-color: transparent;
   }
 }
 
+/* ===== BUDGETS MODULE ===== */
+.budget-summary__content, .progressbox-fixed-wrapper {
+  background-color: var(--stzh-color-secondary10);
+}
+
+.budget-summary__progressbar--meter {
+  background-color: var(--stzh-color-success60);
+}
+
+
 /* ===== COMMENTS MODULE ===== */
 
 @media (max-width: 640px) {
@@ -2181,6 +2191,20 @@ background-color: transparent;
 }
 
 /* ===== DECIDIM GEO / MAP COMPONENT ===== */
+
+.leaflet-popup-content-wrapper {
+  background-color: none;
+  padding: 0;
+}
+
+.leaflet-popup-content {
+  margin: 0;
+}
+
+.leaflet-popup-content-wrapper .card__list-metadata span:not([class]), .leaflet-popup-content-wrapper .card__list-metadata svg, .leaflet-popup-content-wrapper .card__list-title {
+color: var(--stzh-heading-color);
+}
+
 /* Leaflet map styling and controls */
 
 .decidimGeo__container .leaflet-container {
