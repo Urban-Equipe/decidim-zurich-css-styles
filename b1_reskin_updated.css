@@ -177,7 +177,8 @@ header .menu-bar__dropdown-menu a,
 .tab-x[aria-expanded=true],
 .filter.is-active,
 .profile__user-name,
-.activity__content>div:first-child a{
+.activity__content>div:first-child a,
+.comments .add-comment a{
   font-family: var(--stzh-font-family-heavy);
   font-weight: var(--stzh-font-weight-heavy);
 }
@@ -1347,7 +1348,7 @@ text-decoration-line: none;
   border: none;
 }
 
-/* Make flash background stretch full page width */
+/* Make flash alerts background stretch full page width */
 .flash[role="alert"]::before {
   content: "";
   position: absolute;
