@@ -1324,6 +1324,9 @@ text-decoration-line: none;
 
 /*Set default flash variables*/
 .flash {
+  position: relative;
+  z-index: 0;
+
   --background-flash: var(--stzh-color-grey20);
   --flash-text-color: var(--stzh-color-coolgrey70);
 }
@@ -1339,9 +1342,22 @@ text-decoration-line: none;
 .flash {
   /*padding: var(--stzh-space-xlarge) var(--stzh-space-huge);*/
   margin: 0;
-  background-color: var(--background-flash);
+  background-color: transparent;
   color: var(--flash-text-color);
   border: none;
+}
+
+/* Make flash background stretch full page width */
+.flash::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background-color: var(--background-flash);
+  z-index: -1;
 }
 
 /*media screen and (max-width: 1024px){
@@ -1391,8 +1407,6 @@ text-decoration-line: none;
   font-weight: var(--stzh-font-weight-regular);
   font-style: var(--stzh-font-style-heavy);
   --background-flash: var(--stzh-color-success60);
-  background-color: var(--background-flash);
-  border: none;
   align-items: center;
   justify-content: center;
 }
@@ -1406,8 +1420,6 @@ text-decoration-line: none;
   font-weight: var(--stzh-font-weight-regular);
   font-style: var(--stzh-font-style-heavy);
   --background-flash: var(--stzh-color-warning60);
-  background-color: var(--background-flash);
-  border: none;
   align-items: center;
   justify-content: center;
   color: var(--stzh-color-white);
@@ -1422,8 +1434,6 @@ text-decoration-line: none;
   font-weight: var(--stzh-font-weight-regular);
   font-style: var(--stzh-font-style-heavy);
   --background-flash: var(--stzh-color-error60);
-  background-color: var(--background-flash);
-  border: none;
   align-items: center;
   justify-content: center;
 }
@@ -1436,8 +1446,6 @@ text-decoration-line: none;
 
 .flash.secondary {
   --background-flash: var(--stzh-color-info60);
-  background-color: var(--background-flash);
-  border: none;
   align-items: center;
   justify-content: center;
 }
