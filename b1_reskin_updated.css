@@ -1348,7 +1348,7 @@ text-decoration-line: none;
 }
 
 /* Make flash background stretch full page width */
-.flash::before {
+.flash[role="alert"]::before {
   content: "";
   position: absolute;
   top: 0;
@@ -1359,12 +1359,6 @@ text-decoration-line: none;
   background-color: var(--background-flash);
   z-index: -1;
 }
-
-/*media screen and (max-width: 1024px){
-  .flash {
-      padding: var(--stzh-space-medium) var(--stzh-space-large);
-  }
-}*/
 
 .flash__message {
   font-size: var(--stzh-font-milli-font-size);
