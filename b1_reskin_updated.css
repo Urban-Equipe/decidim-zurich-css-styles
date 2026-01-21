@@ -1048,31 +1048,39 @@ header .main-bar__links-desktop svg+span {
 
 /* ===== CARD COMPONENTS ===== */
 /* Grid and list card styles for content display */
-.card__grid {
+.card__grid,
+.card__highlight {
   border-radius: 0;
   background-color: var(--stzh-cardlist-background-color);
   transition-duration: .15s;
   box-shadow: none;
 }
 
-.card__grid:hover, .card__grid:focus {
+.card__grid:hover,
+.card__grid:focus,
+.card__highlight:hover,
+.card__highlight:focus {
  background-color: var(--stzh-color-secondary10);
  border: none;
 }
 
-.card__grid:hover .card__grid-text h3 {
+.card__grid:hover .card__grid-text h3,
+.card__highlight:hover .card__highlight-text h3 {
 text-decoration-line: none;
 }
 
-.card__grid-img {
+.card__grid-img,
+.card__highlight-img {
   border-radius: 0;
 }
 
-.card__grid-text {
+.card__grid-text,
+.card__highlight-text {
   padding: var(--stzh-space-medium);
 }
 
-.card__grid-metadata {
+.card__grid-metadata,
+.card__highlight-metadata {
   font-family: var(--stzh-font-family-medium);
   font-weight: var(--stzh-font-weight-medium);
   font-size: var(--stzh-font-milli-font-size);

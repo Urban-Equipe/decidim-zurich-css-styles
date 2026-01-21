@@ -201,11 +201,13 @@ color: var(--stzh-color-primary70);
 background-color: var(--stzh-color-secondary30);
 }
 
-.card__grid {
+.card__grid,
+.card__highlight {
   position: relative;
 }
 
-.card__grid:hover .stzh-card-navigation__arrow > svg {
+.card__grid:hover .stzh-card-navigation__arrow > svg,
+.card__highlight:hover .stzh-card-navigation__arrow > svg {
  transform: translateX(0.25rem);
 }
 
@@ -221,7 +223,8 @@ transition: transform 150ms ease;
 }
 
 /* Responsive padding on cards*/
-.card__grid-text {
+.card__grid-text,
+.card__highlight-text {
 padding-left: var(--stzh-space-medium);
 display: flex;
 align-items: flex-start;
@@ -231,7 +234,8 @@ padding-bottom: var(--stzh-space-xsmall);
 }
 
 @media screen and (min-width: 640px) {
-.card__grid-text {
+.card__grid-text,
+.card__highlight-text {
     padding-top: var(--stzh-space-large);
     padding-right: var(--stzh-space-large);
     padding-left: var(--stzh-space-large);
@@ -240,7 +244,8 @@ padding-bottom: var(--stzh-space-xsmall);
 }
 
 @media screen and (min-width: 1024px) {
-.card__grid-text {
+.card__grid-text,
+.card__highlight-text {
     padding-bottom: var(--stzh-space-xxxlarge);
     padding-top: var(--stzh-space-xlarge);
     padding-right: var(--stzh-space-xlarge);
@@ -250,7 +255,8 @@ padding-bottom: var(--stzh-space-xsmall);
 }
 
 @media screen and (min-width: 1280px) {
-.card__grid-text {
+.card__grid-text,
+.card__highlight-text {
     padding-bottom: var(--stzh-space-xxxxlarge);
     padding-top: var(--stzh-space-xxlarge);
     padding-right: var(--stzh-space-xxlarge);
@@ -261,18 +267,24 @@ padding-bottom: var(--stzh-space-xsmall);
 
 /*Subtitle & description text*/
 
-.card__grid-metadata, .participatory-space__container>[id^=html-block] :where(h3+*):not(:where([class~=not-prose],[class~=not-prose] *)) {
+.card__grid-metadata,
+.card__highlight-metadata,
+.participatory-space__container>[id^=html-block] :where(h3+*):not(:where([class~=not-prose],[class~=not-prose] *)) {
   color: var(--stzh-base-color);
 }
 
-.card__grid-metadata, .participatory-space__container>[id^=html-block] :where(h3+*):not(:where([class~=not-prose],[class~=not-prose] *)) {
+.card__grid-metadata,
+.card__highlight-metadata,
+.participatory-space__container>[id^=html-block] :where(h3+*):not(:where([class~=not-prose],[class~=not-prose] *)) {
   margin-top: var(--stzh-space-xsmall);
   margin-bottom: var(--stzh-space-xsmall);
 }
 
 
 @media screen and (min-width: 640px) {
-.card__grid-metadata, .participatory-space__container>[id^=html-block] :where(h3+*):not(:where([class~=not-prose],[class~=not-prose] *)) {
+.card__grid-metadata,
+.card__highlight-metadata,
+.participatory-space__container>[id^=html-block] :where(h3+*):not(:where([class~=not-prose],[class~=not-prose] *)) {
     margin-bottom: var(--stzh-space-small);
     margin-top: var(--stzh-space-small);
 
@@ -280,14 +292,18 @@ padding-bottom: var(--stzh-space-xsmall);
 }
 
 @media screen and (min-width: 1024px) {
-  .card__grid-metadata, .participatory-space__container>[id^=html-block] :where(h3+*):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  .card__grid-metadata,
+  .card__highlight-metadata,
+  .participatory-space__container>[id^=html-block] :where(h3+*):not(:where([class~=not-prose],[class~=not-prose] *)) {
     margin-bottom: var(--stzh-space-medium);
     margin-top: var(--stzh-space-medium);
   }
 }
 
 @media screen and (min-width: 1280px) {
-  .card__grid-metadata, .participatory-space__container>[id^=html-block] :where(h3+*):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  .card__grid-metadata,
+  .card__highlight-metadata,
+  .participatory-space__container>[id^=html-block] :where(h3+*):not(:where([class~=not-prose],[class~=not-prose] *)) {
     margin-bottom: var(--stzh-space-xlarge);
     margin-top: var(--stzh-space-xlarge);
   }
