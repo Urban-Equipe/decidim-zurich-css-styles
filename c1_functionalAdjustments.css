@@ -83,3 +83,18 @@ header .main-bar__logo-mobile a {
   border-left: 0;
   padding-left: 0;
 }
+
+/* ––– Default Background Image ––– */
+/* Default Organization image for frontpage */
+
+/* Only apply fallback background when the SVG placeholder is present */
+.card__grid-img:has(svg) {
+  background-image: url("organization-default-image.png");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Hide the SVG when fallback is active */
+.card__grid-img:has(svg) svg {
+  display: none;
+}
