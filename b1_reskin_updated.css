@@ -1349,11 +1349,14 @@ text-decoration-line: none;
 }
 
 .flash {
-  /*padding: var(--stzh-space-xlarge) var(--stzh-space-huge);*/
   margin: 0;
   background-color: transparent;
   color: var(--flash-text-color);
   border: none;
+}
+
+.flash.flex-col{
+  background-color: var(--background-flash);
 }
 
 /* Make flash alerts background stretch full page width */
