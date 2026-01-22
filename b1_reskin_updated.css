@@ -1357,6 +1357,7 @@ text-decoration-line: none;
 
 .flash.flex-col{
   background-color: var(--background-flash);
+  color: var(--flash-text-color);
 }
 
 /* Make flash alerts background stretch full page width */
@@ -2348,57 +2349,16 @@ color: var(--stzh-heading-color);
   font-weight: var(--stzh-font-weight-heavy);
 }
 
-/*–––Decidim GEO mobile fix––––*/
-/*last revisited: 15.07.2025 LK*/
-.decidimGeo__container .js-decidimgeo.decidimgeo__map.leaflet-pseudo-fullscreen {
-  height: 100vh;
-  max-height: 100vh;
-}
+/*–––Decidim GEO mobile fixes––––*/
 
-@media (max-width: 768px){
-  .decidimGeo__container:not(.decidimGeo__container--fullscreen) .js-decidimgeo.decidimgeo__map .leaflet-bar, .decidimGeo__container:not(.decidimGeo__container--fullscreen) .js-decidimgeo.decidimgeo__map .leaflet-control-container {
-    display: block;
-  }
-
-  .decidimGeo__container .leaflet-top .leaflet-control {
-    color: var(--stzh-link-color);
-    /*margin-top: 24px;*/
-  }
-
- .leaflet-bar a.leaflet-fullscreen-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background-color: transparent;
-    color: var(--stzh-link-color);
-    font-size: 32px;
-    font-family: var(--stzh-font-family-medium);
-    font-weight: var(--stzh-font-weight-medium);
-    border-radius: 0;
-    border: 0;
-    text-decoration: none;
-    position: relative;
-    cursor: pointer;
-  }
-
-/* Insert the "×" symbol */
-  .leaflet-bar a.leaflet-fullscreen-icon::before {
-    content: "×";
-    line-height: 1;
-    font-size: 32px;
-  }
-  .decidimGeo__container .js-decidimgeo.decidimgeo__map .decidimGeo__pageName__container {
-    border-radius: 0;
-    margin-top: 16px;
-    width: 100vw;
-  }
-  .decidimGeo__container .js-decidimgeo.decidimgeo__map .decidimGeo__pageName__text {
-    font-family: var(--stzh-font-family-medium);
-    font-weight: var(--stzh-font-weight-medium);
+.decidimGeo__container .js-decidimgeo.decidimgeo__map .decidimGeo__pageName__text {
+    font-family: var(--stzh-font-family-heavy);
+    font-weight: var(--stzh-font-weight-heavy);
     color: var(--stzh-heading-color);
   }
+
+.decidimGeo__container .js-decidimgeo.decidimgeo__map .decidimGeo__drawerHeader__drawerToggle--link {
+  color: var(--stzh-link-color);
 }
 
 /* General Decidim Geo text improvements */
@@ -2424,8 +2384,9 @@ color: var(--stzh-heading-color);
   border-radius: 0;
 }
 
+/*Marker color*/
 path.decidimGeo__marker.leaflet-interactive {
-  stroke: var(--stzh-color-primary70);
+  --primary: var(--stzh-color-primary70);
 }
 
 .decidimGeo__container .js-decidimgeo.decidimgeo__map .decidimGeo__filterModal__label {
