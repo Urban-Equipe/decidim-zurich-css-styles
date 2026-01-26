@@ -2386,7 +2386,7 @@ color: var(--stzh-heading-color);
 
 /*Marker color*/
 path.decidimGeo__marker.leaflet-interactive {
-  --primary: var(--stzh-color-primary70);
+  --primary: var(--marker-color-highlight);
 }
 
 .decidimGeo__container .js-decidimgeo.decidimgeo__map .decidimGeo__filterModal__label {
