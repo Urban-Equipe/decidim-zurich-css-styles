@@ -281,3 +281,8 @@ label[for="proposal_scope_id"]{
 #amendments {
   display: none;
 }
+
+/* Make bg-background transparent */
+.bg-background {
+  background-color: transparent;
+}
