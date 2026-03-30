@@ -1,6 +1,15 @@
+/**
+ * d4_klimainstitutionen.css
+ *
+ * Layout adjustments for process group (e.g. Klimainstitutionen).
+ * Relies on a1_variables.css for design system variables.
+ *
+ * USAGE: Load after a1_variables.css.
+ */
+
 @media (min-width: 1024px){
-.layout-1col.cols-6>* {
-grid-column: span 10 / span 10;
-grid-column-start: 2;
-}
+  .layout-1col.cols-6>* {
+    grid-column: span 10 / span 10;
+    grid-column-start: 2;
+  }
 }

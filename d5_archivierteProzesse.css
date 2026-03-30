@@ -1,5 +1,13 @@
-/*Adjustments for terminated processes*/
+/**
+ * d5_archivierteProzesse.css
+ *
+ * Adjustments for terminated/archived processes.
+ * Scoped per Decidim Awesome configuration.
+ *
+ * USAGE: Load after a1_variables.css.
+ */
 
+/*Adjustments for terminated processes*/
 
 /*Hide process menu*/
 #process-nav-content {

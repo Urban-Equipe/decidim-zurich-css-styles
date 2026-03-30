@@ -1,6 +1,24 @@
-/* VBZ theme variables*/
+/**
+ * a2_VBZ_variables.css
+ *
+ * VBZ (Verkehrsbetriebe Zürich) theme variables.
+ * Scoped to VBZ processes when loaded via Decidim Awesome.
+ *
+ * Relies on a1_variables.css as single source of truth:
+ * - VBZ cyan palette (--stzh-color-vbz-cyan*) from a1
+ * - coolgrey, cobaltblue from @oiz/stzh-components design system
+ * - Fonts from design system (no local font overrides)
+ *
+ * USAGE: Load AFTER a1_variables.css. Enable only for VBZ-scoped processes.
+ */
+
+/* ==========================================================================
+   VBZ THEME – Map semantic colors to VBZ cyan palette
+   ========================================================================== */
 
 body {
+
+  /* --- Primary → VBZ cyan --- */
   --stzh-color-primary10-rgb: var(--stzh-color-vbz-cyan10-rgb);
   --stzh-color-primary10: rgba(var(--stzh-color-primary10-rgb) / 1);
   --stzh-color-primary20-rgb: var(--stzh-color-vbz-cyan20-rgb);
@@ -21,6 +39,8 @@ body {
   --stzh-color-primary90: rgba(var(--stzh-color-primary90-rgb) / 1);
   --stzh-color-primary100-rgb: var(--stzh-color-vbz-cyan100-rgb);
   --stzh-color-primary100: rgba(var(--stzh-color-primary100-rgb) / 1);
+
+  /* --- Secondary → coolgrey (from design system) --- */
   --stzh-color-secondary10-rgb: var(--stzh-color-coolgrey10-rgb);
   --stzh-color-secondary10: rgba(var(--stzh-color-secondary10-rgb) / 1);
   --stzh-color-secondary20-rgb: var(--stzh-color-coolgrey20-rgb);
@@ -41,6 +61,8 @@ body {
   --stzh-color-secondary90: rgba(var(--stzh-color-secondary90-rgb) / 1);
   --stzh-color-secondary100-rgb: var(--stzh-color-coolgrey100-rgb);
   --stzh-color-secondary100: rgba(var(--stzh-color-secondary100-rgb) / 1);
+
+  /* --- Info → cobaltblue (from design system) --- */
   --stzh-color-info10-rgb: var(--stzh-color-cobaltblue10-rgb);
   --stzh-color-info10: rgba(var(--stzh-color-info10-rgb) / 1);
   --stzh-color-info20-rgb: var(--stzh-color-cobaltblue20-rgb);
@@ -61,17 +83,8 @@ body {
   --stzh-color-info90: rgba(var(--stzh-color-info90-rgb) / 1);
   --stzh-color-info100-rgb: var(--stzh-color-cobaltblue100-rgb);
   --stzh-color-info100: rgba(var(--stzh-color-info100-rgb) / 1);
-  --stzh-font-family-regular: 'HelveticaNeueLTW01_55Roman', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --stzh-font-family-medium: 'HelveticaNeueLTW01_55Roman', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --stzh-font-family-medium-italic: 'HelveticaNeueLTW05_66MediumIt', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --stzh-font-family-bold: 'HelveticaNeueLTW05_65Medium', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --stzh-font-family-heavy: 'HelveticaNeueLTW05_65Medium', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --stzh-font-family-title: var(--stzh-font-family-regular);
-  --stzh-font-weight-regular: normal;
-  --stzh-font-weight-medium: 400;
-  --stzh-font-weight-medium-italic: 400;
-  --stzh-font-weight-bold: 500;
-  --stzh-font-weight-heavy: 500;
+
+  /* --- VBZ component overrides (use imported design system fonts) --- */
   --stzh-button-background-color: var(--stzh-color-primary60);
   --stzh-button-hover-background-color: var(--stzh-color-primary80);
   --stzh-button-disabled-background-color: var(--stzh-color-grey70);
@@ -84,8 +97,8 @@ body {
   --stzh-button-tertiary-color: var(--stzh-color-primary70);
   --stzh-button-tertiary-hover-color: var(--stzh-color-primary80);
   --stzh-button-tertiary-disabled-color: var(--stzh-color-grey70);
-  --stzh-link-color: var(--stzh-color-primary50);
-  --stzh-link-hover-color: var(--stzh-color-primary60);
+  --stzh-link-color: var(--stzh-color-primary60);
+  --stzh-link-hover-color: var(--stzh-color-primary70);
   --stzh-header-logobar-background-color: transparent;
   --stzh-tooltip-color: var(--stzh-color-secondary70);
   --stzh-tooltip-background-color: var(--stzh-color-secondary10);
@@ -93,8 +106,6 @@ body {
   --stzh-tooltip-hover-link-color: var(--stzh-color-primary70);
   --stzh-cardlist-background-color: var(--stzh-color-coolgrey10);
   --stzh-cardlist-description-color: var(--stzh-color-primary70);
-  /*manual additions*/
   --stzh-heading-color: var(--stzh-color-primary70);
-  --stzh-link-color: var(--stzh-color-primary60);
   --stzh-topnews-background-color: var(--stzh-color-secondary30);
 }

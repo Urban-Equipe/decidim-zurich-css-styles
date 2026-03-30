@@ -4,109 +4,172 @@ This directory contains CSS files used with [Decidim Awesome](https://github.com
 
 ## Overview
 
-These CSS files customize the Decidim platform to match the Stadt Zürich (STZH) design system. Each file must be included in a separate box in Decidim Awesome and can be scoped accordingly.
+These CSS files customize Decidim to match the [Stadt Zürich (STZH) design system](https://designsystem.stadt-zuerich.ch/current/?path=/docs/docs-about--docs): color palette, typography, spacing, and component patterns, plus extra rules needed for real participatory processes. Each file is included in its own box in Decidim Awesome and can be scoped per page, component, or space.
 
-## Naming Convention
+The sections **Design system (sources and deviations)** and **Breakpoints and horizontal padding** below describe how we apply STZH to Decidim—where we follow the official system, where we use Tailwind-style breakpoints for Decidim compatibility, and how layout width and padding behave across viewports.
 
-The file naming convention follows a hierarchical structure:
+## Design system: sources and deviations
+
+### Sources
+
+- **Reference:** [designsystem.stadt-zuerich.ch](https://designsystem.stadt-zuerich.ch/current/)
+- **Package:** `@oiz/stzh-components` (via [jsDelivr CDN](https://cdn.jsdelivr.net/npm/@oiz/stzh-components@latest/))
+- **Import chain:** `a1_variables.css` imports `stzh-components.css`; `b1_reskin_updated.css` loads after A1 and applies the reskin (see **File organization** for all sheets).
+
+### Breakpoints
+
+The STZH design system uses its own breakpoint scale:
+
+| STZH breakpoint | Min-width | Typical use |
+|-----------------|-----------|-------------|
+| —               | (default) | Base styles |
+| Medium          | **900px** | Layout and typography adjustments |
+| Large           | **1260px**| Further scaling |
+
+**Decidim / Mitwirken** follows **Tailwind CSS** breakpoints instead, for compatibility with Decidim’s grid and utilities:
+
+| Our breakpoint | Min-width | Source |
+|----------------|-----------|--------|
+| (base)         | —         | Default |
+| sm             | **640px** | Tailwind |
+| md             | **768px** | Tailwind |
+| lg             | **1024px**| Tailwind |
+| xl             | **1280px**| Tailwind |
+| 2xl            | **1536px**| Tailwind |
+
+Typography and some components (e.g. help text, footer) still use **900px** and **1260px** where those values match the STZH spec.
+
+### Other deviations
+
+- **Borders:** `.rounded` is reset to `border-radius: 0` (STZH favours square corners).
+- **Text:** `.text-center` and `.uppercase` are overridden to left-aligned and normal case where not needed.
+- **Font loading:** Fonts come from `@oiz/stzh-components`; Decidim’s default font loading is replaced.
+- **Flash messages:** The Banner pattern is adapted to Decidim’s markup (icon, message, close button) with a full-width background via `::before`, while the content box follows main layout alignment.
+
+## Breakpoints and horizontal padding
+
+Main layout uses responsive horizontal padding so content lines up across header, body, and footer. The same scale is used for flash messages, Devise pages, hero blocks, and similar areas.
+
+### Reference scale (content box)
+
+| Viewport        | Breakpoint | Max-width (content) | Horizontal padding |
+|-----------------|------------|---------------------|--------------------|
+| Under 640px     | (base)     | 100%                | `var(--stzh-space-medium)` |
+| ≥ 640px         | sm         | 640px               | `var(--stzh-space-xlarge)` |
+| ≥ 768px         | md         | 768px               | (unchanged) |
+| ≥ 1024px        | lg         | 1024px              | `var(--stzh-layout-padding-desktop)` (4rem) |
+| ≥ 1280px        | xl         | 1280px              | (unchanged) |
+| ≥ 1536px        | 2xl        | 1536px              | (unchanged) |
+
+### Where this applies
+
+- **Flash messages** (`flash[role="alert"]`): Content box uses this max-width and padding; background stays full-width via `::before`.
+- **Devise** (sign-in, registration, password, etc.): `.layout-main` uses `--stzh-space-medium` → `--stzh-space-xlarge` (from 640px) → `--stzh-space-xxlarge` (from 1024px).
+- **Hero** (`.hero > *`): Uses `--stzh-space-xxlarge` on larger viewports.
+- **Footer** (`.main-footer__down`): Uses `var(--stzh-layout-padding-desktop)` on large screens.
+- **Process hero** (`.participatory-space__hero-text`): Uses `var(--stzh-layout-padding-desktop)` from 1024px+ and scales `max-width` by breakpoint.
+
+### STZH spacing variables (padding)
+
+| Variable                         | Approx. value | Typical use |
+|----------------------------------|---------------|-------------|
+| `--stzh-space-medium`            | ~1rem         | Base mobile padding |
+| `--stzh-space-xlarge`            | ~2rem         | Tablet padding |
+| `--stzh-space-xxlarge`           | ~2.5–3rem     | Desktop padding (some areas) |
+| `--stzh-layout-padding-desktop`  | 4rem (64px)   | Desktop padding (layout-main, flash, footer, hero from 1024px+) |
+
+### Max-width and padding together
+
+1. **Max-width** caps the content box so line length stays readable on large screens.
+2. **Padding** keeps content off the viewport edges on small screens and a consistent inset at each step.
+3. Content is centred with `margin-left: auto; margin-right: auto` inside the padded area.
+4. At each breakpoint, max-width matches the breakpoint width (640px, 768px, 1024px, …) so the box grows with the viewport up to that limit.
+
+This aligns with Decidim’s `.home__section` and `.home .content-block` and with STZH where breakpoints allow.
+
+## Naming convention
+
+The file naming convention follows a hierarchy:
 
 - **Class A** – Variable & theme sheets
 - **Class B** – Reskins
 - **Class C** – Functional and design adjustments
 - **Class D** – Process-specific customizations
 
-Each file is named with its class prefix (lowercase letter) followed by a number and a descriptive name (e.g., `a1_variables.css`, `c3_forms.css`).
+Each file uses its class prefix (lowercase letter), a number, and a descriptive name (e.g. `a1_variables.css`, `c3_forms.css`).
 
-## File Organization
+## File organization
 
-### Class A – Variable & Theme Sheets
+### Class A – Variable & theme sheets
 
-These files define CSS custom properties (variables) that form the foundation of the design system.
+Foundation: CSS custom properties (variables).
 
 | File | Box Name | Description |
 |------|----------|-------------|
-| `a1_variables.css` | A1 | Global STZH (Stadt Zürich) variables - defines color palette, typography, spacing, and other design tokens |
-| `a2_VBZ_variables.css` | A2 | VBZ (Verkehrsbetriebe Zürich) specific variables |
+| `a1_variables.css` | A1 | Imports STZH variables from `stzh-components` and defines Decidim-specific token overrides |
+| `a2_VBZ_variables.css` | A2 | VBZ (Verkehrsbetriebe Zürich) design tokens (enable only for VBZ-scoped content) |
 
 ### Class B – Reskins
 
-These files contain global reskinning styles that apply the design system to the platform.
+Global application of the design system across the platform.
 
 | File | Box Name | Description |
 |------|----------|-------------|
-| `b1_reskin_updated.css` | B1 | Global reskin - applies STZH design system styles across the platform (typography, buttons, cards, navigation, etc.) |
+| `b1_reskin_updated.css` | B1 | Main reskin: typography, buttons, cards, navigation, layouts |
 
-**Note:** According to the convention, B2 would contain VBZ adjustments, but this file is currently implemented as `c2_VBZ_adjustments.css` in Class C.
+**Note:** By naming, B2 would be VBZ reskin; VBZ-specific visual tweaks live in **`c2_VBZ_adjustments.css`** (Class C).
 
-### Class C – Functional and Design Adjustments
-
-These files contain specific functional adjustments, component customizations, and feature-specific styles.
+### Class C – Functional and design adjustments
 
 | File | Box Name | Description |
 |------|----------|-------------|
-| `c1_functionalAdjustments.css` | C1 | Functional adjustments independent of reskinning (hides elements, fixes layout issues) |
+| `c1_functionalAdjustments.css` | C1 | Functional tweaks (hide elements, layout fixes) independent of the reskin |
 | `c2_VBZ_adjustments.css` | C2 | VBZ-specific design adjustments |
-| `c3_forms.css` | C3 | Form styling customizations |
-| `c4_mapSize.css` | C4 | Map size and layout adjustments |
-| `c5_hideGeo.css` | C5 | Hides geographic/geo features |
-| `c6_hideProcesses.css` | C6 | Hides process-related elements |
-| `c7_sharetokens.css` | C7 | Share token styling |
+| `c3_forms.css` | C3 | Form styling |
+| `c4_mapSize.css` | C4 | Map size and layout |
+| `c5_hideGeo.css` | C5 | Hide geo-related UI |
+| `c6_hideProcesses.css` | C6 | Hide process-related UI |
+| `c7_sharetokens.css` | C7 | Share-token styling |
 | `c8_meetingAdjustments.css` | C8 | Meeting-related adjustments |
-| `c9_ProcessGroupBannerWeiss.css` | C9 | Process group banner styling (white variant) |
+| `c9_ProcessGroupBannerWeiss.css` | C9 | Process group banner (white variant) |
 
-### Class D – Process-Specific Customizations
-
-These files contain styles specific to individual participatory processes or initiatives.
+### Class D – Process-specific customizations
 
 | File | Box Name | Description |
 |------|----------|-------------|
-| `d1_fahrgaststimme.css` | D1 | Customizations for the "Fahrgaststimme" process |
-| `d1a_nettoNullMeetings.css` | D1a | Netto Null meetings customizations |
-| `d2_proc-nettonull.css` | D2 | Netto Null process theme variables and styling |
-| `d3_proc_Quartierblöcke.css` | D3 | "Quartierblöcke" process customizations |
-| `d4_klimainstitutionen.css` | D4 | Climate institutions customizations |
-| `d5_archivierteProzesse.css` | D5 | Archived processes customizations |
+| `d1_fahrgaststimme.css` | D1 | “Fahrgaststimme” process |
+| `d1a_nettoNullMeetings.css` | D1a | Netto Null meetings |
+| `d2_proc-nettonull.css` | D2 | Netto Null process theme |
+| `d3_proc_Quartierblöcke.css` | D3 | “Quartierblöcke” process |
+| `d4_klimainstitutionen.css` | D4 | Climate institutions |
+| `d5_archivierteProzesse.css` | D5 | Archived processes |
 
 ## Installation in Decidim Awesome
 
-### Setup Instructions
+1. **Boxes:** Create one Decidim Awesome custom-styles box per CSS file.
+2. **Names:** Use the box labels from the tables (A1, A2, B1, C1, …).
+3. **Content:** Paste each file’s contents into the matching box.
+4. **Scoping (optional):** Restrict boxes to specific pages, components, or participatory spaces.
+5. **Order:** Load in cascade order:
+   - Class A (variables first)
+   - Class B (reskin)
+   - Class C (adjustments)
+   - Class D (process-specific last)
 
-1. **Create CSS Boxes in Decidim Awesome**: For each CSS file, create a separate box in the Decidim Awesome custom styles interface.
+### Hiding from public frontend
 
-2. **Box Naming**: Name each box using the provided convention (e.g., "A1", "A2", "B1", "C1", etc.) as shown in the table above.
+To keep custom CSS available in admin but hidden on the public site, add a wrapper class and adjust the box’s `data-key` (or equivalent) in Decidim Awesome so visibility rules apply as needed.
 
-3. **File Upload/Content**: Copy the contents of each CSS file into its corresponding box.
+## Additional notes
 
-4. **Scoping (Optional)**: Each box can be scoped to specific pages, components, or participatory spaces if needed. Use Decidim Awesome's scoping options to limit where styles are applied.
+- **Dependencies:** Class A must load before everything else; later sheets depend on those custom properties.
+- **VBZ:** Enable A2 / C2 only for VBZ-related scopes.
+- **Class D:** Enable each D sheet only for its process.
+- **Maintenance:** Keep naming and class structure when adding or changing files.
 
-5. **Loading Order**: The files should be loaded in the following order to ensure proper cascade:
-   - First: Class A files (A1, A2) - variables must load first
-   - Second: Class B files (B1) - reskins depend on variables
-   - Third: Class C files (C1-C9) - adjustments depend on reskins
-   - Fourth: Class D files (D1-D5) - process-specific styles depend on all above
+## Further reading
 
-### Hiding from Public Frontend
-
-To hide custom styles from the public frontend while keeping them accessible in the admin interface:
-
-- Add a new CSS class wrapper and replace the `data-key` attribute with the desired box name
-- This allows selective visibility control through Decidim Awesome's interface
-
-## Additional Notes
-
-- **Dependencies**: Class A files (variables) must be loaded before all other files, as they define CSS custom properties used throughout.
-- **VBZ**: Some files are specifically for VBZ (Verkehrsbetriebe Zürich) customizations and should only be enabled when working with VBZ-related content.
-- **Process-Specific Files**: Class D files are scoped to specific participatory processes. Ensure they are only active for their respective processes.
-- **Maintenance**: When updating styles, maintain the naming convention and class structure to ensure compatibility and easy identification.
-
-## Design System Reference
-
-These CSS files implement the **[Stadt Zürich (STZH) Design System](https://designsystem.stadt-zuerich.ch/current/?path=/docs/docs-about--docs)**, which includes:
-- Comprehensive color palette (primary, secondary, semantic colors)
-- Typography system with custom font families
-- Spacing and layout variables
-- Component styling guidelines
-
-…plus additional requirements in the application of Decidim in real-world participatory processes.
-
-For more information about the STZH Design System, refer to the official documentation.
+- [STZH design system](https://designsystem.stadt-zuerich.ch/current/)
+- [Decidim documentation](https://docs.decidim.org/)
+- [Tailwind CSS breakpoints](https://tailwindcss.com/docs/responsive-design)
+- [Decidim Awesome](https://github.com/decidim-ice/decidim-module-decidim_awesome)

@@ -1,5 +1,13 @@
-/* Hide agenda filters */
+/**
+ * d1a_nettoNullMeetings.css
+ *
+ * Hide agenda filters and withdrawn meetings for Netto-Null process.
+ * Scoped per Decidim Awesome configuration.
+ *
+ * USAGE: Load after a1_variables.css.
+ */
 
+/* Hide agenda filters */
 #trigger-menu-activity, #panel-dropdown-menu-activity, #trigger-menu-category, #panel-dropdown-menu-category {
   display: none;
 }

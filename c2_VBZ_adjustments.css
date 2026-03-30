@@ -1,8 +1,17 @@
+/**
+ * c2_VBZ_adjustments.css
+ *
+ * VBZ (Verkehrsbetriebe Zürich) specific design adjustments.
+ * Aligned with official VBZ pages (e.g. stadt-zuerich.ch/vbz/.../tram-affoltern).
+ * Scoped to VBZ processes when loaded via Decidim Awesome.
+ *
+ * USAGE: Load after a1_variables.css and b1_reskin_updated.css. Enable only for VBZ-scoped processes.
+ */
+
 /*–––– VBZ adjustments –––––*/
 
-
 /*Replace logo with VBZ logo*/
-header .main-bar__logo-desktop/*, header .main-bar__logo-mobile*/ {
+header .main-bar__logo-desktop {
   background: url(https://www.stadt-zuerich.ch/content/dam/corporate-design/de/logos/vbz.svg) no-repeat;
   background-size: auto 60px;
   width: 0;
@@ -12,4 +21,56 @@ header .main-bar__logo-desktop/*, header .main-bar__logo-mobile*/ {
 
 header .main-bar__logo-mobile a {
   display: none;
+}
+
+/* ===== Hero section – VBZ (match stadt-zuerich.ch/vbz) ===== */
+/* Hero background: coolgrey20 (217, 233, 239) */
+.participatory-space__hero::before {
+  background-color: var(--stzh-color-coolgrey20);
+}
+
+section:has(.participatory-space__hero) {
+  background-color: var(--stzh-color-coolgrey20);
+}
+
+/* Hero h1 typography – primary60 text on light cyan, not fat */
+.participatory-space__hero-slogan,
+.participatory-space__hero-text h1,
+.participatory-space__hero-text .h1 {
+  color: var(--stzh-color-primary60);
+  font-family: var(--stzh-font-family-medium);
+  font-weight: 400;
+  font-size: var(--stzh-font-hecto-font-size);
+  line-height: var(--stzh-font-hecto-text-line-height);
+  letter-spacing: var(--stzh-font-hecto-text-letter-spacing);
+}
+
+@media screen and (min-width: 1280px) {
+  .participatory-space__hero-slogan,
+  .participatory-space__hero-text h1,
+  .participatory-space__hero-text .h1 {
+    font-size: var(--stzh-font-hero-font-size);
+    line-height: var(--stzh-font-hero-text-line-height);
+    letter-spacing: var(--stzh-font-hero-text-letter-spacing);
+  }
+}
+
+.participatory-space__hero-text p,
+.participatory-space__hero-text .text-sm {
+  color: var(--stzh-color-primary70);
+}
+
+/* ===== Footer – VBZ dark cyan (match official VBZ) ===== */
+footer .main-footer {
+  background-color: var(--stzh-color-primary10);
+}
+
+body .main-footer__down::before {
+  background: var(--stzh-color-primary100);
+}
+
+/* ===== Process step indicator – VBZ cyan ===== */
+.participatory-space__metadata-item--step .participatory-space__metadata-item-title,
+.answer-questionnaire__step-counter {
+  background-color: var(--stzh-color-primary60);
 }

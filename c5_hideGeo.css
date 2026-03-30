@@ -1,3 +1,12 @@
+/**
+ * c5_hideGeo.css
+ *
+ * Hide Decidim Geo map component.
+ * Scoped per Decidim Awesome configuration.
+ *
+ * USAGE: Load after a1_variables.css.
+ */
+
 #DecidimGeo {
   display: none;
 }

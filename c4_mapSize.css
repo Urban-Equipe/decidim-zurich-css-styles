@@ -1,3 +1,12 @@
+/**
+ * c4_mapSize.css
+ *
+ * Map size adjustments for proposal views.
+ * Relies on design system variables from a1_variables.css.
+ *
+ * USAGE: Load after a1_variables.css.
+ */
+
 .proposal__container [data-decidim-map] {
   aspect-ratio: 2/1;
 }

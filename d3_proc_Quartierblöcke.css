@@ -1,11 +1,20 @@
+/**
+ * d3_proc_Quartierblöcke.css
+ *
+ * Quartierblöcke process map and filter adjustments.
+ * Relies on a1_variables.css for design system variables.
+ *
+ * USAGE: Load after a1_variables.css. Enable only for Quartierblöcke process.
+ */
+
 /*change color of shp-areas to primary*/
 .leaflet-interactive {
-  stroke: var(--primary);
-  fill: var(--primary);
+  stroke: var(--stzh-color-primary70);
+  fill: var(--stzh-color-primary70);
 }
 
 .decidimGeo__marker.leaflet-interactive{
-    fill: #fff;
+  fill: var(--stzh-color-white);
 }
 
 /*Hide unnecessary meeting filters*/

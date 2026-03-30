@@ -1,4 +1,66 @@
+/**
+ * c3_forms.css
+ *
+ * Form styling using STZH design system variables.
+ * Relies on a1_variables.css / b1_reskin_updated.css for design system variables.
+ *
+ * Fieldset styling aligned with:
+ * https://designsystem.stadt-zuerich.ch/current/?path=/story/components-fieldset--default
+ *
+ * USAGE: Load after a1_variables.css and b1_reskin_updated.css.
+ */
+
 /*–––––– Forms styling–––––*/
+
+/* ===== FIELDSET (STZH Design System) ===== */
+fieldset,
+.form__wrapper-block,
+.fieldset {
+  border: 0.0625rem solid var(--stzh-color-grey70);
+  border-radius: 0;
+  padding: var(--stzh-space-medium);
+  margin: 0 0 var(--stzh-space-large);
+  min-inline-size: 0;
+}
+
+fieldset legend,
+.fieldset legend {
+  font-family: var(--stzh-font-family-heavy);
+  font-weight: var(--stzh-font-weight-heavy);
+  font-style: var(--stzh-font-style-heavy);
+  font-size: var(--stzh-font-micro-font-size);
+  line-height: var(--stzh-font-micro-text-line-height);
+  color: var(--stzh-heading-color);
+  padding: 0 var(--stzh-space-xsmall);
+  margin: 0 0 var(--stzh-space-small);
+  display: block;
+}
+
+/* Description / help text below legend */
+fieldset .help-text,
+fieldset .form-error,
+.form__wrapper-block .help-text,
+.form__wrapper-block > .form-error {
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-size: var(--stzh-font-nano-font-size);
+  line-height: var(--stzh-font-nano-text-line-height);
+  color: var(--stzh-text-info-color);
+  margin-bottom: var(--stzh-space-small);
+  min-height: var(--stzh-fieldset-description-min-height, 1.375rem);
+}
+
+/* Nested form wrappers inside fieldset – reduce top margin */
+fieldset .form__wrapper,
+fieldset .form__wrapper-block,
+.form__wrapper-block .form__wrapper {
+  margin-top: var(--stzh-space-medium);
+}
+
+fieldset .form__wrapper:first-of-type,
+fieldset .form__wrapper-block:first-of-type {
+  margin-top: var(--stzh-space-small);
+}
 
 /*Nullify exclusive classes*/
 .form__wrapper label:not(.form__wrapper-checkbox-label), .form__wrapper-block label:not(.form__wrapper-checkbox-label) {
@@ -12,7 +74,7 @@ font-weight: inherit;
   font-family: var(--stzh-font-family-medium);
   font-weight: var(--stzh-font-weight-medium);
   font-style: var(--stzh-font-style-medium);
-  color: var(--stzh-color-black);
+  color: var(--stzh-base-color);
 }
 
 .answer-questionnaire__question-description,
@@ -23,10 +85,8 @@ font-weight: inherit;
 .answer-questionnaire__multiple-matrix thead td,
 .answer-questionnaire__multiple-matrix th,
 .answer-questionnaire__single-matrix thead td,
-.answer-questionnaire__single-matrix th
-.answer-questionnaire__multiple-matrix th,
-.answer-questionnaire__multiple-matrix td,
 .answer-questionnaire__single-matrix th,
+.answer-questionnaire__multiple-matrix td,
 .answer-questionnaire__single-matrix td,
 .answer-questionnaire__tos{
   font-family: var(--stzh-font-family-medium);
@@ -36,7 +96,7 @@ font-weight: inherit;
   line-height: var(--stzh-font-milli-text-line-height);
   letter-spacing: var(--stzh-font-curve---text-letter-spacing);
   -webkit-user-select: none;
-  color: var(--stzh-color-black);
+  color: var(--stzh-base-color);
 }
 
 .answer-questionnaire__question-label,
@@ -91,23 +151,18 @@ label[for="proposal_user_group_id"],
 /*Number*/
 .answer-questionnaire__question-label::before {
   content: attr(data-answer-idx);
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   height: 2rem;
   width: 2rem;
   border-radius: 50%;
-
   background-color: var(--stzh-link-color);
   border: 1px solid var(--stzh-link-color);
   color: var(--stzh-color-white);
-
   font-size: 1rem;
   font-weight: 600;
   line-height: 1;
-
   margin-right: 0.5rem;
 }
 
@@ -125,48 +180,6 @@ label[for="questionnaire_name"]{
 .tos-agreement, label[for="questionnaire_tos_agreement"] {
   padding-top: var(--stzh-space-xxlarge);
 }
-/*Checkboxes & Radios*/
-/* WIP, currently no checkbox fill svg
-.form__wrapper-checkbox-label{
-  display: flex;
-  transition: color var(--stzh-base-transition-animation-speed);
-  margin-left: var(--stzh-space-small);
-  line-height: 1.5rem;
-}
-
-.form-defaults input[type=checkbox]:not(.reset-defaults),
-.form-defaults input[type=radio]:not(.reset-defaults),
-.form__wrapper-checkbox-label:hover,
-.form__wrapper-radio-label:hover,
-.filter-container input[type=checkbox],
-.filter-container input[type=radio]{
-  border-color: var(--stzh-link-color);
-  color: var(--stzh-link-color);
-}
-
-.form-defaults input[type=checkbox]:not(.reset-defaults),
-.form-defaults input[type=radio]:not(.reset-defaults)
-.filter-container input[type=checkbox],
-.filter-container input[type=radio]{
-  -webkit-appearance: none;
-  border: 0.125rem solid var(--stzh-color-black);
-  background-color: var(--stzh-color-white);
-  width: 1.5rem;
-  height: 1.5rem;
-  flex-shrink: 0;
-  border-radius: var(--stzh-form-input-border-radius);
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  transition: border-color var(--stzh-base-transition-animation-speed);
-}
-
-.form-defaults input[type=checkbox]:not(.reset-defaults):checked{
-  -webkit-appearance: none;
-  border: 0.125rem solid var(--stzh-link-color);
-  background-color: var(--stzh-color-white);
-  background-image: url("/decidim-packs/media/images/remixicon.symbol-e643e553623ffcd49f94.svg#ri-direction-line");
-}*/
 
 /*Text-fields*/
 .form-defaults :is(
@@ -203,7 +216,27 @@ label[for="questionnaire_name"]{
   color: var(--stzh-color-secondary60);
   background-color: var(--stzh-color-white);
   appearance: none;
-  text-align: var(--text-align);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+/* Safari: hide number input spin buttons */
+.form-defaults input[type="number"]:not(.reset-defaults)::-webkit-inner-spin-button,
+.form-defaults input[type="number"]:not(.reset-defaults)::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.form-defaults input[type="number"]:not(.reset-defaults) {
+  -moz-appearance: textfield;
+}
+
+/* Safari: remove search input default styling */
+.form-defaults input[type="search"]:not(.reset-defaults)::-webkit-search-decoration,
+.form-defaults input[type="search"]:not(.reset-defaults)::-webkit-search-cancel-button {
+  -webkit-appearance: none;
 }
 
 /*Text-fields focus*/
@@ -224,7 +257,7 @@ label[for="questionnaire_name"]{
     select,
     textarea
   ):not(.reset-defaults):focus {
-  color: var(--stzh-color-black);
+  color: var(--stzh-base-color);
   border-color: var(--stzh-color-secondary50);
   background-color: var(--stzh-color-secondary20);
   outline-width: 0;

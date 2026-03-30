@@ -1,5 +1,13 @@
+/**
+ * d1_fahrgaststimme.css
+ *
+ * Fahrgaststimme process (146) specific adjustments.
+ * Relies on a1_variables.css / b1_reskin_updated.css for design system variables.
+ *
+ * USAGE: Load after a1_variables.css. Enable only for process 146.
+ */
+
 /*––––––Fahrgaststimme–––––*/
-/*make follow button more prominent and responsive*/
 #follow_participatory_process_146 {
   line-height: var(--stzh-font-centi-text-line-height);
   background-color: var(--stzh-color-primary60);
@@ -9,46 +17,19 @@
 
 @media (min-width: 1280px){
   #follow_participatory_process_146 {
-  padding: var(--stzh-space-small) var(--stzh-space-medium);
-  font-size: var(--stzh-font-centi-font-size);
+    padding: var(--stzh-space-small) var(--stzh-space-medium);
+    font-size: var(--stzh-font-centi-font-size);
   }
 }
 
-/*Sticky button*/
-/*
-@media (min-width: 1024px){
-  #follow_participatory_process_146 {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: var(--stzh-color-primary60);
-  color: white;
-  text-align: center;
-  padding: 1rem;
-  font-size: 1.2rem;
-  border: none;
-  z-index: 999;
-  }
+header .menu-bar__actions {
+  display: block;
 }
-*/
-
-/*Hide menu actions for mobile (to display button)*/
- header .menu-bar__actions {
-   display: block;
-  }
-/*Hide menu actions for mobile (to display button)*/
-/*@media (max-width: 1024px){
- header .menu-bar__actions {
-   display: block;
-  }
-}*/
 
 header .menu-bar__breadcrumb-mobile {
   display: none;
 }
 
-/* Remove unnecessary metadata*/
 .participatory-space__metadata > .participatory-space__metadata-item:first-child {
   display: none;
 }

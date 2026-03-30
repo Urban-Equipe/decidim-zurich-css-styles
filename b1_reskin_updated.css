@@ -1,22 +1,24 @@
 /**
- * b1_reskin_refactored.css
- * 
+ * b1_reskin_updated.css
+ *
  * Main reskin stylesheet for Decidim Zurich customization.
- * Replaces default Tailwind classes with STZH Design System variables.
- * 
- * Structure:
- * - Base styles and animations
- * - Tailwind class overrides
- * - Typography and fonts
- * - Layout components
- * - Navigation and menus
- * - Cards and content blocks
- * - Forms and inputs
- * - Interactive components
- * - Decidim-specific modules
+ * Relies on imported STZH design system (a1_variables.css) as single source of truth.
+ *
+ * CHANGES from b1_reskin_updated.css:
+ * - Fonts loaded from @oiz/stzh-components (replaces Decidim font loading)
+ * - All variables from design system; no local overrides
+ * - Fixed orphan .success selector, --stzh-font-deci-centi-line-height, hardcoded values
+ *
+ * USAGE: Load AFTER a1_variables.css (which imports stzh-components.css)
  */
 
- html {
+/* ==========================================================================
+   Design system fonts (replaces Decidim font loading)
+   ========================================================================== */
+
+@import url("https://cdn.jsdelivr.net/npm/@oiz/stzh-components@latest/dist/stzh-components/assets/fonts.css");
+
+html {
   font-family: var(--stzh-font-family-regular);
   -webkit-font-smoothing: antialiased;
 }
@@ -62,6 +64,77 @@
     grid-column: span 8 / span 8;
     grid-column-start: 1;
   }
+}
+
+/* Devise pages: ensure layout-main has same horizontal padding as header/menu-bar */
+body.sessions .layout-main,
+body.registrations .layout-main,
+body.passwords .layout-main,
+body.confirmations .layout-main,
+body.unlocks .layout-main,
+body.devise .layout-main {
+  padding-left: var(--stzh-space-medium) !important;
+  padding-right: var(--stzh-space-medium) !important;
+}
+
+@media (min-width: 640px) {
+  body.sessions .layout-main,
+  body.registrations .layout-main,
+  body.passwords .layout-main,
+  body.confirmations .layout-main,
+  body.unlocks .layout-main,
+  body.devise .layout-main {
+    padding-left: var(--stzh-space-xlarge) !important;
+    padding-right: var(--stzh-space-xlarge) !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  body.sessions .layout-main,
+  body.registrations .layout-main,
+  body.passwords .layout-main,
+  body.confirmations .layout-main,
+  body.unlocks .layout-main,
+  body.devise .layout-main {
+    padding-left: var(--stzh-layout-padding-desktop) !important;
+    padding-right: var(--stzh-layout-padding-desktop) !important;
+  }
+}
+
+/* Devise pages: align form with header/footer (sessions, registrations, etc.) */
+body.sessions .layout-main__section > div,
+body.registrations .layout-main__section > div,
+body.passwords .layout-main__section > div,
+body.confirmations .layout-main__section > div,
+body.unlocks .layout-main__section > div,
+body.devise .layout-main__section > div {
+  grid-column: 1 / -1 !important;
+  grid-column-start: 1 !important;
+  justify-self: start !important;
+  max-width: 100%;
+}
+
+/* Layout-main: ensure content aligns left with header/footer */
+.layout-main {
+  justify-content: flex-start !important;
+}
+
+.layout-main > section,
+.layout-main > .grid-container,
+.layout-main > [class*="grid"] {
+  justify-items: start !important;
+  width: 100%;
+}
+
+
+/* Remove centering from form wrappers (mx-auto, max-w) on Devise pages */
+body.sessions .layout-main [class*="mx-auto"],
+body.registrations .layout-main [class*="mx-auto"],
+body.passwords .layout-main [class*="mx-auto"],
+body.confirmations .layout-main [class*="mx-auto"],
+body.unlocks .layout-main [class*="mx-auto"] {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 
 
@@ -275,10 +348,23 @@ a:hover{
   color: var(--stzh-link-hover-color);
 }
 
-:is(.editor-content, .content-block__description) :is(a) {
-color: var(--stzh-link-color);
-text-decoration: underline;
-font-weight: var(--stzh-font-weight-regular);
+/* Default link styling (STZH Design System) for links in body text and forms */
+:is(.editor-content, .content-block__description) :is(a),
+form a {
+  color: var(--stzh-link-color);
+  font-weight: var(--stzh-font-weight-regular);
+  transition: color var(--stzh-base-transition-animation-speed);
+  text-underline-offset: var(--stzh-link-text-underline-offset);
+  -webkit-text-decoration-line: var(--stzh-link-text-decoration-line);
+  text-decoration-line: var(--stzh-link-text-decoration-line);
+  text-decoration-thickness: var(--stzh-link-text-decoration-thickness);
+  -webkit-text-decoration-skip-ink: var(--stzh-link-text-decoration-skip-ink);
+  text-decoration-skip-ink: var(--stzh-link-text-decoration-skip-ink);
+}
+
+:is(.editor-content, .content-block__description) :is(a):hover,
+form a:hover {
+  color: var(--stzh-link-hover-color);
 }
 
 
@@ -395,6 +481,12 @@ abbr:where([title]) {
 [data-dialog] > .login__modal {
   position: relative;
   z-index: 1001;
+}
+
+/* Remove border from Login button parent (form__wrapper / form__wrapper-block around submit) */
+.form__wrapper:has(button[type="submit"]),
+.form__wrapper-block:has(button[type="submit"]) {
+  border: none;
 }
 
 /* ===== ADMIN MENU ===== */
@@ -515,6 +607,89 @@ header .main-bar__dropdown>:not([hidden])~:not([hidden]){
   }
 }
 
+/* Profile activity resource menu – STZH Anchornav style (designsystem.stadt-zuerich.ch) */
+#dropdown-menu-resource,
+#dropdown-menu-resource ul,
+#dropdown-menu-resource nav,
+#dropdown-menu-resource [role="navigation"] {
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+}
+
+#dropdown-menu-resource ul {
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--stzh-space-xsmall);
+}
+
+#dropdown-menu-resource li {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background-color: var(--stzh-color-grey10);
+  border-radius: 0;
+  transition: background-color var(--stzh-base-transition-animation-speed),
+    color var(--stzh-base-transition-animation-speed);
+}
+
+#dropdown-menu-resource li:hover,
+#dropdown-menu-resource li:focus-within {
+  background-color: var(--stzh-color-secondary10);
+}
+
+#dropdown-menu-resource li:hover a,
+#dropdown-menu-resource li:focus-within a,
+#dropdown-menu-resource li:hover .dropdown__item,
+#dropdown-menu-resource li:focus-within .dropdown__item {
+  color: var(--stzh-color-primary80);
+  text-decoration: none;
+}
+
+#dropdown-menu-resource li[aria-selected="true"],
+#dropdown-menu-resource li.is-active {
+  background-color: var(--stzh-color-secondary40);
+}
+
+#dropdown-menu-resource li[aria-selected="true"] a,
+#dropdown-menu-resource li[aria-selected="true"] .dropdown__item,
+#dropdown-menu-resource li.is-active a,
+#dropdown-menu-resource li.is-active .dropdown__item {
+  color: var(--stzh-color-white);
+  text-decoration: none;
+}
+
+#dropdown-menu-resource a,
+#dropdown-menu-resource .dropdown__item {
+  display: flex;
+  align-items: center;
+  gap: var(--stzh-space-xsmall);
+  padding: var(--stzh-space-small) var(--stzh-space-medium);
+  color: var(--stzh-link-color);
+  font-family: var(--stzh-font-family-heavy);
+  font-weight: var(--stzh-font-weight-heavy);
+  font-style: var(--stzh-font-style-heavy);
+  font-size: var(--stzh-font-milli-font-size);
+  line-height: var(--stzh-font-milli-text-line-height);
+  text-decoration: none;
+  transition: color var(--stzh-base-transition-animation-speed);
+}
+
+#dropdown-menu-resource a svg,
+#dropdown-menu-resource .dropdown__item svg {
+  width: var(--stzh-icon-size-medium);
+  height: var(--stzh-icon-size-medium);
+  flex-shrink: 0;
+}
+
+#dropdown-menu-resource li[aria-selected="true"] svg,
+#dropdown-menu-resource li.is-active svg {
+  color: var(--stzh-color-white);
+}
+
 /* ===== BUTTON STYLES ===== */
 /* Match Decidim buttons to STZH Design System button styles */
 .button {
@@ -565,6 +740,11 @@ header .main-bar__dropdown>:not([hidden])~:not([hidden]){
   color: var(--stzh-color-primary80);
 }
 
+/* ===== Content sections – clean white background ===== */
+.participatory-space__container,
+.layout-main {
+  background-color: var(--stzh-color-white);
+}
 
 /* ===== FOOTER STYLES ===== */
 
@@ -658,10 +838,12 @@ header .main-bar__dropdown>:not([hidden])~:not([hidden]){
         display: none;
     }
 
-    /*Color and style main footer down*/
+    /*Color and style main footer down – responsive padding to match layout */
+
     footer .main-footer__down {
-        padding: var(--stzh-space-xxlarge) 4rem;
-    }
+          padding: var(--stzh-space-xxlarge) var(--stzh-layout-padding-desktop);
+      }
+
 /* 1) Make sure the section can host an absolutely-positioned pseudo background */
     .main-footer__down {
         position: relative;
@@ -677,7 +859,7 @@ header .main-bar__dropdown>:not([hidden])~:not([hidden]){
         font-weight: var(--stzh-font-weight-medium);
         font-size: var(--stzh-font-milli-font-size);
         transition-duration: var(--stzh-base-transition-animation-speed);
-        color: rgba(255, 255, 255, 0.7);
+        color: var(--stzh-color-footer-text);
         text-decoration-line: none;
     }
 
@@ -789,19 +971,28 @@ header .menu-bar__dropdown-menu a svg, header .menu-bar__secondary-dropdown__men
   height: var(--stzh-icon-size-medium);
 }
 
-/* Place content block action buttons on second row on mobile */
-.home__section-header {
+/* Section header: title and button level on desktop, stacked on mobile */
+.home__section-header,
+.content-block__title {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  row-gap: var(--stzh-space-xlarge);
-  -moz-column-gap: var(--stzh-space-xxsmall);
-  column-gap: var(--stzh-space-xxsmall);
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  row-gap: var(--stzh-space-small);
+  -moz-column-gap: var(--stzh-space-medium);
+  column-gap: var(--stzh-space-medium);
 }
 
-/*Adjustments for start page*/
 @media (max-width: 640px) {
-  .home__section-header > .button__text-secondary, .content-block__title > .button__text-secondary {
+  .home__section-header,
+  .content-block__title {
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: var(--stzh-space-xlarge);
+  }
+  .home__section-header > .button__text-secondary,
+  .content-block__title > .button__text-secondary {
     padding: var(--stzh-space-xxsmall) 0;
   }
   .content-block__title {
@@ -1089,6 +1280,17 @@ text-decoration-line: none;
   color: var(--stzh-color-grey80);
 }
 
+.card__grid-grid .card__proposals-item {
+  border: none;
+  border-radius: 0;
+}
+
+/* Override Decidim's border-radius on proposal list cards - left side square, no left border */
+.card__list-list .card__proposals-item,
+.card__list-list .card__proposals-item:hover {
+  border: none;
+}
+
 .card__list {
   border-radius: 0;
   border: 0;
@@ -1105,7 +1307,33 @@ text-decoration-line: none;
   border: 0;
   border-color: none;
   background-color: var(--stzh-color-secondary10);
+}
 
+/* Proposal list: background on item, not on content */
+.card__list-content {
+  background-color: transparent;
+}
+
+.card__proposals-item {
+  background-color: var(--stzh-color-grey10);
+}
+
+.card__proposals-item:hover {
+  background-color: var(--stzh-color-secondary10);
+}
+
+.card__proposals-item .card__list,
+.card__proposals-item .card__grid,
+.card__proposals-item:hover .card__list,
+.card__proposals-item:hover .card__grid,
+.card__proposals-item .card__list:focus,
+.card__proposals-item .card__grid:focus {
+  background-color: transparent;
+}
+
+.card__list-list .card__proposals-item .card__proposals-votes,
+.card__grid-grid .card__proposals-item .card__proposals-votes {
+  background-color: transparent;
 }
 
 .card__list-title {
@@ -1210,9 +1438,9 @@ text-decoration-line: none;
 /* Separator style */
 .meeting__calendar-separator {
   margin: 0 0.25rem;
-  font-size: 14px;
-  line-height: 18px;
-  font-weight: 400;
+  font-size: var(--stzh-font-centi-font-size);
+  line-height: var(--stzh-font-centi-text-line-height);
+  font-weight: var(--stzh-font-weight-regular);
 }
 
 /* Ensure block display for date parts */
@@ -1340,8 +1568,6 @@ text-decoration-line: none;
   --flash-text-color: var(--stzh-color-coolgrey70);
 }
 
-.success
-
 #flash-messages-container {
   padding: 0;
   margin: 0;
@@ -1371,6 +1597,65 @@ text-decoration-line: none;
   transform: translateX(-50%);
   background-color: var(--background-flash);
   z-index: -1;
+}
+
+/* Limit content box to page alignment; background overflows via ::before.
+   Vertical padding per STZH Banner (designsystem.stadt-zuerich.ch).
+   Max-width and padding match .home__section, .home .content-block per viewport. */
+.flash[role="alert"],
+.flash[role="alert"].flex-col {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: center;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: var(--stzh-space-large);
+  padding-bottom: var(--stzh-space-large);
+  padding-left: var(--stzh-space-medium);
+  padding-right: var(--stzh-space-medium);
+  box-sizing: border-box;
+}
+
+/* Match .home__section, .home .content-block responsive max-width and padding */
+@media (min-width: 640px) {
+  .flash[role="alert"],
+  .flash[role="alert"].flex-col {
+    max-width: 640px;
+    padding-left: var(--stzh-space-xlarge);
+    padding-right: var(--stzh-space-xlarge);
+  }
+}
+
+@media (min-width: 768px) {
+  .flash[role="alert"],
+  .flash[role="alert"].flex-col {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .flash[role="alert"],
+  .flash[role="alert"].flex-col {
+    max-width: 1024px;
+    padding-left: var(--stzh-layout-padding-desktop);
+    padding-right: var(--stzh-layout-padding-desktop);
+  }
+}
+
+@media (min-width: 1280px) {
+  .flash[role="alert"],
+  .flash[role="alert"].flex-col {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .flash[role="alert"],
+  .flash[role="alert"].flex-col {
+    max-width: 1536px;
+  }
 }
 
 .flash__message {
@@ -1404,7 +1689,7 @@ text-decoration-line: none;
 }
 
 .flash__message .editor-content, 
-.flash__message .editor-content :where(strong):not(:where([class~=not-prose],[class~=not-prose] *))
+.flash__message .editor-content :where(strong):not(:where([class~=not-prose],[class~=not-prose] *)),
 .flash__message:is(.editor-content, .content-block__description) :is(h1, h2, h3, h4, h5) {
   color: var(--flash-text-color);
 }
@@ -1415,7 +1700,7 @@ text-decoration-line: none;
   font-style: var(--stzh-font-style-heavy);
   --background-flash: var(--stzh-color-success60);
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .success > .flash__message {
@@ -1428,7 +1713,7 @@ text-decoration-line: none;
   font-style: var(--stzh-font-style-heavy);
   --background-flash: var(--stzh-color-warning60);
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   color: var(--stzh-color-white);
 }
 
@@ -1442,7 +1727,7 @@ text-decoration-line: none;
   font-style: var(--stzh-font-style-heavy);
   --background-flash: var(--stzh-color-error60);
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 
@@ -1454,7 +1739,7 @@ text-decoration-line: none;
 .flash.secondary {
   --background-flash: var(--stzh-color-info60);
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 /* ===== PAGE ACCORDIONS ===== */
@@ -1597,7 +1882,7 @@ text-decoration-line: none;
   font-weight: var(--stzh-font-weight-heavy);
   font-style: var(--stzh-font-style-heavy);
   font-size: var(--stzh-font-centi-font-size);
-  line-height: var(--stzh-font-deci-centi-line-height);
+  line-height: var(--stzh-font-centi-text-line-height);
   letter-spacing: var(--stzh-font-curve---text-letter-spacing);
 }
 
@@ -1607,7 +1892,7 @@ text-decoration-line: none;
     font-weight: var(--stzh-font-weight-heavy);
     font-style: var(--stzh-font-style-heavy);
     font-size: var(--stzh-font-centi-font-size);
-    line-height: var(--stzh-font-deci-centi-line-height);
+    line-height: var(--stzh-font-centi-text-line-height);
     letter-spacing: var(--stzh-font-curve---text-letter-spacing);
   }
 }
@@ -1696,8 +1981,8 @@ text-decoration-line: none;
 @media (min-width: 1024px) {
   .participatory-space__hero-text {
     max-width: 512px;
-    padding-left: 4rem;
-    padding-right: 4rem;
+    padding-left: var(--stzh-layout-padding-desktop);
+    padding-right: var(--stzh-layout-padding-desktop);
   }
 }
 
@@ -1861,6 +2146,195 @@ background-color: var(--stzh-color-white);
 /*grey background for even elements*/
 .activity:nth-child(even) {
 background-color: var(--stzh-color-grey10);
+}
+
+/* ===== NOTIFICATIONS PAGE ===== */
+/* Match activity feed pattern: alternating backgrounds, STZH typography */
+
+.notification {
+  border: 0;
+  padding: var(--stzh-space-small) var(--stzh-space-medium);
+  transition: background-color var(--stzh-base-transition-animation-speed);
+}
+
+.notification:first-child {
+  padding-top: var(--stzh-space-small);
+}
+
+.notification:last-child {
+  padding-bottom: var(--stzh-space-small);
+}
+
+.notification:nth-child(odd) {
+  background-color: var(--stzh-color-white);
+}
+
+.notification:nth-child(even) {
+  background-color: var(--stzh-color-grey10);
+}
+
+.notification:hover {
+  background-color: var(--stzh-color-secondary10);
+}
+
+.notification__time,
+.notification__content {
+  color: var(--stzh-color-black);
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-style: var(--stzh-font-style-medium);
+  font-size: var(--stzh-font-milli-font-size);
+  line-height: var(--stzh-font-milli-text-line-height);
+  letter-spacing: var(--stzh-font-curve---text-letter-spacing);
+}
+
+.notification__content a {
+  color: var(--stzh-link-color);
+  font-weight: inherit;
+  transition: color var(--stzh-base-transition-animation-speed);
+  text-underline-offset: var(--stzh-link-text-underline-offset);
+  -webkit-text-decoration-line: var(--stzh-link-text-decoration-line);
+  text-decoration-line: var(--stzh-link-text-decoration-line);
+  text-decoration-thickness: var(--stzh-link-text-decoration-thickness);
+}
+
+.notification__content a:hover {
+  color: var(--stzh-link-hover-color);
+}
+
+/* Notification button (e.g. "Als gelesen markieren") – STZH text button */
+.notification__button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--stzh-space-xxsmall);
+  padding: var(--stzh-space-small) var(--stzh-space-xlarge);
+  border-radius: 0;
+  border: 0;
+  background-color: transparent;
+  color: var(--stzh-link-color);
+  font-family: var(--stzh-font-family-heavy);
+  font-weight: var(--stzh-font-weight-heavy);
+  font-style: var(--stzh-font-style-heavy);
+  font-size: var(--stzh-font-milli-font-size);
+  line-height: var(--stzh-font-milli-text-line-height);
+  letter-spacing: var(--stzh-font-curve---text-letter-spacing);
+  text-decoration-line: none;
+  cursor: pointer;
+  transition: color var(--stzh-base-transition-animation-speed),
+    background-color var(--stzh-base-transition-animation-speed);
+}
+
+.notification__button:hover,
+.notification__button:focus {
+  background-color: var(--stzh-color-secondary20);
+  color: var(--stzh-color-primary80);
+  text-decoration-line: none;
+}
+
+.notification__button svg {
+  flex-shrink: 0;
+}
+
+/* ===== PAGINATION ===== */
+/* STZH design system – designsystem.stadt-zuerich.ch pagination component */
+
+.pagination,
+nav.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--stzh-space-xsmall);
+  margin: var(--stzh-space-large) 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pagination li,
+.pagination span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination a,
+.pagination a.page-link,
+.pagination .page a,
+.pagination .prev a,
+.pagination .next a,
+.pagination .first a,
+.pagination .last a,
+.pagination-previous,
+.pagination-next {
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  padding: var(--stzh-space-small) var(--stzh-space-medium);
+  border-radius: 0;
+  border: 0;
+  background-color: transparent;
+  color: var(--stzh-link-color);
+  font-family: var(--stzh-font-family-heavy);
+  font-weight: var(--stzh-font-weight-heavy);
+  font-size: var(--stzh-font-milli-font-size);
+  line-height: var(--stzh-font-milli-text-line-height);
+  text-decoration: none;
+  transition: background-color var(--stzh-base-transition-animation-speed),
+    color var(--stzh-base-transition-animation-speed);
+}
+
+.pagination a:hover,
+.pagination a:focus,
+.pagination .page a:hover,
+.pagination .page a:focus,
+.pagination-previous:hover,
+.pagination-previous:focus,
+.pagination-next:hover,
+.pagination-next:focus {
+  background-color: var(--stzh-color-secondary20);
+  color: var(--stzh-color-primary80);
+}
+
+.pagination .current,
+.pagination .page.current,
+.pagination em.current,
+.pagination span.current {
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  padding: var(--stzh-space-small) var(--stzh-space-medium);
+  border-radius: 0;
+  border: 0;
+  background-color: var(--stzh-color-secondary30);
+  color: var(--stzh-color-black);
+  font-family: var(--stzh-font-family-heavy);
+  font-weight: var(--stzh-font-weight-heavy);
+  font-style: normal;
+  font-size: var(--stzh-font-milli-font-size);
+  line-height: var(--stzh-font-milli-text-line-height);
+  text-decoration: none;
+  cursor: default;
+}
+
+.pagination .prev.disabled,
+.pagination .next.disabled,
+.pagination .prev[aria-disabled="true"],
+.pagination .next[aria-disabled="true"],
+.pagination-previous.disabled,
+.pagination-next.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.pagination .prev.disabled a,
+.pagination .next.disabled a {
+  color: var(--stzh-color-coolgrey70);
+}
+
+.pagination .gap,
+.pagination .ellipsis {
+  padding: 0 var(--stzh-space-small);
+  color: var(--stzh-color-coolgrey70);
+  font-family: var(--stzh-font-family-regular);
 }
 
 /* ===== DATA UPLOAD MODAL ===== */

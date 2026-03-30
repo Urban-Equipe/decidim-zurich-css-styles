@@ -1,26 +1,31 @@
+/**
+ * c8_meetingAdjustments.css
+ *
+ * Meeting form layout and questionnaire styling.
+ * Relies on a1_variables.css / b1_reskin_updated.css for design system variables.
+ *
+ * USAGE: Load after a1_variables.css and b1_reskin_updated.css.
+ */
+
 #panel-participants, #trigger-participants {
   display: none;
 }
 
-/*Hide meeting authors, as long as we only have official meetings anyway*/
 .layout-author {
   display: none;
 }
 
-/*Improve guest meeting form layout & spacing*/
 /* ===== Global form rhythm ===== */
 .form__wrapper > * + * {
   margin-top: var(--stzh-space-large);
 }
 
-/* Labels: make vertical spacing effective */
 .form__wrapper label {
   display: block;
   margin-bottom: var(--stzh-space-small);
 }
 
 /* ===== Radios & checkboxes aligned with labels ===== */
-/* Adjacent pattern: <input> + <label> */
 input[type="checkbox"] + label,
 input[type="radio"] + label {
   display: inline-flex;
@@ -28,14 +33,12 @@ input[type="radio"] + label {
   gap: var(--stzh-space-small);
 }
 
-/* Nested pattern: <label><input …> Text</label> */
 label > input[type="checkbox"],
 label > input[type="radio"] {
   margin-right: var(--stzh-space-small);
   vertical-align: middle;
 }
 
-/* Tiny optical nudge so controls sit dead-center on the text line */
 input[type="checkbox"],
 input[type="radio"] {
   vertical-align: middle;
@@ -53,13 +56,13 @@ table {
 }
 
 .answer-questionnaire__multiple-matrix thead td, .answer-questionnaire__multiple-matrix th, .answer-questionnaire__single-matrix thead td, .answer-questionnaire__single-matrix th {
-  background-color: rgb(243,244,247);
+  background-color: var(--stzh-color-grey10);
 }
 
 .answer-questionnaire__multiple-matrix th, .answer-questionnaire__multiple-matrix td, .answer-questionnaire__single-matrix th, .answer-questionnaire__single-matrix td {
-border-width: 1px;
-border-color: #f3f4f7;
-padding: .625rem .5rem;
+  border-width: 1px;
+  border-color: var(--stzh-color-grey10);
+  padding: var(--stzh-space-xsmall) var(--stzh-space-small);
 }
 
 .js-collection-input > input[type=checkbox], .js-collection-input > input[type=radio] {
@@ -75,33 +78,32 @@ padding: .625rem .5rem;
 }
 
 .answer-questionnaire__question>:not([hidden])~:not([hidden]) {
---tw-space-y-reverse: 0;
-margin-top: 1rem;
-margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
-margin-bottom: 0rem;
-margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+  --tw-space-y-reverse: 0;
+  margin-top: 1rem;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: 0rem;
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
 
 /*Numbering*/
 .answer-questionnaire__question-label::before {
-content: attr(data-answer-idx);
-display: inline-flex;
-align-items: center;
-justify-content: center;
-height: 2rem;
-width: 2rem;
-border-radius: 50%;
-background-color: var(--stzh-link-color);
-border: 1px solid var(--stzh-link-color);
-color: var(--stzh-color-white);
-font-size: 1rem;
-font-weight: 600;
-line-height: 1;
-margin-right: 0.5rem;
+  content: attr(data-answer-idx);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  background-color: var(--stzh-link-color);
+  border: 1px solid var(--stzh-link-color);
+  color: var(--stzh-color-white);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  margin-right: 0.5rem;
 }
 
 
-/*Hide checkmarks _ leave below*/
 .answer-questionnaire__footer > .form__wrapper-checkbox-label,
 .answer-questionnaire__footer > div:first-child,
 label[for="questionnaire_public_participation"],

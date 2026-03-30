@@ -1,4 +1,12 @@
-/* Hide unpublished component warning in surveys using share tokens */
+/**
+ * c7_sharetokens.css
+ *
+ * Hide unpublished component warning in surveys using share tokens.
+ * Scoped per Decidim Awesome configuration.
+ *
+ * USAGE: Load after a1_variables.css.
+ */
+
 .flash.flex-col.warning {
   display: none;
 }

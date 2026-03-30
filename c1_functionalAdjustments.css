@@ -1,3 +1,12 @@
+/**
+ * c1_functionalAdjustments.css
+ *
+ * Functional adjustments independent of reskinning.
+ * Relies on a1_variables.css / b1_reskin_updated.css for design system variables.
+ *
+ * USAGE: Load after a1_variables.css and b1_reskin_updated.css.
+ */
+
 /*––––––Functional adjustments, irrelevant of reskinning ––––––––––*/
 
 /*Hide hero CTA*/
@@ -5,7 +14,7 @@
   display: none;
 }
 
-/*Hide latest meetings & activitiest from topbar*/
+/*Hide latest meetings & activities from topbar*/
 header .main-bar__links-desktop__item-wrapper{
   display: none;
 }
@@ -17,7 +26,7 @@ header .main-bar__links-desktop__item-wrapper{
 
 /*TEMP remove mobile logo (from favicon) and display normal logo*/
 /*Last checked 15.07.25 LK*/
-/*Replace logo with VBZ logo*/
+/*Replace logo with VBZ logo - see c2_VBZ_adjustments for VBZ-scoped logo*/
 @media (max-width: 1024px){
   header .main-bar__logo-desktop {
     display: block;
@@ -33,25 +42,18 @@ header .main-bar__logo-mobile a {
   display: none;
 }
 
-/* Hide "About this Process" title */ 
+/* Hide "About this Process" title */
 .participatory-space__content-block > .space-y-8 > .h2.decorator {
   display: none;
 }
 
 /* Hide public participation for meeting registrations on entire platform*/
 
-.public-participation, #public-participation  {
+.form__wrapper > div:has(input#user_group),
+label.form__wrapper-checkbox-label:has(input#public_participation)
+ {
   display: none;
 }
-
-/* To general limitations*/
-/*.answer-questionnaire__footer > .form__wrapper-checkbox-label,
-.answer-questionnaire__footer > div:first-child > input,
-.answer-questionnaire__footer > div:first-child > label,
-.answer-questionnaire__footer > div:first-child > select
-{
-  display: none;
-}*/
 
 /* Hide filters for type and activity on entire platform*/
 .filter-container:has(#trigger-menu-activity, #trigger-menu-type) {
@@ -85,16 +87,12 @@ header .main-bar__logo-mobile a {
 }
 
 /* ––– Default Background Image ––– */
-/* Default Organization image for frontpage */
-
-/* Only apply fallback background when the SVG placeholder is present */
 .card__grid-img:has(svg) {
   background-image: url("organization-default-image.png");
   background-size: cover;
   background-position: center;
 }
 
-/* Hide the SVG when fallback is active */
 .card__grid-img:has(svg) svg {
   display: none;
 }
@@ -111,12 +109,9 @@ header .main-bar__logo-mobile a {
   margin-right: 0.5em;
   display: inline-block;
   vertical-align: -0.15em;
-
   background-color: currentColor;
-
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 22a8 8 0 0 1 16 0h-2a6 6 0 1 0-12 0zm8-9c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6m0-2c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4'/%3E%3C/svg%3E")
     no-repeat center / contain;
-
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 22a8 8 0 0 1 16 0h-2a6 6 0 1 0-12 0zm8-9c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6m0-2c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4'/%3E%3C/svg%3E")
     no-repeat center / contain;
 }
@@ -124,12 +119,6 @@ header .main-bar__logo-mobile a {
 /* Align decorated titles to the left */
 .justify-center:has(.title-decorator) {
   justify-content: flex-start;
-}
-
-/* Add padding to layout-1col containing centered titles */
-.layout-1col:has(.justify-center) {
-  padding-left: var(--stzh-space-xxlarge);
-  padding-right: var(--stzh-space-xxlarge);
 }
 
 /*Remove indent on meetings single page & decrease top & bottom padding*/
@@ -160,8 +149,8 @@ header .main-bar__logo-mobile a {
 /* Also adjust Decidim Geo*/
 @media (min-width:1024px){
   .decidimGeo__container--item {
-  padding-left: 4rem;
-  padding-right: 4rem;
+  padding-left: var(--stzh-layout-padding-desktop);
+  padding-right: var(--stzh-layout-padding-desktop);
 }}
 
 /*Remove top-padding for Decidim GEO*/
