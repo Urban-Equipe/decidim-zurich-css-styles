@@ -16,6 +16,12 @@ body {
   --c-00: #1d1d1b;
   --c-10: #dfecea;
   --c-20: #bee1da;
+  --c-10-red: #f9e7df;
+  --c-20-red: #f8d3c3;
+  --c-30-red: #f18785;
+  --c-40-red: #e22d53;  
+  --c-50-red: #b80b2e;
+  --proposal-summary-box-bg: #f2f7f6;
 
   /* --- Primary → petrol (from design system) --- */
   --stzh-color-primary10-rgb: var(--stzh-color-petrol10-rgb);
@@ -80,7 +86,7 @@ body {
   --stzh-button-tertiary-hover-color: var(--stzh-color-secondary80);
   --stzh-button-tertiary-disabled-color: var(--stzh-color-grey70);
   --stzh-link-color: var(--stzh-color-secondary50);
-  --stzh-link-hover-color: var(--stzh-color-secondary20);
+  --stzh-link-hover-color: var(--stzh-color-primary50);
   --stzh-link-secondary-color: var(--stzh-color-secondary80);
   --stzh-header-logobar-background-color: transparent;
   --stzh-tooltip-color: var(--stzh-color-secondary80);
@@ -166,6 +172,33 @@ header .menu-bar__main-dropdown {
   padding-inline-start: 0em;
 }
 
+/* Proposal summary announcement box (only Decidim's default green variant) */
+.flash[data-announcement][style*="background-color: #E3FCE9"][style*="color: #15602C"] {
+  background-color: var(--c-20) !important;
+  color: var(--stzh-color-primary80) !important;
+  border-color: var(--stzh-color-secondary80) !important;
+}
+
+/* Proposal summary announcement box (only Decidim's default red variant) */
+.flash[data-announcement][style*="background-color: #FFEBE9"][style*="color: #D1242F"] {
+  background-color: var(--c-20-red) !important;
+  color: var(--c-50-red) !important;
+  border-color: var(--c-50-red) !important;
+}
+
+/* Status labels: override only Decidim inline green/red variants */
+span.label[style*="background-color: #E3FCE9"][style*="color: #15602C"] {
+  background-color: var(--c-10) !important;
+  color: var(--stzh-color-secondary80) !important;
+  border-color: var(--stzh-color-secondary80) !important;
+}
+
+span.label[style*="background-color: #FFEBE9"][style*="color: #D1242F"] {
+  background-color: var(--stzh-color-error10) !important;
+  color: var(--stzh-color-error70) !important;
+  border-color: var(--stzh-color-error70) !important;
+}
+
 [data-announcement] > .flash__message {
   color: var(--stzh-color-secondary80);
 }
@@ -229,7 +262,7 @@ a.button__text-secondary[href="/processes/pilotquartier/f/664/last_activities"],
   font-weight: var(--stzh-font-weight-medium);
 }
 
-#panel-dropdown-menu-state, #trigger-menu-state, #trigger-menu-scope, #panel-dropdown-menu-scope {
+/*#panel-dropdown-menu-state, #trigger-menu-state,*/ #trigger-menu-scope, #panel-dropdown-menu-scope {
   display: none;
 }
 
@@ -259,4 +292,24 @@ div [data-endorsements-count] {
 
 .card__search-metadata>div, .card__list-metadata>div {
   border-right-width: 0;
+}
+
+/* Adjust borders on sections to layout from pilotquartier website*/
+.content-block~.content-block {
+  border-top-width: 1px;
+  border-top-color: var(--stzh-color-secondary80);
+}
+
+/* Highlight voting rules content block */
+#voting-rules {
+  background-color: var(--stzh-color-secondary80);
+}
+
+#voting-rules > .flash__title, #voting-rules > .flash__message {
+  --flash-text-color: var(--c-10);
+  color: var(--c-10);
+}
+
+#voting-rules.flash {
+  gap: 0;
 }
