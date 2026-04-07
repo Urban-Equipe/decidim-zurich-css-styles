@@ -244,3 +244,19 @@ label[for="proposal_scope_id"]{
 .bg-background {
   background-color: transparent;
 }
+
+.card__list-list .card__proposals-item .card__proposals-votes button {
+  background-color: var(--stzh-link-color);
+}
+
+#trigger-menu-origin, #panel-dropdown-menu-origin {
+  display: none;
+}
+
+div [data-endorsements-count] {
+  display: none;
+}
+
+.card__search-metadata>div, .card__list-metadata>div {
+  border-right-width: 0;
+}
