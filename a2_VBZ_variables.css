@@ -108,4 +108,14 @@ body {
   --stzh-cardlist-description-color: var(--stzh-color-primary70);
   --stzh-heading-color: var(--stzh-color-primary70);
   --stzh-topnews-background-color: var(--stzh-color-secondary30);
+  --stzh-font-family-bold: var(--stzh-font-family-medium);
+  --stzh-font-weight-bold: var(--stzh-font-weight-medium);
+  --stzh-font-family-heavy: var(--stzh-font-family-medium);
+  --stzh-font-weight-heavy: var(--stzh-font-weight-medium);
+  --stzh-font-family-medium: var(--stzh-font-family-regular);
+  --stzh-font-weight-medium: var(--stzh-font-weight-regular);
+  --stzh-font-family-regular: var(--stzh-font-family-regular);
+  --stzh-font-weight-regular: var(--stzh-font-weight-regular);
+  --stzh-font-family-light: var(--stzh-font-family-light);
+  --stzh-font-weight-light: var(--stzh-font-weight-light);
 }
