@@ -311,5 +311,53 @@ div [data-endorsements-count] {
 }
 
 #voting-rules.flash {
+  display: block !important;
   gap: 0;
+  text-align: left !important;
+}
+
+/* Voting rules: flatten list markup to plain inline text */
+#voting-rules .editor-content ul,
+#voting-rules .editor-content li {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#voting-rules .editor-content ul > li::marker,
+#voting-rules .editor-content ul > li::before {
+  content: none !important;
+}
+
+#voting-rules > .flash__title,
+#voting-rules > .flash__message,
+#voting-rules > .flash__message > p,
+#voting-rules > .flash__message .editor-content {
+  display: inline !important;
+  margin: 0 !important;
+}
+
+#voting-rules > .flash__message {
+  margin-left: 0 !important;
+  text-align: left !important;
+  float: none !important;
+}
+
+#voting-rules > .flash__title {
+  margin-right: 0.25ch;
+}
+
+#remaining-votes-count {
+  display: block !important;
+  width: 100% !important;
+  text-align: left !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  float: none !important;
+  margin-top: var(--stzh-space-xxsmall);
+  font-size: var(--stzh-font-deci-font-size);
+  font-family: var(--stzh-font-family-heavy);
+  font-weight: var(--stzh-font-weight-heavy);
 }
