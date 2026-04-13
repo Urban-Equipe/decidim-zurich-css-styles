@@ -278,7 +278,8 @@ label[for="proposal_scope_id"]{
   background-color: transparent;
 }
 
-.card__list-list .card__proposals-item .card__proposals-votes button {
+.card__list-list .card__proposals-item .card__proposals-votes button,
+.card__grid-grid .card__proposals-item .card__proposals-votes button {
   background-color: var(--stzh-link-color);
 }
 
@@ -317,10 +318,9 @@ div [data-endorsements-count] {
 }
 
 /* Adjust flash message colors on comments */
-#comments > .comment > .flash.secondary,
-#comments > .comment > .flash.secondary > .flash__title,
-#comments > .comment > .flash.secondary > .flash__message,
-#comments > .comment > .flash.secondary > .flash__message a:not(.button) {
+#comments .flash__title,
+#comments .flash__message,
+#comments .flash__message a:not(.button) {
   --flash-text-color: var(--c-10);
   color: var(--flash-text-color) !important;
 }
@@ -355,6 +355,8 @@ div [data-endorsements-count] {
 
 #voting-rules > .flash__title {
   margin-right: 0.25ch;
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
 }
 
 #remaining-votes-count {
