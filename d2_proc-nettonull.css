@@ -199,9 +199,9 @@ span.label[style*="background-color: #FFEBE9"][style*="color: #D1242F"] {
   border-color: var(--stzh-color-error70) !important;
 }
 
-[data-announcement] > .flash__message {
+/*[data-announcement] > .flash__message {
   color: var(--stzh-color-secondary80);
-}
+}*/
 
 .activity__container {
   display:none;
@@ -314,6 +314,15 @@ div [data-endorsements-count] {
   display: block !important;
   gap: 0;
   text-align: left !important;
+}
+
+/* Adjust flash message colors on comments */
+#comments > .comment > .flash.secondary,
+#comments > .comment > .flash.secondary > .flash__title,
+#comments > .comment > .flash.secondary > .flash__message,
+#comments > .comment > .flash.secondary > .flash__message a:not(.button) {
+  --flash-text-color: var(--c-10);
+  color: var(--flash-text-color) !important;
 }
 
 /* Voting rules: flatten list markup to plain inline text */
