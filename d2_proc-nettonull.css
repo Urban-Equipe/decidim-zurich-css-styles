@@ -12,7 +12,7 @@
  * USAGE: Load after a1_variables.css. Enable only for Netto-Null process.
  */
 
-body {
+ body {
   --c-00: #1d1d1b;
   --c-10: #dfecea;
   --c-20: #bee1da;
@@ -207,7 +207,7 @@ span.label[style*="background-color: #FFEBE9"][style*="color: #D1242F"] {
   display:none;
 }
 
-a.button__text-secondary[href="/last_activities"],
+a.button__text-secondary[href*="last_activities"],
 a.button__text-secondary[href="/last_activities?locale=en"],
 a.button__text-secondary[href="/last_activities?locale=de"],
 a.button__text-secondary[href="/processes/pilotquartier/f/664/last_activities?locale=en"],
