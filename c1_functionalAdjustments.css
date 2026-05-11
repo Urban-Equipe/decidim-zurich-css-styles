@@ -19,6 +19,19 @@ header .main-bar__links-desktop__item-wrapper{
   display: none;
 }
 
+/*Hide last activity from main menu dropdown*/
+.activity__container {
+  display:none;
+}
+
+.bg-background {
+  background-color: transparent;
+}
+
+.menu-bar__breadcrumb-desktop__dropdown-content-secondary a.button__text-secondary[href*="last_activities"] {
+  display: none;
+}
+
 /*TEMP remove card styling improvement introduced in 0.29.4, as it messes with the layout. Will be fixed.*/
 .card__highlight-metadata>*:first-child, .card__grid-metadata>*:first-child {
  width: auto;

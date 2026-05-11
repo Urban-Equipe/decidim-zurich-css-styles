@@ -199,24 +199,6 @@ span.label[style*="background-color: #FFEBE9"][style*="color: #D1242F"] {
   border-color: var(--stzh-color-error70) !important;
 }
 
-/*[data-announcement] > .flash__message {
-  color: var(--stzh-color-secondary80);
-}*/
-
-.activity__container {
-  display:none;
-}
-
-a.button__text-secondary[href*="last_activities"],
-a.button__text-secondary[href="/last_activities?locale=en"],
-a.button__text-secondary[href="/last_activities?locale=de"],
-a.button__text-secondary[href="/processes/pilotquartier/f/664/last_activities?locale=en"],
-a.button__text-secondary[href="/processes/pilotquartier/f/664/last_activities?locale=de"],
-a.button__text-secondary[href="/processes/pilotquartier/f/664/last_activities"],
-.menu-bar__secondary-dropdown__left > a.button__text-secondary{
-  display: none;
-}
-
 :is(.editor-content, .content-block__description) :is(h1, h2, h3, h4, h5):not(:first-child) {
   margin-top: var(--stzh-space-xxxlarge);
 }
