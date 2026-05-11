@@ -1,0 +1,89 @@
+/**
+ * a3_friedhofstrategie.css
+ *
+ * Friedhofstrategie theme variables.
+ * Scoped to Friedhofstrategie processes when loaded via Decidim Awesome.
+ *
+ * Relies on a1_variables.css as single source of truth:
+ * - firgreen palette (--stzh-color-firgreen*) from a1
+ * - coolgrey, cobaltblue from @oiz/stzh-components design system
+ * - Fonts from design system (no local font overrides)
+ *
+ * USAGE: Load AFTER a1_variables.css. Enable only for Friedhofstrategie-scoped processes.
+ */
+
+/* ==========================================================================
+   FRIEDHOFSTRATEGIE THEME – Map semantic colors to firgreen palette
+   ========================================================================== */
+
+body {
+
+  /* --- Primary → firgreen --- */
+  --stzh-color-primary10-rgb: var(--stzh-color-firgreen10-rgb);
+  --stzh-color-primary10: rgba(var(--stzh-color-primary10-rgb) / 1);
+  --stzh-color-primary20-rgb: var(--stzh-color-firgreen20-rgb);
+  --stzh-color-primary20: rgba(var(--stzh-color-primary20-rgb) / 1);
+  --stzh-color-primary30-rgb: var(--stzh-color-firgreen30-rgb);
+  --stzh-color-primary30: rgba(var(--stzh-color-primary30-rgb) / 1);
+  --stzh-color-primary40-rgb: var(--stzh-color-firgreen40-rgb);
+  --stzh-color-primary40: rgba(var(--stzh-color-primary40-rgb) / 1);
+  --stzh-color-primary50-rgb: var(--stzh-color-firgreen50-rgb);
+  --stzh-color-primary50: rgba(var(--stzh-color-primary50-rgb) / 1);
+  --stzh-color-primary60-rgb: var(--stzh-color-firgreen60-rgb);
+  --stzh-color-primary60: rgba(var(--stzh-color-primary60-rgb) / 1);
+  --stzh-color-primary70-rgb: var(--stzh-color-firgreen70-rgb);
+  --stzh-color-primary70: rgba(var(--stzh-color-primary70-rgb) / 1);
+  --stzh-color-primary80-rgb: var(--stzh-color-firgreen80-rgb);
+  --stzh-color-primary80: rgba(var(--stzh-color-primary80-rgb) / 1);
+  --stzh-color-primary90-rgb: var(--stzh-color-firgreen90-rgb);
+  --stzh-color-primary90: rgba(var(--stzh-color-primary90-rgb) / 1);
+  --stzh-color-primary100-rgb: var(--stzh-color-firgreen100-rgb);
+  --stzh-color-primary100: rgba(var(--stzh-color-primary100-rgb) / 1);
+
+  /* --- Secondary → firgreen --- */
+  --stzh-color-secondary10-rgb: var(--stzh-color-firgreen10-rgb);
+  --stzh-color-secondary10: rgba(var(--stzh-color-secondary10-rgb) / 1);
+  --stzh-color-secondary20-rgb: var(--stzh-color-firgreen20-rgb);
+  --stzh-color-secondary20: rgba(var(--stzh-color-secondary20-rgb) / 1);
+  --stzh-color-secondary30-rgb: var(--stzh-color-firgreen30-rgb);
+  --stzh-color-secondary30: rgba(var(--stzh-color-secondary30-rgb) / 1);
+  --stzh-color-secondary40-rgb: var(--stzh-color-firgreen40-rgb);
+  --stzh-color-secondary40: rgba(var(--stzh-color-secondary40-rgb) / 1);
+  --stzh-color-secondary50-rgb: var(--stzh-color-firgreen50-rgb);
+  --stzh-color-secondary50: rgba(var(--stzh-color-secondary50-rgb) / 1);
+  --stzh-color-secondary60-rgb: var(--stzh-color-firgreen60-rgb);
+  --stzh-color-secondary60: rgba(var(--stzh-color-secondary60-rgb) / 1);
+  --stzh-color-secondary70-rgb: var(--stzh-color-firgreen70-rgb);
+  --stzh-color-secondary70: rgba(var(--stzh-color-secondary70-rgb) / 1);
+  --stzh-color-secondary80-rgb: var(--stzh-color-firgreen80-rgb);
+  --stzh-color-secondary80: rgba(var(--stzh-color-secondary80-rgb) / 1);
+  --stzh-color-secondary90-rgb: var(--stzh-color-firgreen90-rgb);
+  --stzh-color-secondary90: rgba(var(--stzh-color-secondary90-rgb) / 1);
+  --stzh-color-secondary100-rgb: var(--stzh-color-firgreen100-rgb);
+  --stzh-color-secondary100: rgba(var(--stzh-color-secondary100-rgb) / 1);
+
+  /* --- Theme component overrides (use imported design system fonts) --- */
+  --stzh-button-background-color: var(--stzh-color-primary60);
+  --stzh-button-hover-background-color: var(--stzh-color-primary80);
+  --stzh-button-disabled-background-color: var(--stzh-color-grey70);
+  --stzh-button-secondary-background-color: var(--stzh-color-secondary30);
+  --stzh-button-secondary-hover-background-color: var(--stzh-color-secondary40);
+  --stzh-button-secondary-disabled-background-color: var(--stzh-color-grey20);
+  --stzh-button-secondary-color: var(--stzh-color-primary80);
+  --stzh-button-secondary-hover-color: var(--stzh-color-primary80);
+  --stzh-button-secondary-disabled-color: var(--stzh-color-grey80);
+  --stzh-button-tertiary-color: var(--stzh-color-primary80);
+  --stzh-button-tertiary-hover-color: var(--stzh-color-primary80);
+  --stzh-button-tertiary-disabled-color: var(--stzh-color-grey70);
+  --stzh-link-color: var(--stzh-color-primary70);
+  --stzh-link-hover-color: var(--stzh-color-primary80);
+  --stzh-header-logobar-background-color: transparent;
+  --stzh-tooltip-color: var(--stzh-color-secondary70);
+  --stzh-tooltip-background-color: var(--stzh-color-secondary10);
+  --stzh-tooltip-link-color: var(--stzh-color-primary60);
+  --stzh-tooltip-hover-link-color: var(--stzh-color-primary80);
+  --stzh-cardlist-background-color: var(--stzh-color-coolgrey10);
+  --stzh-cardlist-description-color: var(--stzh-color-primary80);
+  --stzh-heading-color: var(--stzh-color-primary80);
+  --stzh-topnews-background-color: var(--stzh-color-secondary30);
+}
