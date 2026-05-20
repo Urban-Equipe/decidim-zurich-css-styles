@@ -20,7 +20,7 @@ header .main-bar__links-desktop__item-wrapper{
 }
 
 /*Hide last activity from main menu dropdown*/
-.activity__container {
+.menu-bar__main-dropdown__left .activity__container, .menu-bar__secondary-dropdown__left .activity__container {
   display:none;
 }
 
