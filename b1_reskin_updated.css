@@ -442,17 +442,6 @@ abbr:where([title]) {
   text-decoration: none;
 }
 
-/*Heavy font classes*/
-.dropdown__item {
-  font-family: var(--stzh-font-family-heavy);
-}
-
-
-/*Black fonts*/
-.dropdown__item .text-secondary, .dropdown__item>svg, .dropdown__item:hover>svg {
-  color: var(--stzh-base-color);
-}
-
 /* ===== PADDING UTILITIES ===== */
 /* Standardize padding values */
 .dropdown>*{
@@ -498,6 +487,18 @@ header .admin-bar__button, header .admin-bar__title {
   color: var(--stzh-color-footer-text);
 }
 
+/* ===== PROFILE/USER MENU ===== */
+/*Heavy font classes*/
+.dropdown__item {
+  font-family: var(--stzh-font-family-heavy);
+}
+
+
+/*Black fonts*/
+.dropdown__item .dropdown__button, .dropdown__button>svg, .dropdown__button:hover>svg {
+  color: var(--stzh-base-color);
+}
+
 
 /* ===== MAIN NAVIGATION MENU ===== */
 
@@ -534,7 +535,23 @@ header .main-bar__links-desktop__item:hover{
   border-radius: 0;
 }
 
-/* Style dropdown menu */
+/* ===== PROFILE/USER MENU ===== */
+/*Heavy font classes*/
+.dropdown__item {
+  font-family: var(--stzh-font-family-heavy);
+}
+
+
+/*Black fonts*/
+.dropdown__item .dropdown__button, 
+.dropdown__item.dropdown__button>svg, 
+.dropdown__item .dropdown__button:hover>svg, 
+.dropdown__item .dropdown__button.is-hover svg, 
+.dropdown__item .dropdown__button:not([disabled]):not([class*=button__text]):not(label):hover svg {
+  color: var(--stzh-base-color);
+  fill: var(--stzh-base-color);
+}
+
 .dropdown {
   padding-top: var(--stzh-space-medium);
   padding-left: 0;
@@ -545,7 +562,15 @@ header .main-bar__links-desktop__item:hover{
   filter: none;
 }
 
-.dropdown__bottom:after, .dropdown__bottom {
+.dropdown__item {
+  border-radius: 0;
+}
+
+.dropdown__item .dropdown__button {
+  transition: none;
+}
+
+.dropdown__bottom:after, .dropdown__bottom{
   background-color: var(--background-color);
 }
 
@@ -553,27 +578,38 @@ header .main-bar__links-desktop__item:hover{
   display: none;
 }
 
-.main-bar__dropdown li:hover{
+/*.main-bar__dropdown li:hover{
   background-color: var(--hover-background-color);
-}
+}*/
 
-.dropdown__item {
-  padding-left:var(--stzh-space-xlarge);
-  padding-right:var(--stzh-space-xlarge);
-  padding-top: var(--stzh-space-xsmall);
-  padding-bottom: var(--stzh-space-xsmall);
+.dropdown__item .dropdown__button:not([class*=button__text]) {
+  padding-left:var(--stzh-space-xlarge)!important;
+  padding-right:var(--stzh-space-xlarge)!important;
+  padding-top: var(--stzh-space-xsmall)!important;
+  padding-bottom: var(--stzh-space-xsmall)!important;
   height: var(--stzh-menu-large-item-height);
+  border-radius: 0;
 }
 
-.dropdown__item:hover {
+.dropdown__item .dropdown__button:hover {
+  border-radius: 0;
+  background-color: var(--hover-background-color)!important;
   text-decoration-line: none;
 }
 
-header .main-bar__dropdown {
+.dropdown__item .dropdown__button:hover span {
+  color: var(--stzh-base-color);
+}
+
+.dropdown__item .dropdown__button.is-hover, .dropdown__item .dropdown__button:not([disabled]):not([class*=button__text]):not(label):hover {
+  background: none;
+}
+
+/*header .main-bar__dropdown {
   z-index: 3000;
 }
 
-/*.menu-bar__actions {
+.menu-bar__actions {
   z-index: -1000;
 }*/
 
@@ -581,23 +617,24 @@ header .main-bar__dropdown>:not([hidden])~:not([hidden]){
   border: none;
 }
 
-.main-bar__dropdown li:last-child {
+.main-bar__dropdown .dropdown__item:last-child > .dropdown__button {
   background-color: var(--stzh-base-invert-background-color);
 }
 
-.main-bar__dropdown li:last-child:hover {
-  background-color: var(--stzh-link-hover-color);
+.main-bar__dropdown .dropdown__item:last-child > .dropdown__button:hover {
+  background-color: var(--stzh-link-hover-color)!important;
 }
 
-.main-bar__dropdown li:nth-last-child(2) {
+.main-bar__dropdown .dropdown__item:nth-last-child(2) {
   margin-bottom: var(--stzh-space-medium);
 }
 
-.main-bar__dropdown li:last-child > a.dropdown__item .text-secondary {
-  color: var(--stzh-base-invert-color);
+.main-bar__dropdown .dropdown__item:last-child > .dropdown__button, 
+.main-bar__dropdown .dropdown__item:last-child > .dropdown__button:hover span {
+  color: var(--stzh-base-invert-color)!important;
 }
 
-.main-bar__dropdown li:last-child > a > svg {
+.main-bar__dropdown .dropdown__item:last-child > .dropdown__button > svg {
   display:none;
 }
 
@@ -1044,7 +1081,7 @@ header .main-bar__links-mobile__account ul > li:last-child {
   background-color: var(--stzh-link-color);
 }
 
-li:last-child .dropdown__item .text-secondary {
+li:last-child .dropdown__item .dropdown__button {
   color: var(--stzh-color-white);
 }
 
