@@ -167,6 +167,43 @@ To keep custom CSS available in admin but hidden on the public site, add a wrapp
 - **Class D:** Enable each D sheet only for its process.
 - **Maintenance:** Keep naming and class structure when adding or changing files.
 
+## Decidim versions and Git branches
+
+Each Decidim major/minor line has its **own branch** with a **full set of CSS files** at the repo root (same names as in the tables above). You copy files from the branch that matches the backend you are editing—not from commit messages on a single shared tree.
+
+| Decidim version | Branch | Use for |
+|-----------------|--------|---------|
+| **0.29** (current production) | `maint/decidim-0.29` | Live site, hotfixes |
+| **0.31** (upgrade) | `upgrade/decidim-0.31` | Staging / new platform |
+| Integration | `main` | Merged baseline; keep in sync when a version branch is promoted |
+
+**Baseline tag:** `css/decidim-0.29-baseline` — snapshot when 0.29 and 0.31 branches were created (after merging `automation` into `main`).
+
+### Copy-paste workflow
+
+1. **One version at a time:** `git checkout maint/decidim-0.29` or `git checkout upgrade/decidim-0.31`, then open the `.css` files in this folder and paste into Decidim Awesome.
+2. **Both versions at once (recommended):** use a second [git worktree](https://git-scm.com/docs/git-worktree) so two folders exist on disk, each on its branch:
+
+```bash
+cd "/Users/lars/kDrive/Common documents/Projekte/_DecidimZuerich/CSS/github"
+git worktree add ../github-decidim-0.31 upgrade/decidim-0.31
+```
+
+- `github/` → stay on `maint/decidim-0.29` for 0.29 paste
+- `github-decidim-0.31/` → `upgrade/decidim-0.31` for 0.31 paste
+
+Commit on the branch that matches the instance you changed. Cherry-pick between branches when a fix applies to both markup versions.
+
+### Pushing to GitHub
+
+After review locally:
+
+```bash
+git push origin main
+git push origin maint/decidim-0.29 upgrade/decidim-0.31
+git push origin css/decidim-0.29-baseline
+```
+
 ## Further reading
 
 - [STZH design system](https://designsystem.stadt-zuerich.ch/current/)
