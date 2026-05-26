@@ -2485,7 +2485,7 @@ font-weight: var(--stzh-font-weight-heavy);
   color: var(--stzh-link-color);
 }
 
-.tabs-title:hover a {
+a.tabs-title:hover {
   text-decoration-line: none;
   color: var(--stzh-color-primary80);
 }
@@ -2495,6 +2495,17 @@ font-weight: var(--stzh-font-weight-heavy);
   background-color: var(--stzh-color-secondary40);
   font-weight: var(--stzh-font-weight-heavy);
 }
+
+.vertical-tabs__list a:hover {
+  text-decoration-line: none;
+}
+
+@media (min-width:768px) {
+  .vertical-tabs__list>:not([hidden])~:not([hidden]){
+    border-top-width: 0px;
+  }
+}
+
 
 /* ===== LEFT SIDEBAR FILTERS ===== */
 
