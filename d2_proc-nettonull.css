@@ -354,3 +354,8 @@ div [data-endorsements-count] {
   font-family: var(--stzh-font-family-heavy);
   font-weight: var(--stzh-font-weight-heavy);
 }
+
+/* Hide blog component from menu */
+li:has(a[href*="/processes/pilotquartier/f/707/posts"]) {
+  display: none;
+}
