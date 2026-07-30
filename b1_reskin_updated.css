@@ -891,7 +891,8 @@ header .main-bar__dropdown>:not([hidden])~:not([hidden]){
         border: none;
     }
 
-    [aria-label="Legal"] a {
+    [aria-label="Legal"] a,
+    footer .main-footer__down a {
         font-family: var(--stzh-font-family-medium);
         font-weight: var(--stzh-font-weight-medium);
         font-size: var(--stzh-font-milli-font-size);
@@ -900,7 +901,8 @@ header .main-bar__dropdown>:not([hidden])~:not([hidden]){
         text-decoration-line: none;
     }
 
-    [aria-label="Legal"] a:hover {
+    [aria-label="Legal"] a:hover,
+    footer .main-footer__down a:hover {
         color: var(--stzh-color-white);
     }
 
@@ -2663,6 +2665,11 @@ background-color: transparent;
   max-width: 100%; /* Ensure it doesn’t overflow its parent */
   box-sizing: border-box; /* Ensure padding is included in width */
   justify-content: flex-start;
+}
+
+/*––––Style pills––––*/
+label[for].button__pill--active {
+  --stzh-heading-color: var(--stzh-color-white);
 }
 
 /* ===== CONVERSATION STYLES ===== */
