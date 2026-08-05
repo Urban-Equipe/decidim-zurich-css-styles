@@ -1148,8 +1148,9 @@ header .menu-bar__breadcrumb-desktop {
 /*
  * Decidim core sets `> * { font-size: 18px; color: #fff }` — override so every
  * crumb stays STZH milli + medium (same size as last; only weight changes).
+ * Exclude bare slash <span> separators (styled separately below).
  */
-header .menu-bar__breadcrumb-desktop > *,
+header .menu-bar__breadcrumb-desktop > :not(span),
 header .menu-bar__breadcrumb-desktop__dropdown-wrapper,
 header .menu-bar__breadcrumb-desktop__dropdown-trigger {
   color: inherit;
@@ -1179,7 +1180,7 @@ header .menu-bar__breadcrumb-desktop > a.menu-bar__breadcrumb-desktop__dropdown-
 
 /*
  * Decidim inserts literal slash spans between crumbs.
- * Match stzh-breadcrumb separators: icon-width slot + ">" glyph.
+ * Hide "/" text and show STZH-style ">" via ::before.
  */
 header .menu-bar__breadcrumb-desktop > span {
   display: inline-flex;
@@ -1190,8 +1191,8 @@ header .menu-bar__breadcrumb-desktop > span {
   margin-left: var(--stzh-space-xsmall, 0.5rem);
   margin-right: var(--stzh-space-xsmall, 0.5rem);
   color: inherit;
-  font-size: 0;
-  line-height: 0;
+  font-size: 0 !important;
+  line-height: 0 !important;
   user-select: none;
   pointer-events: none;
 }
@@ -1200,7 +1201,7 @@ header .menu-bar__breadcrumb-desktop > span::before {
   content: ">";
   font-family: var(--stzh-font-family-medium);
   font-weight: var(--stzh-font-weight-medium);
-  font-size: var(--stzh-font-milli-font-size);
+  font-size: var(--stzh-font-milli-font-size) !important;
   line-height: var(--stzh-font-milli-text-line-height);
   letter-spacing: var(--stzh-font-curve---text-letter-spacing);
   color: inherit;
@@ -1336,8 +1337,8 @@ header .menu-bar__breadcrumb-mobile__dropdown-trigger > span > span:not(.cursor-
   width: var(--stzh-icon-size-small, 1.25rem);
   margin-left: var(--stzh-space-xsmall, 0.5rem);
   margin-right: var(--stzh-space-xsmall, 0.5rem);
-  font-size: 0;
-  line-height: 0;
+  font-size: 0 !important;
+  line-height: 0 !important;
   color: inherit;
   vertical-align: middle;
   user-select: none;
@@ -1350,7 +1351,7 @@ header .menu-bar__breadcrumb-mobile__dropdown-trigger
   content: ">";
   font-family: var(--stzh-font-family-medium);
   font-weight: var(--stzh-font-weight-medium);
-  font-size: var(--stzh-font-milli-font-size);
+  font-size: var(--stzh-font-milli-font-size) !important;
   line-height: var(--stzh-font-milli-text-line-height);
 }
 
