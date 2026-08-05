@@ -1169,6 +1169,17 @@ header .menu-bar__breadcrumb-desktop > span::before {
   color: inherit;
 }
 
+/*
+ * Decidim often leaves a trailing "/" when the last crumb is a process
+ * dropdown (no following link) — hide that empty ">".
+ */
+header .menu-bar__breadcrumb-desktop
+  > span:last-of-type:not(:has(+ a)):not(:has(+ .relative)):not(
+    :has(+ .menu-bar__breadcrumb-desktop__dropdown-wrapper)
+  ) {
+  display: none;
+}
+
 header .menu-bar__breadcrumb-desktop__dropdown-trigger {
   z-index: 20;
   display: inline-flex;
@@ -1204,14 +1215,28 @@ header .menu-bar__breadcrumb-desktop__dropdown-wrapper:hover
   color: var(--stzh-color-primary90);
 }
 
-/* Last visible crumb = heavy (stzh-breadcrumb__item.is-last) */
+/*
+ * Last visible crumb = heavy (stzh-breadcrumb__item.is-last).
+ * Detail pages end on an <a>; listing pages often end on .relative
+ * (process dropdown) followed by a trailing slash — cover both.
+ */
 header .menu-bar__breadcrumb-desktop
-  > a.menu-bar__breadcrumb-desktop__dropdown-wrapper:last-of-type,
+  > a.menu-bar__breadcrumb-desktop__dropdown-wrapper:last-of-type:not(
+    :has(~ .relative)
+  ):not(:has(~ .menu-bar__breadcrumb-desktop__dropdown-wrapper)),
 header .menu-bar__breadcrumb-desktop
-  > a.menu-bar__breadcrumb-desktop__dropdown-trigger:last-of-type,
+  > a.menu-bar__breadcrumb-desktop__dropdown-trigger:last-of-type:not(
+    :has(~ .relative)
+  ):not(:has(~ .menu-bar__breadcrumb-desktop__dropdown-wrapper)),
 header .menu-bar__breadcrumb-desktop
-  > .menu-bar__breadcrumb-desktop__dropdown-wrapper:last-of-type
-  > a.menu-bar__breadcrumb-desktop__dropdown-trigger {
+  > .relative:has(+ span:last-of-type)
+  .menu-bar__breadcrumb-desktop__dropdown-trigger,
+header .menu-bar__breadcrumb-desktop
+  > .relative:last-child
+  .menu-bar__breadcrumb-desktop__dropdown-trigger,
+header .menu-bar__breadcrumb-desktop
+  > .menu-bar__breadcrumb-desktop__dropdown-wrapper:has(+ span:last-of-type)
+  > .menu-bar__breadcrumb-desktop__dropdown-trigger {
   font-family: var(--stzh-font-family-heavy);
   font-weight: var(--stzh-font-weight-heavy);
   font-style: var(--stzh-font-style-heavy);

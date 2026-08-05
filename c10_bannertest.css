@@ -192,9 +192,18 @@ header #sticky-header-container {
     display: none;
   }
 
-  /* Search starts at first grid column (content edge inside main-bar padding) */
+  /*
+   * Search starts at content edge. Span enough tracks so Decidim's
+   * minmax(0,1fr) grid cannot clip the STZH resting width (~10rem).
+   */
   header .main-bar__search {
-    grid-column-start: 1;
+    grid-column: 1 / span 4;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  header .main-bar__search {
+    grid-column: 1 / span 5;
   }
 }
 
@@ -377,13 +386,17 @@ header .main-bar__links-mobile__login:hover {
 /* ===== Metabar search (stzh-header__metabar-search) ===== */
 
 header .main-bar__search {
+  box-sizing: border-box;
   justify-self: start;
-  width: var(--stzh-mitwirken-search-width);
-  min-width: var(--stzh-mitwirken-search-width);
-  max-width: var(--stzh-mitwirken-search-max);
+  align-self: center;
+  /* Explicit widths beat grid-track clipping (minmax(0,1fr) + max-width:100%) */
+  width: var(--stzh-mitwirken-search-width) !important;
+  min-width: var(--stzh-mitwirken-search-width) !important;
+  max-width: var(--stzh-mitwirken-search-max) !important;
   margin-right: var(--stzh-space-medium, 1rem);
-  overflow: hidden;
-  transition-property: width;
+  overflow: visible;
+  z-index: 2;
+  transition-property: width, min-width;
   transition-duration: var(--stzh-base-transition-animation-speed);
 }
 
@@ -401,15 +414,18 @@ header .main-bar__search {
 
 /* Expand to STZH max on focus (like metabar-search:focus-within { width: 100% }) */
 header .main-bar__search:focus-within {
-  width: var(--stzh-mitwirken-search-max);
-  min-width: var(--stzh-mitwirken-search-max);
+  width: var(--stzh-mitwirken-search-max) !important;
+  min-width: var(--stzh-mitwirken-search-max) !important;
+  z-index: 5;
 }
 
 header .main-bar__search form {
   position: relative;
   display: block;
-  width: 100%;
-  max-width: 100%;
+  box-sizing: border-box;
+  width: 100% !important;
+  min-width: 0;
+  max-width: none !important;
   overflow: hidden;
   border: none;
   border-radius: 0;
