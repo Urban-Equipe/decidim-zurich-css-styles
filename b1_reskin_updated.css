@@ -1742,7 +1742,8 @@ text-decoration-line: none;
   justify-content: space-between;
 }
 
-.success > .flash__message {
+.success > .flash__message,
+.success > .flash__title {
   color: var(--stzh-color-white);
 }
 
@@ -1756,7 +1757,8 @@ text-decoration-line: none;
   color: var(--stzh-color-white);
 }
 
-.warning > .flash__message {
+.warning > .flash__message,
+.warning > .flash__title {
   color: var(--stzh-color-white);
 }
 
@@ -1770,7 +1772,8 @@ text-decoration-line: none;
 }
 
 
-.alert > .flash__message {
+.alert > .flash__message,
+.alert > .flash__title {
   color: var(--stzh-base-invert-color);
 }
 
