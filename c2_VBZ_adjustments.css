@@ -5,18 +5,23 @@
  * Aligned with official VBZ pages (e.g. stadt-zuerich.ch/vbz/.../tram-affoltern).
  * Scoped to VBZ processes when loaded via Decidim Awesome.
  *
- * USAGE: Load after a1_variables.css and b1_reskin_updated.css. Enable only for VBZ-scoped processes.
+ * USAGE: Load after a1, b1, and c10 (logobar/metabar). Enable only for VBZ-scoped processes.
+ * Logo URL comes from a2 (`--stzh-mitwirken-logobar-logo-url` → C10 logobar).
  */
 
 /*–––– VBZ adjustments –––––*/
 
-/*Replace logo with VBZ logo*/
+/*
+ * Do not paint the VBZ logo onto `.main-bar__logo-desktop` — that was the old
+ * metabar slot. C10 draws the logobar from `--stzh-mitwirken-logobar-logo-url`
+ * (set in a2_VBZ_variables.css). Keep the Decidim img hidden; hit target stays
+ * the stretched home link from C10.
+ */
 header .main-bar__logo-desktop {
-  background: url(https://www.stadt-zuerich.ch/content/dam/corporate-design/de/logos/vbz.svg) no-repeat;
-  background-size: auto 60px;
-  width: 0;
-  height: 79px;
-  padding-left: 19rem;
+  background: none;
+  width: auto;
+  height: auto;
+  padding-left: 0;
 }
 
 header .main-bar__logo-mobile a {
