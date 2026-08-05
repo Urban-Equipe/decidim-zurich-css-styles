@@ -1256,13 +1256,14 @@ header .menu-bar__breadcrumb-desktop__dropdown-wrapper:hover
 /*
  * Last crumb only = heavy weight, SAME milli size as siblings
  * (stzh-breadcrumb__item.is-last — never a larger font-size).
+ * Process listings: only the last .relative with no following link crumb.
  */
 header .menu-bar__breadcrumb-desktop
   > a.menu-bar__breadcrumb-desktop__dropdown-wrapper:last-of-type,
 header .menu-bar__breadcrumb-desktop
   > a.menu-bar__breadcrumb-desktop__dropdown-trigger:last-of-type,
 header .menu-bar__breadcrumb-desktop
-  > .relative:not(:has(~ a))
+  > .relative:last-of-type:not(:has(~ a))
   .menu-bar__breadcrumb-desktop__dropdown-trigger {
   font-family: var(--stzh-font-family-heavy) !important;
   font-weight: var(--stzh-font-weight-heavy) !important;
