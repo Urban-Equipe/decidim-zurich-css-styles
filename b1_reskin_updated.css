@@ -1087,7 +1087,7 @@ li:last-child .dropdown__item .dropdown__button {
 
 header .menu-bar__container {
   height: auto;
-  min-height: 3.5rem;
+  min-height: 0;
   background-color: var(--stzh-color-white);
   box-shadow: none;
 }
@@ -1095,9 +1095,10 @@ header .menu-bar__container {
 header .menu-bar {
   display: flex;
   align-items: center;
-  min-height: 3.5rem;
-  padding-top: var(--stzh-space-small, 0.75rem);
-  padding-bottom: var(--stzh-space-small, 0.75rem);
+  min-height: 0;
+  /* STZH trail sits with more vertical room than Decidim’s compact menu-bar */
+  padding-top: var(--stzh-space-large, 1.25rem);
+  padding-bottom: var(--stzh-space-large, 1.25rem);
 }
 
 /* ---- Desktop trail ---- */
@@ -1123,6 +1124,11 @@ header .menu-bar__breadcrumb-desktop > * {
   font: inherit;
 }
 
+header .menu-bar__breadcrumb-desktop > .relative {
+  display: flex;
+  align-items: center;
+}
+
 header .menu-bar__breadcrumb-desktop__dropdown-wrapper,
 header .menu-bar__breadcrumb-desktop > a.menu-bar__breadcrumb-desktop__dropdown-trigger,
 header .menu-bar__breadcrumb-desktop > a.menu-bar__breadcrumb-desktop__dropdown-wrapper {
@@ -1134,39 +1140,33 @@ header .menu-bar__breadcrumb-desktop > a.menu-bar__breadcrumb-desktop__dropdown-
   cursor: pointer;
 }
 
-/* Chevron separators between crumbs (skip dropdown panels) */
-header .menu-bar__breadcrumb-desktop
-  > .menu-bar__breadcrumb-desktop__dropdown-wrapper
-  + .menu-bar__breadcrumb-desktop__dropdown-wrapper::before,
-header .menu-bar__breadcrumb-desktop
-  > .menu-bar__breadcrumb-desktop__dropdown-wrapper
-  + a.menu-bar__breadcrumb-desktop__dropdown-trigger::before,
-header .menu-bar__breadcrumb-desktop
-  > .menu-bar__breadcrumb-desktop__dropdown-wrapper
-  + a.menu-bar__breadcrumb-desktop__dropdown-wrapper::before,
-header .menu-bar__breadcrumb-desktop
-  > a.menu-bar__breadcrumb-desktop__dropdown-wrapper
-  + .menu-bar__breadcrumb-desktop__dropdown-wrapper::before,
-header .menu-bar__breadcrumb-desktop
-  > a.menu-bar__breadcrumb-desktop__dropdown-trigger
-  + .menu-bar__breadcrumb-desktop__dropdown-wrapper::before,
-header .menu-bar__breadcrumb-desktop
-  > a.menu-bar__breadcrumb-desktop__dropdown-wrapper
-  + a.menu-bar__breadcrumb-desktop__dropdown-wrapper::before,
-header .menu-bar__breadcrumb-desktop
-  > a.menu-bar__breadcrumb-desktop__dropdown-trigger
-  + a.menu-bar__breadcrumb-desktop__dropdown-wrapper::before {
-  content: "›";
+/*
+ * Decidim inserts literal <span>/</span> between crumbs.
+ * Match stzh-breadcrumb separators: icon-width slot + ">" glyph.
+ */
+header .menu-bar__breadcrumb-desktop > span {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  flex: 0 0 auto;
   width: var(--stzh-icon-size-small, 1.25rem);
-  margin-right: var(--stzh-space-xxsmall, 0.25rem);
+  margin-left: var(--stzh-space-xsmall, 0.5rem);
+  margin-right: var(--stzh-space-xsmall, 0.5rem);
   color: inherit;
-  font-size: var(--stzh-font-centi-font-size);
-  line-height: 1;
+  font-size: 0;
+  line-height: 0;
+  user-select: none;
   pointer-events: none;
+}
+
+header .menu-bar__breadcrumb-desktop > span::before {
+  content: ">";
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-size: var(--stzh-font-milli-font-size);
+  line-height: var(--stzh-font-milli-text-line-height);
+  letter-spacing: var(--stzh-font-curve---text-letter-spacing);
+  color: inherit;
 }
 
 header .menu-bar__breadcrumb-desktop__dropdown-trigger {
@@ -1265,24 +1265,30 @@ header .menu-bar__breadcrumb-mobile__dropdown-trigger [aria-current="page"] {
   font-weight: var(--stzh-font-weight-heavy);
 }
 
-/* Replace "/" with STZH-style chevron */
+/* Replace Decidim "/" with ">" */
 header .menu-bar__breadcrumb-mobile__dropdown-trigger > span > span:not(.cursor-pointer) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: var(--stzh-icon-size-small, 1.25rem);
-  margin-inline: var(--stzh-space-xxsmall, 0.25rem);
+  margin-left: var(--stzh-space-xsmall, 0.5rem);
+  margin-right: var(--stzh-space-xsmall, 0.5rem);
   font-size: 0;
+  line-height: 0;
   color: inherit;
   vertical-align: middle;
+  user-select: none;
+  pointer-events: none;
 }
 
 header .menu-bar__breadcrumb-mobile__dropdown-trigger
   > span
   > span:not(.cursor-pointer)::before {
-  content: "›";
-  font-size: var(--stzh-font-centi-font-size);
-  line-height: 1;
+  content: ">";
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-size: var(--stzh-font-milli-font-size);
+  line-height: var(--stzh-font-milli-text-line-height);
 }
 
 header .menu-bar__breadcrumb-mobile__dropdown-wrapper:hover {
