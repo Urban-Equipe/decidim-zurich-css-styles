@@ -748,6 +748,32 @@ header .main-bar__dropdown>:not([hidden])~:not([hidden]){
   background-color: var(--hover-button-background-color)!important;
 }
 
+/*
+ * Decidim `.button__transparent` is white-on-transparent (meant for the old
+ * blue menu-bar). On the white STZH breadcrumb bar, force primary colors.
+ */
+header .menu-bar__actions .button__transparent,
+header .menu-bar__actions-mobile .button__transparent {
+  color: var(--stzh-breadcrumb-color, var(--stzh-color-primary70));
+  border-color: var(--stzh-breadcrumb-color, var(--stzh-color-primary70));
+  background-color: transparent;
+}
+
+header .menu-bar__actions .button__transparent span,
+header .menu-bar__actions .button__transparent svg,
+header .menu-bar__actions-mobile .button__transparent span,
+header .menu-bar__actions-mobile .button__transparent svg {
+  color: inherit;
+  fill: currentColor;
+}
+
+header .menu-bar__actions .button__transparent:hover,
+header .menu-bar__actions-mobile .button__transparent:hover {
+  color: var(--stzh-color-primary90);
+  border-color: var(--stzh-color-primary90);
+  background-color: transparent;
+}
+
 
 /*Match text button to tertiary buttons from STZH*/
 .button__text,.button__text-primary,.button__text-secondary, .button__text-tertiary {
@@ -1121,7 +1147,7 @@ header .menu-bar__breadcrumb-desktop {
 
 header .menu-bar__breadcrumb-desktop > * {
   color: inherit;
-  font: inherit;
+  /* Do not set font: inherit — it locks crumbs to medium and blocks last-item heavy */
 }
 
 header .menu-bar__breadcrumb-desktop > .relative {
@@ -1217,29 +1243,36 @@ header .menu-bar__breadcrumb-desktop__dropdown-wrapper:hover
 
 /*
  * Last visible crumb = heavy (stzh-breadcrumb item is-last).
- * Detail pages end on a link; listing pages often end on .relative
- * (process dropdown) followed by a trailing slash — cover both.
+ * Prefer simple :last-of-type (reliable); refine with :has where supported.
  */
 header .menu-bar__breadcrumb-desktop
-  > a.menu-bar__breadcrumb-desktop__dropdown-wrapper:last-of-type:not(
-    :has(~ .relative)
-  ):not(:has(~ .menu-bar__breadcrumb-desktop__dropdown-wrapper)),
+  > a.menu-bar__breadcrumb-desktop__dropdown-wrapper:last-of-type,
 header .menu-bar__breadcrumb-desktop
-  > a.menu-bar__breadcrumb-desktop__dropdown-trigger:last-of-type:not(
-    :has(~ .relative)
-  ):not(:has(~ .menu-bar__breadcrumb-desktop__dropdown-wrapper)),
-header .menu-bar__breadcrumb-desktop
-  > .relative:has(+ span:last-of-type)
-  .menu-bar__breadcrumb-desktop__dropdown-trigger,
-header .menu-bar__breadcrumb-desktop
-  > .relative:last-child
-  .menu-bar__breadcrumb-desktop__dropdown-trigger,
-header .menu-bar__breadcrumb-desktop
-  > .menu-bar__breadcrumb-desktop__dropdown-wrapper:has(+ span:last-of-type)
-  > .menu-bar__breadcrumb-desktop__dropdown-trigger {
-  font-family: var(--stzh-font-family-heavy);
-  font-weight: var(--stzh-font-weight-heavy);
+  > a.menu-bar__breadcrumb-desktop__dropdown-trigger:last-of-type {
+  font-family: var(--stzh-font-family-heavy) !important;
+  font-weight: var(--stzh-font-weight-heavy) !important;
   font-style: var(--stzh-font-style-heavy);
+}
+
+@supports selector(:has(*)) {
+  /* Listing pages: last crumb is the process .relative (no link after it) */
+  header .menu-bar__breadcrumb-desktop
+    > .relative:not(:has(~ a))
+    .menu-bar__breadcrumb-desktop__dropdown-trigger {
+    font-family: var(--stzh-font-family-heavy) !important;
+    font-weight: var(--stzh-font-weight-heavy) !important;
+    font-style: var(--stzh-font-style-heavy);
+  }
+
+  /* Do not keep a mid-trail link heavy when a process block follows */
+  header .menu-bar__breadcrumb-desktop
+    > a.menu-bar__breadcrumb-desktop__dropdown-wrapper:last-of-type:has(~ .relative),
+  header .menu-bar__breadcrumb-desktop
+    > a.menu-bar__breadcrumb-desktop__dropdown-trigger:last-of-type:has(~ .relative) {
+    font-family: var(--stzh-font-family-medium) !important;
+    font-weight: var(--stzh-font-weight-medium) !important;
+    font-style: var(--stzh-font-style-medium);
+  }
 }
 
 header .menu-bar__breadcrumb-desktop__dropdown-trigger svg,
