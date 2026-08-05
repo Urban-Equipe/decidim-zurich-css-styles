@@ -1,0 +1,224 @@
+/**
+ * c10_bannertest.css
+ *
+ * Rebuilds Stadt Zürich `stzh-header__logobar` (white logo plate + blue decoration)
+ * as a block above Decidim’s `.main-bar` (not overlaid on it).
+ *
+ * Attachment: `#main-bar.main-bar__container::before` so it pushes the nav down.
+ *
+ * Content column = Decidim `header .main-bar` box (max-width + centering).
+ * Logo inset in the white plate = STZH `.stzh-header__logo-link` padding-left:
+ *   20px → 32px (≥640) → 40px (≥1024) → 64px (≥1280) → 4rem (≥1536, Decidim pad)
+ *
+ * Logo:
+ * https://www.stadt-zuerich.ch/content/dam/corporate-design/de/logos/stadt-zuerich.svg
+ *
+ * USAGE: Load after a1_variables.css.
+ *
+ * Click target: `.main-bar__logo-desktop a` covers the white logo plate.
+ * From 768px the old logo grid slot is collapsed so search left-aligns
+ * with the main-bar content edge; the Decidim logo image stays visually hidden.
+ */
+
+:root {
+  /* Decidim header .main-bar content box (see decidim_core) */
+  --stzh-mitwirken-content-max: 100%;
+  --stzh-mitwirken-content-side: max(
+    0px,
+    (100vw - var(--stzh-mitwirken-content-max)) / 2
+  );
+
+  /* STZH logobar geometry */
+  --stzh-mitwirken-logobar-height: 4.125rem;
+  --stzh-mitwirken-logobar-logo-width: 18rem;
+  /* STZH logo-link padding-left: --stzh-container-margin (20px) */
+  --stzh-mitwirken-logobar-pad-x: var(--stzh-container-margin, 1.25rem);
+  --stzh-mitwirken-logobar-pad-y: 0.875rem;
+  --stzh-mitwirken-logobar-pad-y-bottom: 0.6875rem;
+  --stzh-mitwirken-logobar-bg: var(
+    --stzh-header-logobar-background-color,
+    var(--stzh-color-primary70)
+  );
+  --stzh-mitwirken-logobar-logo-url: url("https://www.stadt-zuerich.ch/content/dam/corporate-design/de/logos/stadt-zuerich.svg");
+
+  /* White plate starts at content column; logo inset by STZH pad within it */
+  --stzh-mitwirken-logobar-white-start: var(--stzh-mitwirken-content-side);
+  --stzh-mitwirken-logobar-blue-start: calc(
+    var(--stzh-mitwirken-content-side) + var(--stzh-mitwirken-logobar-logo-width)
+  );
+  --stzh-mitwirken-logobar-logo-x: calc(
+    var(--stzh-mitwirken-content-side) + var(--stzh-mitwirken-logobar-pad-x)
+  );
+}
+
+@media screen and (min-width: 640px) {
+  :root {
+    --stzh-mitwirken-content-max: 640px;
+    --stzh-mitwirken-logobar-logo-width: 18.75rem;
+    /* STZH ≥600: --stzh-container-margin-small (32px) */
+    --stzh-mitwirken-logobar-pad-x: var(--stzh-container-margin-small, 2rem);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  :root {
+    --stzh-mitwirken-content-max: 768px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  :root {
+    --stzh-mitwirken-content-max: 1024px;
+    --stzh-mitwirken-logobar-height: 5.5rem;
+    --stzh-mitwirken-logobar-logo-width: 24.9375rem;
+    /* STZH ≥900: --stzh-container-margin-medium (40px) */
+    --stzh-mitwirken-logobar-pad-x: var(--stzh-container-margin-medium, 2.5rem);
+    --stzh-mitwirken-logobar-pad-y: 1.125rem;
+    --stzh-mitwirken-logobar-pad-y-bottom: 1.125rem;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  :root {
+    --stzh-mitwirken-content-max: 1280px;
+    --stzh-mitwirken-logobar-height: 8.4375rem;
+    --stzh-mitwirken-logobar-logo-width: 38.5625rem;
+    /* STZH ≥1260: --stzh-container-margin-large (64px) */
+    --stzh-mitwirken-logobar-pad-x: var(--stzh-container-margin-large, 4rem);
+    --stzh-mitwirken-logobar-pad-y: 1.75rem;
+    --stzh-mitwirken-logobar-pad-y-bottom: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 1536px) {
+  :root {
+    --stzh-mitwirken-content-max: 1536px;
+    --stzh-mitwirken-logobar-logo-width: 34.5625rem;
+    /**
+     * STZH ≥1600 sets logo-link padding-left: 0 (flush to content column).
+     * Decidim’s main-bar still uses 4rem horizontal padding — keep that inset
+     * so the logo left-aligns with page content.
+     */
+    --stzh-mitwirken-logobar-pad-x: 4rem;
+  }
+}
+
+/* Stack logobar above .main-bar as a real flex child (no absolute overlay) */
+#main-bar.main-bar__container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+#main-bar.main-bar__container > .main-bar {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+/**
+ * Logobar strip:
+ * - white plate from content column left → logo plate width
+ * - blue SVG inset by STZH pad-x within that plate
+ * - primary70 from plate end → right viewport edge
+ */
+#main-bar.main-bar__container::before {
+  content: "";
+  display: block;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  height: var(--stzh-mitwirken-logobar-height);
+  pointer-events: none;
+  background-image: var(--stzh-mitwirken-logobar-logo-url),
+    linear-gradient(
+      to right,
+      transparent 0,
+      transparent var(--stzh-mitwirken-logobar-white-start),
+      var(--stzh-color-white, #fff) var(--stzh-mitwirken-logobar-white-start),
+      var(--stzh-color-white, #fff) var(--stzh-mitwirken-logobar-blue-start),
+      var(--stzh-mitwirken-logobar-bg) var(--stzh-mitwirken-logobar-blue-start),
+      var(--stzh-mitwirken-logobar-bg) 100%
+    );
+  background-repeat: no-repeat, no-repeat;
+  background-position: left var(--stzh-mitwirken-logobar-logo-x) center, left top;
+  background-size: auto
+      calc(
+        var(--stzh-mitwirken-logobar-height) -
+          var(--stzh-mitwirken-logobar-pad-y) -
+          var(--stzh-mitwirken-logobar-pad-y-bottom)
+      ),
+    100% 100%;
+}
+
+header #sticky-header-container {
+  overflow: visible;
+}
+
+/* ===== Clickable logo + collapse old slot ===== */
+
+/**
+ * Pull logo out of the main-bar grid so search can start at the content edge.
+ * From md (768px) search is visible; keep mobile title link below that.
+ */
+@media screen and (min-width: 768px) {
+  header .main-bar__logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    max-width: none;
+    overflow: visible;
+    grid-column: auto;
+  }
+
+  header .main-bar__logo-mobile {
+    display: none;
+  }
+
+  /* Search starts at first grid column (content edge inside main-bar padding) */
+  header .main-bar__search {
+    grid-column-start: 1;
+  }
+}
+
+/* Keep desktop wrapper available at all widths so the hit target exists */
+header .main-bar__logo-desktop {
+  display: block;
+}
+
+/**
+ * Stretch the existing home `<a>` over the white logo plate in the logobar.
+ * Containing block is `.main-bar__logo` (absolute at top-left of `.main-bar`).
+ */
+header .main-bar__logo-desktop a {
+  position: absolute;
+  top: calc(-1 * var(--stzh-mitwirken-logobar-height));
+  left: 0;
+  width: var(--stzh-mitwirken-logobar-logo-width);
+  height: var(--stzh-mitwirken-logobar-height);
+  z-index: 5;
+  display: block;
+  box-sizing: border-box;
+  text-decoration: none !important;
+  color: transparent;
+}
+
+/* Hide old Decidim logo image; keep in DOM for accessible name (alt text) */
+header .main-bar__logo-desktop img {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
