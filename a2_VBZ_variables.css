@@ -100,7 +100,9 @@ body {
   --stzh-button-tertiary-disabled-color: var(--stzh-color-grey70);
   --stzh-link-color: var(--stzh-color-primary60);
   --stzh-link-hover-color: var(--stzh-color-primary70);
-  --stzh-header-logobar-background-color: transparent;
+  /* VBZ header is all-white (stadt-zuerich.ch/vbz), not STZH primary70 strip */
+  --stzh-header-logobar-background-color: var(--stzh-color-white, #fff);
+  --stzh-mitwirken-logobar-bg: var(--stzh-color-white, #fff);
   /* VBZ logo in the C10 STZH logobar (::before), not the old main-bar slot */
   --stzh-mitwirken-logobar-logo-url: url("https://www.stadt-zuerich.ch/content/dam/corporate-design/de/logos/vbz.svg");
   --stzh-tooltip-color: var(--stzh-color-secondary70);
