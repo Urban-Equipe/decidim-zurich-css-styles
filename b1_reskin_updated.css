@@ -1145,9 +1145,20 @@ header .menu-bar__breadcrumb-desktop {
   white-space: nowrap;
 }
 
-header .menu-bar__breadcrumb-desktop > * {
+/*
+ * Decidim core sets `> * { font-size: 18px; color: #fff }` — override so every
+ * crumb stays STZH milli + medium (same size as last; only weight changes).
+ */
+header .menu-bar__breadcrumb-desktop > *,
+header .menu-bar__breadcrumb-desktop__dropdown-wrapper,
+header .menu-bar__breadcrumb-desktop__dropdown-trigger {
   color: inherit;
-  /* Do not set font: inherit — it locks crumbs to medium and blocks last-item heavy */
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-style: var(--stzh-font-style-medium);
+  font-size: var(--stzh-font-milli-font-size) !important;
+  line-height: var(--stzh-font-milli-text-line-height);
+  letter-spacing: var(--stzh-font-curve---text-letter-spacing);
 }
 
 header .menu-bar__breadcrumb-desktop > .relative {
@@ -1217,7 +1228,7 @@ header .menu-bar__breadcrumb-desktop__dropdown-trigger {
   background-color: transparent;
   border: none;
   color: inherit;
-  font: inherit;
+  /* size/weight set above — do not use font: inherit (pulls Decidim 18px) */
   text-decoration: none;
   transition: color var(--stzh-base-transition-animation-speed);
   cursor: pointer;
@@ -1242,20 +1253,22 @@ header .menu-bar__breadcrumb-desktop__dropdown-wrapper:hover
 }
 
 /*
- * Last visible crumb = heavy (stzh-breadcrumb item is-last).
- * Avoid @supports selector() — Decidim Awesome’s Sass rejects it.
- * Avoid chaining :has into a single compound that older tooling drops.
+ * Last crumb only = heavy weight, SAME milli size as siblings
+ * (stzh-breadcrumb__item.is-last — never a larger font-size).
  */
 header .menu-bar__breadcrumb-desktop
   > a.menu-bar__breadcrumb-desktop__dropdown-wrapper:last-of-type,
 header .menu-bar__breadcrumb-desktop
   > a.menu-bar__breadcrumb-desktop__dropdown-trigger:last-of-type,
 header .menu-bar__breadcrumb-desktop
-  > .relative:last-of-type
+  > .relative:not(:has(~ a))
   .menu-bar__breadcrumb-desktop__dropdown-trigger {
   font-family: var(--stzh-font-family-heavy) !important;
   font-weight: var(--stzh-font-weight-heavy) !important;
   font-style: var(--stzh-font-style-heavy);
+  font-size: var(--stzh-font-milli-font-size) !important;
+  line-height: var(--stzh-font-milli-text-line-height);
+  letter-spacing: var(--stzh-font-curve---text-letter-spacing);
 }
 
 header .menu-bar__breadcrumb-desktop__dropdown-trigger svg,
@@ -1293,7 +1306,11 @@ header .menu-bar__breadcrumb-mobile {
 header .menu-bar__breadcrumb-mobile__dropdown-trigger,
 header .menu-bar__breadcrumb-mobile__dropdown-trigger a {
   color: inherit;
-  font: inherit;
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-style: var(--stzh-font-style-medium);
+  font-size: var(--stzh-font-milli-font-size) !important;
+  line-height: var(--stzh-font-milli-text-line-height);
   text-decoration: none;
 }
 
@@ -1301,9 +1318,14 @@ header .menu-bar__breadcrumb-mobile__dropdown-trigger a:hover {
   color: var(--stzh-color-primary90);
 }
 
-header .menu-bar__breadcrumb-mobile__dropdown-trigger [aria-current="page"] {
+/* Only the last mobile crumb is heavy — same milli size */
+header .menu-bar__breadcrumb-mobile__dropdown-trigger
+  > span
+  > span.cursor-pointer:last-of-type {
   font-family: var(--stzh-font-family-heavy);
   font-weight: var(--stzh-font-weight-heavy);
+  font-style: var(--stzh-font-style-heavy);
+  font-size: var(--stzh-font-milli-font-size) !important;
 }
 
 /* Replace Decidim "/" with ">" */
