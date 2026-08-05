@@ -1,23 +1,14 @@
 /**
  * c10_bannertest.css
  *
- * Rebuilds Stadt Zürich `stzh-header__logobar` (white logo plate + blue decoration)
- * as a block above Decidim’s `.main-bar` (not overlaid on it).
+ * 1) STZH `stzh-header__logobar` as `#main-bar.main-bar__container::before`
+ * 2) STZH `stzh-header__metabar` restyle of Decidim `.main-bar` (nav + search)
  *
- * Attachment: `#main-bar.main-bar__container::before` so it pushes the nav down.
+ * Load after a1_variables.css and b1_reskin_updated.css (B1 defers main-bar
+ * chrome here). Decorative logobar + clickable home hit target on
+ * `.main-bar__logo-desktop a`.
  *
- * Content column = Decidim `header .main-bar` box (max-width + centering).
- * Logo inset in the white plate = STZH `.stzh-header__logo-link` padding-left:
- *   20px → 32px (≥640) → 40px (≥1024) → 64px (≥1280) → 4rem (≥1536, Decidim pad)
- *
- * Logo:
- * https://www.stadt-zuerich.ch/content/dam/corporate-design/de/logos/stadt-zuerich.svg
- *
- * USAGE: Load after a1_variables.css.
- *
- * Click target: `.main-bar__logo-desktop a` covers the white logo plate.
- * From 768px the old logo grid slot is collapsed so search left-aligns
- * with the main-bar content edge; the Decidim logo image stays visually hidden.
+ * Logo: https://www.stadt-zuerich.ch/content/dam/corporate-design/de/logos/stadt-zuerich.svg
  */
 
 :root {
@@ -108,6 +99,22 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  /* White behind logobar, coolgrey10 behind metabar row */
+  background: linear-gradient(
+    to bottom,
+    var(--stzh-color-white, #fff) 0,
+    var(--stzh-color-white, #fff) var(--stzh-mitwirken-logobar-height),
+    var(
+        --stzh-header-metabar-background-color,
+        var(--stzh-color-coolgrey10)
+      )
+      var(--stzh-mitwirken-logobar-height),
+    var(
+        --stzh-header-metabar-background-color,
+        var(--stzh-color-coolgrey10)
+      )
+      100%
+  );
 }
 
 #main-bar.main-bar__container > .main-bar {
@@ -155,6 +162,10 @@
 
 header #sticky-header-container {
   overflow: visible;
+  background-color: var(
+    --stzh-header-metabar-background-color,
+    var(--stzh-color-coolgrey10)
+  );
 }
 
 /* ===== Clickable logo + collapse old slot ===== */
@@ -221,4 +232,251 @@ header .main-bar__logo-desktop img {
   white-space: nowrap;
   border: 0;
 }
+
+/**
+ * Container background is set with the logobar flex stack above.
+ * Variables for metabar chrome:
+ */
+:root {
+  --stzh-mitwirken-metabar-height: 4rem;
+  --stzh-mitwirken-metabar-bg: var(
+    --stzh-header-metabar-background-color,
+    var(--stzh-color-coolgrey10)
+  );
+  --stzh-mitwirken-metanav-color: var(
+    --stzh-header-metanav-item-color,
+    var(--stzh-color-grey90)
+  );
+  --stzh-mitwirken-search-max: 21.5625rem;
+  --stzh-mitwirken-search-width: 2.5rem;
+}
+
+@media screen and (min-width: 640px) {
+  :root {
+    --stzh-mitwirken-search-width: 6rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  :root {
+    --stzh-mitwirken-search-width: 10rem;
+  }
+}
+
+/* Metabar row height + alignment */
+#main-bar.main-bar__container > .main-bar,
+header .main-bar {
+  height: var(--stzh-mitwirken-metabar-height);
+  min-height: var(--stzh-mitwirken-metabar-height);
+  padding-top: 0;
+  padding-bottom: 0;
+  align-items: center;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+/* ===== Metabar nav (stzh-header__metanav-item) ===== */
+
+header .main-bar__links-desktop {
+  gap: var(--stzh-space-medium, 1rem);
+  align-items: center;
+}
+
+@media screen and (min-width: 640px) {
+  header .main-bar__links-desktop {
+    gap: var(--stzh-space-xlarge, 1.5rem);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  header .main-bar__links-desktop {
+    gap: var(--stzh-space-xxlarge, 2rem);
+  }
+}
+
+header .main-bar__links-desktop > :not([hidden]) ~ :not([hidden]) {
+  border-left-width: 0;
+  border-right-width: 0;
+}
+
+header .main-bar__links-desktop > * {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+header .main-bar__links-desktop__item-wrapper {
+  column-gap: inherit;
+  align-items: center;
+}
+
+header .main-bar__links-desktop__item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--stzh-space-small, 0.75rem);
+  min-width: 2.5rem;
+  padding: 0;
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--stzh-mitwirken-metanav-color);
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-style: var(--stzh-font-style-medium);
+  font-size: var(--stzh-font-milli-font-size);
+  line-height: var(--stzh-font-milli-text-line-height);
+  letter-spacing: var(--stzh-font-curve---text-letter-spacing);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color var(--stzh-base-transition-animation-speed);
+  cursor: pointer;
+}
+
+header .main-bar__links-desktop__item a,
+header .main-bar__links-desktop__item span,
+header .main-bar__links-desktop svg + span {
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+}
+
+header .main-bar__links-desktop__item svg {
+  width: var(--stzh-icon-size-small, 1.25rem);
+  height: var(--stzh-icon-size-small, 1.25rem);
+  flex-shrink: 0;
+}
+
+header .main-bar__links-desktop__item:hover {
+  background-color: transparent;
+  color: var(--stzh-color-black);
+  text-decoration: none;
+  border-radius: 0;
+}
+
+header .main-bar__links-mobile__trigger {
+  color: var(--stzh-mitwirken-metanav-color);
+  background: transparent;
+  border-radius: 0;
+}
+
+header .main-bar__links-mobile__trigger:hover {
+  color: var(--stzh-color-black);
+  background: transparent;
+}
+
+header .main-bar__links-mobile__login {
+  color: var(--stzh-mitwirken-metanav-color);
+  text-decoration: none;
+}
+
+header .main-bar__links-mobile__login:hover {
+  color: var(--stzh-color-black);
+}
+
+/* ===== Metabar search (stzh-header__metabar-search) ===== */
+
+header .main-bar__search {
+  margin-right: var(--stzh-space-medium, 1rem);
+  max-width: var(--stzh-mitwirken-search-max);
+}
+
+@media screen and (min-width: 640px) {
+  header .main-bar__search {
+    margin-right: var(--stzh-space-xxlarge, 2rem);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  header .main-bar__search {
+    margin-right: var(--stzh-space-xxxxlarge, 3rem);
+  }
+}
+
+header .main-bar__search form {
+  position: relative;
+  display: block;
+  width: var(--stzh-mitwirken-search-width);
+  max-width: var(--stzh-mitwirken-search-max);
+  overflow: hidden;
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  transition-property: width, background-color;
+  transition-duration: var(--stzh-base-transition-animation-speed);
+}
+
+header .main-bar__search form:focus-within {
+  width: 100%;
+  background-color: var(--stzh-color-white);
+}
+
+header .main-bar__search input[type="text"],
+header .main-bar__search input[type="search"] {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: var(--stzh-form-input-small-height, 2.75rem);
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background-color: transparent;
+  color: var(--stzh-color-secondary60);
+  font-family: inherit;
+  font-size: inherit;
+  padding: var(--stzh-space-xsmall, 0.5rem);
+  padding-left: calc(
+    var(--stzh-icon-size, 1.5rem) + var(--stzh-space-medium, 1rem)
+  );
+  padding-right: var(--stzh-space-medium, 1rem);
+  appearance: none;
+}
+
+header .main-bar__search input[type="text"]:focus,
+header .main-bar__search input[type="search"]:focus {
+  outline: none;
+  box-shadow: none;
+  background-color: transparent;
+  color: var(--stzh-color-secondary60);
+}
+
+/* Icon sits on the left like STZH search (Decidim core places it on the right) */
+header .main-bar__search button[type="submit"] {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--stzh-icon-size, 1.5rem) + var(--stzh-space-medium, 1rem));
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--stzh-mitwirken-metanav-color);
+  cursor: pointer;
+  transition: color var(--stzh-base-transition-animation-speed);
+}
+
+header .main-bar__search button[type="submit"]:where([dir="ltr"], [dir="ltr"] *),
+header .main-bar__search button[type="submit"]:where([dir="rtl"], [dir="rtl"] *) {
+  left: 0;
+  right: auto;
+}
+
+header .main-bar__search form:focus-within button[type="submit"],
+header .main-bar__search button[type="submit"]:hover {
+  color: var(--stzh-color-black);
+}
+
+header .main-bar__search button[type="submit"] svg {
+  width: var(--stzh-icon-size-small, 1.25rem);
+  height: var(--stzh-icon-size-small, 1.25rem);
+}
+
 

@@ -326,7 +326,7 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5,
 }
 
 /*Milli Font-size*/
-.text-md, header .main-bar__links-desktop svg+span, .card__list-metadata {
+.text-md, .card__list-metadata {
   font-size: var(--stzh-font-milli-font-size);
   line-height: var(--stzh-font-milli-text-line-height);
   letter-spacing: var(--stzh-font-curve---text-letter-spacing);
@@ -507,14 +507,10 @@ header #sticky-header-container {
   box-shadow: none;
 }
 
-/* Menu items */
-header .main-bar__links-desktop__item {
-  font-family: var(--stzh-font-family-heavy);
-  font-weight: var(--stzh-font-weight-heavy);
-  font-style: var(--stzh-font-style-heavy);
-  color: var(--stzh-link-color);
-  transition-duration: var(--stzh-base-transition-animation-speed);
-}
+/**
+ * Main-bar / metabar link + search chrome lives in c10_bannertest.css
+ * (STZH stzh-header__metabar). Keep B1 free of competing main-bar item rules.
+ */
 
 header #sticky-header-container {
   z-index: 400;
@@ -522,17 +518,6 @@ header #sticky-header-container {
 
 .menu-bar, .layout-container > header, #floating-helper-tip {
   z-index: 200;
-}
-
-header .main-bar__links-desktop__item a {
-  color: var(--stzh-link-color);
-}
-
-header .main-bar__links-desktop__item:hover{
-  text-decoration-line: none;
-  background-color: var(--stzh-selection-background-color);
-  color: var(--stzh-color-primary80);
-  border-radius: 0;
 }
 
 /* ===== PROFILE/USER MENU ===== */
@@ -1118,10 +1103,6 @@ header .menu-bar__breadcrumb-mobile__dropdown-wrapper:hover,
 header .menu-bar__breadcrumb-desktop__dropdown-wrapper:hover .menu-bar__breadcrumb-desktop__dropdown-trigger,
 header .menu-bar__breadcrumb-desktop__dropdown-wrapper:hover .menu-bar__breadcrumb-desktop__dropdown-trigger.a {
   color: var(--stzh-color-white);
-}
-
-header .main-bar__links-desktop svg+span {
-  font-family: var(--stzh-font-family-heavy);
 }
 
 /*Enlarge dropdown menu width*/
