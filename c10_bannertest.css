@@ -247,17 +247,18 @@ header .main-bar__logo-desktop img {
     --stzh-header-metanav-item-color,
     var(--stzh-color-grey90)
   );
+  /* Match stzh-header__metabar-search resting widths */
   --stzh-mitwirken-search-max: 21.5625rem;
   --stzh-mitwirken-search-width: 2.5rem;
 }
 
-@media screen and (min-width: 640px) {
+@media screen and (min-width: 600px) {
   :root {
     --stzh-mitwirken-search-width: 6rem;
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 900px) {
   :root {
     --stzh-mitwirken-search-width: 10rem;
   }
@@ -376,27 +377,39 @@ header .main-bar__links-mobile__login:hover {
 /* ===== Metabar search (stzh-header__metabar-search) ===== */
 
 header .main-bar__search {
-  margin-right: var(--stzh-space-medium, 1rem);
+  justify-self: start;
+  width: var(--stzh-mitwirken-search-width);
+  min-width: var(--stzh-mitwirken-search-width);
   max-width: var(--stzh-mitwirken-search-max);
+  margin-right: var(--stzh-space-medium, 1rem);
+  overflow: hidden;
+  transition-property: width;
+  transition-duration: var(--stzh-base-transition-animation-speed);
 }
 
-@media screen and (min-width: 640px) {
+@media screen and (min-width: 600px) {
   header .main-bar__search {
     margin-right: var(--stzh-space-xxlarge, 2rem);
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 900px) {
   header .main-bar__search {
     margin-right: var(--stzh-space-xxxxlarge, 3rem);
   }
 }
 
+/* Expand to STZH max on focus (like metabar-search:focus-within { width: 100% }) */
+header .main-bar__search:focus-within {
+  width: var(--stzh-mitwirken-search-max);
+  min-width: var(--stzh-mitwirken-search-max);
+}
+
 header .main-bar__search form {
   position: relative;
   display: block;
-  width: var(--stzh-mitwirken-search-width);
-  max-width: var(--stzh-mitwirken-search-max);
+  width: 100%;
+  max-width: 100%;
   overflow: hidden;
   border: none;
   border-radius: 0;
@@ -405,12 +418,11 @@ header .main-bar__search form {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
-  transition-property: width, background-color;
+  transition-property: background-color;
   transition-duration: var(--stzh-base-transition-animation-speed);
 }
 
 header .main-bar__search form:focus-within {
-  width: 100%;
   background-color: var(--stzh-color-white);
 }
 
