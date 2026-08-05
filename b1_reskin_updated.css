@@ -1243,36 +1243,19 @@ header .menu-bar__breadcrumb-desktop__dropdown-wrapper:hover
 
 /*
  * Last visible crumb = heavy (stzh-breadcrumb item is-last).
- * Prefer simple :last-of-type (reliable); refine with :has where supported.
+ * Avoid @supports selector() — Decidim Awesome’s Sass rejects it.
+ * Avoid chaining :has into a single compound that older tooling drops.
  */
 header .menu-bar__breadcrumb-desktop
   > a.menu-bar__breadcrumb-desktop__dropdown-wrapper:last-of-type,
 header .menu-bar__breadcrumb-desktop
-  > a.menu-bar__breadcrumb-desktop__dropdown-trigger:last-of-type {
+  > a.menu-bar__breadcrumb-desktop__dropdown-trigger:last-of-type,
+header .menu-bar__breadcrumb-desktop
+  > .relative:last-of-type
+  .menu-bar__breadcrumb-desktop__dropdown-trigger {
   font-family: var(--stzh-font-family-heavy) !important;
   font-weight: var(--stzh-font-weight-heavy) !important;
   font-style: var(--stzh-font-style-heavy);
-}
-
-@supports selector(:has(*)) {
-  /* Listing pages: last crumb is the process .relative (no link after it) */
-  header .menu-bar__breadcrumb-desktop
-    > .relative:not(:has(~ a))
-    .menu-bar__breadcrumb-desktop__dropdown-trigger {
-    font-family: var(--stzh-font-family-heavy) !important;
-    font-weight: var(--stzh-font-weight-heavy) !important;
-    font-style: var(--stzh-font-style-heavy);
-  }
-
-  /* Do not keep a mid-trail link heavy when a process block follows */
-  header .menu-bar__breadcrumb-desktop
-    > a.menu-bar__breadcrumb-desktop__dropdown-wrapper:last-of-type:has(~ .relative),
-  header .menu-bar__breadcrumb-desktop
-    > a.menu-bar__breadcrumb-desktop__dropdown-trigger:last-of-type:has(~ .relative) {
-    font-family: var(--stzh-font-family-medium) !important;
-    font-weight: var(--stzh-font-weight-medium) !important;
-    font-style: var(--stzh-font-style-medium);
-  }
 }
 
 header .menu-bar__breadcrumb-desktop__dropdown-trigger svg,
