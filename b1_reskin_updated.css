@@ -1078,31 +1078,223 @@ li:last-child .dropdown__item .dropdown__button {
 
 
 
-/* ===== BREADCRUMB STYLES ===== */
+/* ===== BREADCRUMB STYLES (stzh-breadcrumb) =====
+ *
+ * Decidim keeps dropdown affordances; visual trail matches
+ * https://designsystem.stadt-zuerich.ch / stadt-zuerich.ch stzh-breadcrumb:
+ * milli + medium, primary70, last crumb heavy, chevron separators, no blue bar.
+ */
+
 header .menu-bar__container {
-  background-color: var(--stzh-color-primary70);
+  height: auto;
+  min-height: 3.5rem;
+  background-color: var(--stzh-color-white);
+  box-shadow: none;
 }
 
-header .menu-bar__breadcrumb-desktop>*, 
-.menu-bar__breadcrumb-mobile__dropdown-trigger, 
-.menu-bar__breadcrumb-mobile__dropdown-trigger a, 
-.menu-bar__breadcrumb-desktop__dropdown-trigger {
-  color: var(--stzh-color-white);
+header .menu-bar {
+  display: flex;
+  align-items: center;
+  min-height: 3.5rem;
+  padding-top: var(--stzh-space-small, 0.75rem);
+  padding-bottom: var(--stzh-space-small, 0.75rem);
+}
+
+/* ---- Desktop trail ---- */
+header .menu-bar__breadcrumb-desktop {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  gap: 0;
+  width: 100%;
+  color: var(--stzh-breadcrumb-color, var(--stzh-color-primary70));
   font-family: var(--stzh-font-family-medium);
   font-weight: var(--stzh-font-weight-medium);
-  transition-duration: var(--stzh-base-transition-animation-speed);
+  font-style: var(--stzh-font-style-medium);
+  font-size: var(--stzh-font-milli-font-size);
+  line-height: var(--stzh-font-milli-text-line-height);
+  letter-spacing: var(--stzh-font-curve---text-letter-spacing);
+  white-space: nowrap;
 }
 
-header .menu-bar__breadcrumb-mobile__dropdown-wrapper:hover,
+header .menu-bar__breadcrumb-desktop > * {
+  color: inherit;
+  font: inherit;
+}
+
+header .menu-bar__breadcrumb-desktop__dropdown-wrapper,
+header .menu-bar__breadcrumb-desktop > a.menu-bar__breadcrumb-desktop__dropdown-trigger,
+header .menu-bar__breadcrumb-desktop > a.menu-bar__breadcrumb-desktop__dropdown-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--stzh-space-xxsmall, 0.25rem);
+  border-radius: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+/* Chevron separators between crumbs (skip dropdown panels) */
+header .menu-bar__breadcrumb-desktop
+  > .menu-bar__breadcrumb-desktop__dropdown-wrapper
+  + .menu-bar__breadcrumb-desktop__dropdown-wrapper::before,
+header .menu-bar__breadcrumb-desktop
+  > .menu-bar__breadcrumb-desktop__dropdown-wrapper
+  + a.menu-bar__breadcrumb-desktop__dropdown-trigger::before,
+header .menu-bar__breadcrumb-desktop
+  > .menu-bar__breadcrumb-desktop__dropdown-wrapper
+  + a.menu-bar__breadcrumb-desktop__dropdown-wrapper::before,
+header .menu-bar__breadcrumb-desktop
+  > a.menu-bar__breadcrumb-desktop__dropdown-wrapper
+  + .menu-bar__breadcrumb-desktop__dropdown-wrapper::before,
+header .menu-bar__breadcrumb-desktop
+  > a.menu-bar__breadcrumb-desktop__dropdown-trigger
+  + .menu-bar__breadcrumb-desktop__dropdown-wrapper::before,
+header .menu-bar__breadcrumb-desktop
+  > a.menu-bar__breadcrumb-desktop__dropdown-wrapper
+  + a.menu-bar__breadcrumb-desktop__dropdown-wrapper::before,
+header .menu-bar__breadcrumb-desktop
+  > a.menu-bar__breadcrumb-desktop__dropdown-trigger
+  + a.menu-bar__breadcrumb-desktop__dropdown-wrapper::before {
+  content: "›";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--stzh-icon-size-small, 1.25rem);
+  margin-right: var(--stzh-space-xxsmall, 0.25rem);
+  color: inherit;
+  font-size: var(--stzh-font-centi-font-size);
+  line-height: 1;
+  pointer-events: none;
+}
+
+header .menu-bar__breadcrumb-desktop__dropdown-trigger {
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--stzh-space-xxsmall, 0.25rem);
+  padding: 0;
+  border-radius: 0;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+  transition: color var(--stzh-base-transition-animation-speed);
+  cursor: pointer;
+}
+
+header .menu-bar__breadcrumb-desktop__dropdown-trigger:hover,
+header .menu-bar__breadcrumb-desktop a.menu-bar__breadcrumb-desktop__dropdown-wrapper:hover {
+  color: var(--stzh-color-primary90);
+  text-decoration: none;
+  background-color: transparent;
+  backdrop-filter: none;
+}
+
 header .menu-bar__breadcrumb-desktop__dropdown-wrapper:hover {
   backdrop-filter: none;
-  background-color: var(--stzh-link-hover-color);
+  background-color: transparent;
 }
 
-header .menu-bar__breadcrumb-mobile__dropdown-wrapper:hover,
-header .menu-bar__breadcrumb-desktop__dropdown-wrapper:hover .menu-bar__breadcrumb-desktop__dropdown-trigger,
-header .menu-bar__breadcrumb-desktop__dropdown-wrapper:hover .menu-bar__breadcrumb-desktop__dropdown-trigger.a {
-  color: var(--stzh-color-white);
+header .menu-bar__breadcrumb-desktop__dropdown-wrapper:hover
+  .menu-bar__breadcrumb-desktop__dropdown-trigger {
+  color: var(--stzh-color-primary90);
+}
+
+/* Last visible crumb = heavy (stzh-breadcrumb__item.is-last) */
+header .menu-bar__breadcrumb-desktop
+  > a.menu-bar__breadcrumb-desktop__dropdown-wrapper:last-of-type,
+header .menu-bar__breadcrumb-desktop
+  > a.menu-bar__breadcrumb-desktop__dropdown-trigger:last-of-type,
+header .menu-bar__breadcrumb-desktop
+  > .menu-bar__breadcrumb-desktop__dropdown-wrapper:last-of-type
+  > a.menu-bar__breadcrumb-desktop__dropdown-trigger {
+  font-family: var(--stzh-font-family-heavy);
+  font-weight: var(--stzh-font-weight-heavy);
+  font-style: var(--stzh-font-style-heavy);
+}
+
+header .menu-bar__breadcrumb-desktop__dropdown-trigger svg,
+header .menu-bar__breadcrumb-desktop [data-target*="dropdown"] > svg {
+  width: var(--stzh-icon-size-small, 1.25rem);
+  height: var(--stzh-icon-size-small, 1.25rem);
+  fill: currentColor;
+  color: inherit;
+}
+
+header .menu-bar__breadcrumb-desktop [data-target*="dropdown"] {
+  display: inline-flex;
+  width: auto;
+  align-items: center;
+  gap: 0;
+  padding: 0;
+  color: inherit;
+}
+
+/* Kill Decidim hover hit-area pseudo on triggers */
+header .menu-bar__breadcrumb-desktop__dropdown-trigger:hover::before {
+  content: none;
+  display: none;
+}
+
+/* ---- Mobile trail ---- */
+header .menu-bar__breadcrumb-mobile {
+  color: var(--stzh-breadcrumb-color, var(--stzh-color-primary70));
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-size: var(--stzh-font-milli-font-size);
+  line-height: var(--stzh-font-milli-text-line-height);
+}
+
+header .menu-bar__breadcrumb-mobile__dropdown-trigger,
+header .menu-bar__breadcrumb-mobile__dropdown-trigger a {
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+}
+
+header .menu-bar__breadcrumb-mobile__dropdown-trigger a:hover {
+  color: var(--stzh-color-primary90);
+}
+
+header .menu-bar__breadcrumb-mobile__dropdown-trigger [aria-current="page"] {
+  font-family: var(--stzh-font-family-heavy);
+  font-weight: var(--stzh-font-weight-heavy);
+}
+
+/* Replace "/" with STZH-style chevron */
+header .menu-bar__breadcrumb-mobile__dropdown-trigger > span > span:not(.cursor-pointer) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--stzh-icon-size-small, 1.25rem);
+  margin-inline: var(--stzh-space-xxsmall, 0.25rem);
+  font-size: 0;
+  color: inherit;
+  vertical-align: middle;
+}
+
+header .menu-bar__breadcrumb-mobile__dropdown-trigger
+  > span
+  > span:not(.cursor-pointer)::before {
+  content: "›";
+  font-size: var(--stzh-font-centi-font-size);
+  line-height: 1;
+}
+
+header .menu-bar__breadcrumb-mobile__dropdown-wrapper:hover {
+  backdrop-filter: none;
+  background-color: transparent;
+}
+
+header .menu-bar__breadcrumb-mobile button svg {
+  width: var(--stzh-icon-size-small, 1.25rem);
+  height: var(--stzh-icon-size-small, 1.25rem);
+  fill: currentColor;
+  color: inherit;
 }
 
 /*Enlarge dropdown menu width*/
