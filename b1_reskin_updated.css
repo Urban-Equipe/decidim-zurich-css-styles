@@ -509,7 +509,7 @@ header #sticky-header-container {
 
 /**
  * Main-bar / metabar link + search chrome lives in c10_bannertest.css
- * (STZH stzh-header__metabar). Keep B1 free of competing main-bar item rules.
+ * (STZH stzh-header metabar). Keep B1 free of competing main-bar item rules.
  */
 
 header #sticky-header-container {
@@ -1141,7 +1141,7 @@ header .menu-bar__breadcrumb-desktop > a.menu-bar__breadcrumb-desktop__dropdown-
 }
 
 /*
- * Decidim inserts literal <span>/</span> between crumbs.
+ * Decidim inserts literal slash spans between crumbs.
  * Match stzh-breadcrumb separators: icon-width slot + ">" glyph.
  */
 header .menu-bar__breadcrumb-desktop > span {
@@ -1216,8 +1216,8 @@ header .menu-bar__breadcrumb-desktop__dropdown-wrapper:hover
 }
 
 /*
- * Last visible crumb = heavy (stzh-breadcrumb__item.is-last).
- * Detail pages end on an <a>; listing pages often end on .relative
+ * Last visible crumb = heavy (stzh-breadcrumb item is-last).
+ * Detail pages end on a link; listing pages often end on .relative
  * (process dropdown) followed by a trailing slash — cover both.
  */
 header .menu-bar__breadcrumb-desktop

@@ -1,14 +1,11 @@
 /**
  * c10_bannertest.css
  *
- * 1) STZH `stzh-header__logobar` as `#main-bar.main-bar__container::before`
- * 2) STZH `stzh-header__metabar` restyle of Decidim `.main-bar` (nav + search)
+ * 1) STZH logobar on main-bar container ::before
+ * 2) STZH metabar restyle of Decidim main-bar (nav + search)
  *
- * Load after a1_variables.css and b1_reskin_updated.css (B1 defers main-bar
- * chrome here). Decorative logobar + clickable home hit target on
- * `.main-bar__logo-desktop a`.
- *
- * Logo: https://www.stadt-zuerich.ch/content/dam/corporate-design/de/logos/stadt-zuerich.svg
+ * Load after a1_variables.css and b1_reskin_updated.css.
+ * Logo SVG: stadt-zuerich.ch corporate-design logos/stadt-zuerich.svg
  */
 
 :root {
@@ -213,8 +210,8 @@ header .main-bar__logo-desktop {
 }
 
 /**
- * Stretch the existing home `<a>` over the white logo plate in the logobar.
- * Containing block is `.main-bar__logo` (absolute at top-left of `.main-bar`).
+ * Stretch the existing home link over the white logo plate in the logobar.
+ * Containing block is .main-bar__logo (absolute at top-left of .main-bar).
  */
 header .main-bar__logo-desktop a {
   position: absolute;
