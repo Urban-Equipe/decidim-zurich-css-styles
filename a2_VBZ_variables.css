@@ -10,7 +10,7 @@
  * - Fonts from design system (no local font overrides)
  *
  * USAGE: Load AFTER a1_variables.css. Enable only for VBZ-scoped processes.
- * Sets `--stzh-mitwirken-logobar-logo-url` so C10’s logobar shows the VBZ mark.
+ * Sets `--stzh-mitwirken-logobar-logo-url` so B1’s logobar shows the VBZ mark.
  */
 
 /* ==========================================================================
@@ -103,7 +103,7 @@ body {
   /* VBZ header is all-white (stadt-zuerich.ch/vbz), not STZH primary70 strip */
   --stzh-header-logobar-background-color: var(--stzh-color-white, #fff);
   --stzh-mitwirken-logobar-bg: var(--stzh-color-white, #fff);
-  /* VBZ logo in the C10 STZH logobar (::before), not the old main-bar slot */
+  /* VBZ logo in the B1 STZH logobar (::before), not the old main-bar slot */
   --stzh-mitwirken-logobar-logo-url: url("https://www.stadt-zuerich.ch/content/dam/corporate-design/de/logos/vbz.svg");
   --stzh-tooltip-color: var(--stzh-color-secondary70);
   --stzh-tooltip-background-color: var(--stzh-color-secondary10);
