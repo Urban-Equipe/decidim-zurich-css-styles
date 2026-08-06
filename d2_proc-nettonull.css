@@ -9,7 +9,8 @@
  * --c-00: #1d1d1b; --c-10: #dfecea; --c-20: #bee1da
  * --c-30: #009f9d ≈ petrol50; --c-40: #007c78 ≈ petrol60; --c-50: #003c40 ≈ petrol80
  *
- * USAGE: Load after a1_variables.css. Enable only for Netto-Null process.
+ * USAGE: Load after a1 and b1 (B1 includes logobar/metabar). Enable only for Netto-Null process.
+ * Sets `--stzh-mitwirken-logobar-logo-url` so B1’s logobar shows the Netto-Null mark.
  */
 
  body {
@@ -88,7 +89,10 @@
   --stzh-link-color: var(--stzh-color-secondary50);
   --stzh-link-hover-color: var(--stzh-color-primary50);
   --stzh-link-secondary-color: var(--stzh-color-secondary80);
-  --stzh-header-logobar-background-color: transparent;
+  /* Logobar strip: Diluno petrol60 (#007c78 / c-40), logo on B1 white plate */
+  --stzh-header-logobar-background-color: var(--stzh-color-primary60);
+  --stzh-mitwirken-logobar-bg: var(--stzh-color-primary60);
+  --stzh-mitwirken-logobar-logo-url: url("https://mitwirken.stadt-zuerich.ch/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbEJ3IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--4cf2fc2a891f55e648f419de81cec989d0465330/logoDEV_nettonull.png");
   --stzh-tooltip-color: var(--stzh-color-secondary80);
   --stzh-tooltip-background-color: var(--stzh-color-secondary10);
   --stzh-tooltip-link-color: var(--stzh-color-secondary60);
@@ -100,13 +104,20 @@
   --secondary-rgb: var(--stzh-color-secondary60-rgb);
 }
 
-/*Replace logo with Netto-Null color*/
+/*
+ * Do not paint the Netto-Null logo onto `.main-bar__logo-desktop` — that was
+ * the old metabar slot. B1 draws the logobar from `--stzh-mitwirken-logobar-logo-url`
+ * (set above). Keep the Decidim img reset; hit target stays the stretched home link.
+ */
 header .main-bar__logo-desktop {
-  background: url(https://mitwirken.stadt-zuerich.ch/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbEJ3IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--4cf2fc2a891f55e648f419de81cec989d0465330/logoDEV_nettonull.png) no-repeat;
-  width: 0;
-  background-size: auto 79px;
-  height: 79px;
-  padding-left: 19rem;
+  background: none;
+  width: auto;
+  height: auto;
+  padding-left: 0;
+}
+
+header .main-bar__logo-mobile a {
+  display: none;
 }
 
 .participatory-space__hero::before, section:has(.participatory-space__hero) {
