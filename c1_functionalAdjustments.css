@@ -79,7 +79,7 @@ label.form__wrapper-checkbox-label:has(input#public_participation)
 }
 
 /* Hide participation avatars in steps */
-.participatory-space__metadata-link-endorsers {
+.participatory-space__metadata-link-likes {
   display: none;
 }
 
