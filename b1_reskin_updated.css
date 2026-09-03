@@ -10,7 +10,8 @@
  * - Fixed orphan .success selector, --stzh-font-deci-centi-line-height, hardcoded values
  *
  * USAGE: Load AFTER a1_variables.css (which imports stzh-components.css).
- * Includes STZH logobar + metabar (merged from former c10_bannertest.css).
+ * Includes STZH logobar + metabar (merged from former c10_bannertest.css)
+ * and form/survey styling (merged from former c3_forms.css).
  */
 
 /* ==========================================================================
@@ -3713,4 +3714,525 @@ path.decidimGeo__marker.leaflet-interactive {
     white-space: nowrap;
     margin-top: var(--stzh-space-xxsmall);
   }
+}
+
+
+/* ==========================================================================
+   Forms and surveys (formerly c3_forms.css)
+   Aligned with STZH eGov form, fieldset, and input.
+   Decidim 0.31 uses response-questionnaire__*; answer-questionnaire__* is kept
+   for older markup.
+   ========================================================================== */
+
+/*–––––– Forms styling–––––*/
+
+/* ===== FIELDSET (STZH Design System) ===== */
+fieldset,
+.form__wrapper-block,
+.fieldset {
+  border: 0.0625rem solid var(--stzh-color-grey70);
+  border-radius: 0;
+  padding: var(--stzh-space-medium);
+  margin: 0 0 var(--stzh-space-large);
+  min-inline-size: 0;
+}
+
+fieldset legend,
+.fieldset legend {
+  font-family: var(--stzh-font-family-heavy);
+  font-weight: var(--stzh-font-weight-heavy);
+  font-style: var(--stzh-font-style-heavy);
+  font-size: var(--stzh-font-deca-font-size);
+  line-height: var(--stzh-font-deca-text-line-height);
+  color: var(--stzh-heading-color);
+  padding: 0;
+  margin: 0 0 var(--stzh-space-large);
+  display: block;
+}
+
+/* Description / help text below legend */
+fieldset .help-text,
+fieldset .form-error,
+.form__wrapper-block .help-text,
+.form__wrapper-block > .form-error {
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-size: var(--stzh-font-nano-font-size);
+  line-height: var(--stzh-font-nano-text-line-height);
+  color: var(--stzh-text-info-color);
+  margin-bottom: var(--stzh-space-small);
+  min-height: var(--stzh-fieldset-description-min-height, 1.375rem);
+}
+
+/* Nested form wrappers inside fieldset – reduce top margin */
+fieldset .form__wrapper,
+fieldset .form__wrapper-block,
+.form__wrapper-block .form__wrapper {
+  margin-top: var(--stzh-space-medium);
+}
+
+fieldset .form__wrapper:first-of-type,
+fieldset .form__wrapper-block:first-of-type {
+  margin-top: var(--stzh-space-small);
+}
+
+/*Nullify exclusive classes*/
+.form__wrapper label:not(.form__wrapper-checkbox-label), .form__wrapper-block label:not(.form__wrapper-checkbox-label) {
+font-size: inherit;
+line-height: inherit;
+font-weight: inherit;
+}
+
+/* Style texts*/
+.form__wrapper-checkbox-label {
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-style: var(--stzh-font-style-medium);
+  color: var(--stzh-base-color);
+}
+
+/* ===== SURVEY QUESTIONS (STZH input / radiogroup / fieldset) ===== */
+
+/* Stack questions with the eGov form field rhythm */
+.form.response-questionnaire .response.question,
+.form.answer-questionnaire .answer.question {
+  margin: 0 0 var(--stzh-space-xlarge);
+}
+
+/* Section titles (title-and-description questions) = fieldset legend (deca / 24px) */
+.response-questionnaire__step-heading h3,
+.response-questionnaire__step-heading .h3,
+.answer-questionnaire__step-heading h3,
+.answer-questionnaire__step-heading .h3 {
+  font-family: var(--stzh-font-family-heavy);
+  font-weight: var(--stzh-font-weight-heavy);
+  font-style: var(--stzh-font-style-heavy);
+  font-size: var(--stzh-font-deca-font-size);
+  line-height: var(--stzh-font-deca-text-line-height);
+  color: var(--stzh-heading-color);
+  margin: 0 0 var(--stzh-space-large);
+}
+
+/* Field titles = stzh-input__label (micro / 14px heavy, heading colour) */
+label.response-questionnaire__question-label,
+label.answer-questionnaire__question-label,
+.tos-agreement,
+label[for],
+.upload-modal__files-container.upload-container-for-documents.with-title label,
+.formbuilder-textarea-label,
+.formbuilder-text-label,
+.formbuilder-select-label {
+  display: block;
+  font-family: var(--stzh-font-family-heavy);
+  font-weight: var(--stzh-font-weight-heavy);
+  font-style: var(--stzh-font-style-heavy);
+  font-size: var(--stzh-font-micro-font-size);
+  line-height: var(--stzh-font-micro-text-line-height);
+  color: var(--stzh-heading-color);
+  margin: 0 0 var(--stzh-space-small);
+}
+
+/* Descriptions = STZH caption / input description */
+.response-questionnaire__question-description,
+.answer-questionnaire__question-description,
+.response-questionnaire__question > .help-text,
+.answer-questionnaire__question > .help-text,
+.response-questionnaire__question .rich-text-display,
+.answer-questionnaire__question .rich-text-display,
+.response-questionnaire__step-heading .rich-text-display,
+.answer-questionnaire__step-heading .rich-text-display,
+.response-questionnaire__step-heading > div,
+.answer-questionnaire__step-heading > div {
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-style: var(--stzh-font-style-medium);
+  font-size: var(--stzh-font-curve-caption-default-font-size, var(--stzh-font-nano-font-size));
+  line-height: var(--stzh-font-curve-caption-default-text-line-height, var(--stzh-font-nano-text-line-height));
+  color: var(--stzh-text-info-color);
+  margin: 0 0 var(--stzh-space-small);
+}
+
+@media screen and (min-width: 900px) {
+  .response-questionnaire__question-description,
+  .answer-questionnaire__question-description,
+  .response-questionnaire__question > .help-text,
+  .answer-questionnaire__question > .help-text,
+  .response-questionnaire__question .rich-text-display,
+  .answer-questionnaire__question .rich-text-display,
+  .response-questionnaire__step-heading .rich-text-display,
+  .answer-questionnaire__step-heading .rich-text-display,
+  .response-questionnaire__step-heading > div,
+  .answer-questionnaire__step-heading > div {
+    font-size: var(--stzh-font-curve-caption-medium-font-size, var(--stzh-font-micro-font-size));
+    line-height: var(--stzh-font-curve-caption-medium-text-line-height, var(--stzh-font-micro-text-line-height));
+  }
+}
+
+/* Choice / matrix / TOS copy = stzh-radio__label (milli / 16px medium) */
+.response-questionnaire__multiple-option,
+.response-questionnaire__single-option,
+.answer-questionnaire__multiple-option,
+.answer-questionnaire__single-option {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stzh-space-medium);
+}
+
+.response-questionnaire__multiple-option label,
+.response-questionnaire__single-option label,
+.answer-questionnaire__multiple-option label,
+.answer-questionnaire__single-option label,
+.js-collection-input label {
+  display: flex;
+  align-items: center;
+  gap: var(--stzh-space-small);
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-style: var(--stzh-font-style-medium);
+  font-size: var(--stzh-font-milli-font-size);
+  line-height: var(--stzh-font-milli-text-line-height);
+  letter-spacing: var(--stzh-font-curve---text-letter-spacing);
+  color: var(--stzh-base-color);
+  margin: 0;
+}
+
+/* STZH radio / checkbox marks (24px, 2px black stroke) */
+.form.response-questionnaire input[type="radio"]:not(.reset-defaults),
+.form.response-questionnaire input[type="checkbox"]:not(.reset-defaults),
+.form.answer-questionnaire input[type="radio"]:not(.reset-defaults),
+.form.answer-questionnaire input[type="checkbox"]:not(.reset-defaults),
+.form.response-questionnaire label > input[type="radio"]:not(.reset-defaults),
+.form.response-questionnaire label > input[type="checkbox"]:not(.reset-defaults),
+.form.answer-questionnaire label > input[type="radio"]:not(.reset-defaults),
+.form.answer-questionnaire label > input[type="checkbox"]:not(.reset-defaults) {
+  appearance: none;
+  -webkit-appearance: none;
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0.125rem solid var(--stzh-color-black);
+  background-color: var(--stzh-color-white);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 1.25rem 1.25rem;
+  color: var(--stzh-heading-color);
+  vertical-align: middle;
+  transform: none;
+  cursor: pointer;
+  transition-property: border-color, background-color, background-image, box-shadow;
+  transition-duration: var(--stzh-base-transition-animation-speed);
+}
+
+.form.response-questionnaire input[type="radio"]:not(.reset-defaults),
+.form.answer-questionnaire input[type="radio"]:not(.reset-defaults) {
+  border-radius: 50%;
+}
+
+.form.response-questionnaire input[type="checkbox"]:not(.reset-defaults),
+.form.answer-questionnaire input[type="checkbox"]:not(.reset-defaults) {
+  border-radius: 0;
+}
+
+.form.response-questionnaire input[type="radio"]:not(.reset-defaults):checked,
+.form.answer-questionnaire input[type="radio"]:not(.reset-defaults):checked {
+  background-image: radial-gradient(
+    circle at center,
+    var(--stzh-heading-color) 0.5rem,
+    transparent 0.51rem
+  );
+}
+
+.form.response-questionnaire input[type="checkbox"]:not(.reset-defaults):checked,
+.form.answer-questionnaire input[type="checkbox"]:not(.reset-defaults):checked {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='currentColor' d='M10 15.172l9.192-9.193 1.415 1.414L10 18 3.636 11.636l1.414-1.414z'/%3E%3C/svg%3E");
+}
+
+.form.response-questionnaire input[type="radio"]:not(.reset-defaults):hover:not(:disabled),
+.form.response-questionnaire input[type="checkbox"]:not(.reset-defaults):hover:not(:disabled),
+.form.answer-questionnaire input[type="radio"]:not(.reset-defaults):hover:not(:disabled),
+.form.answer-questionnaire input[type="checkbox"]:not(.reset-defaults):hover:not(:disabled) {
+  border-color: var(--stzh-heading-color);
+}
+
+.form.response-questionnaire input[type="radio"]:not(.reset-defaults):focus-visible,
+.form.response-questionnaire input[type="checkbox"]:not(.reset-defaults):focus-visible,
+.form.answer-questionnaire input[type="radio"]:not(.reset-defaults):focus-visible,
+.form.answer-questionnaire input[type="checkbox"]:not(.reset-defaults):focus-visible {
+  outline: 0.125rem solid var(--stzh-color-secondary50);
+  outline-offset: 0.125rem;
+}
+
+.form.response-questionnaire input[type="radio"]:not(.reset-defaults):disabled,
+.form.response-questionnaire input[type="checkbox"]:not(.reset-defaults):disabled,
+.form.answer-questionnaire input[type="radio"]:not(.reset-defaults):disabled,
+.form.answer-questionnaire input[type="checkbox"]:not(.reset-defaults):disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  border-color: var(--stzh-color-grey70);
+}
+
+.response-questionnaire__sorting,
+.answer-questionnaire__sorting,
+.response-questionnaire__multiple-matrix thead td,
+.response-questionnaire__multiple-matrix th,
+.response-questionnaire__multiple-matrix td,
+.response-questionnaire__single-matrix thead td,
+.response-questionnaire__single-matrix th,
+.response-questionnaire__single-matrix td,
+.answer-questionnaire__multiple-matrix thead td,
+.answer-questionnaire__multiple-matrix th,
+.answer-questionnaire__multiple-matrix td,
+.answer-questionnaire__single-matrix thead td,
+.answer-questionnaire__single-matrix th,
+.answer-questionnaire__single-matrix td,
+.response-questionnaire__tos,
+.answer-questionnaire__tos {
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-style: var(--stzh-font-style-medium);
+  font-size: var(--stzh-font-milli-font-size);
+  line-height: var(--stzh-font-milli-text-line-height);
+  letter-spacing: var(--stzh-font-curve---text-letter-spacing);
+  color: var(--stzh-base-color);
+}
+
+.form.response-questionnaire .js-collection-input:has(input[type="text"]),
+.form.answer-questionnaire .js-collection-input:has(input[type="text"]) {
+  display: flex;
+  align-items: center;
+  gap: var(--stzh-space-medium);
+}
+
+/*Apply STZH tag*/
+.response-questionnaire__step-counter,
+.answer-questionnaire__step-counter {
+  display: inline-block;
+  font-family: var(--stzh-font-family-heavy);
+  font-weight: var(--stzh-font-weight-heavy);
+  font-style: var(--stzh-font-style-heavy);
+  font-size: var(--stzh-font-micro-font-size);
+  line-height: var(--stzh-font-micro-text-line-height);
+  color: var(--stzh-color-white);
+  background-color: var(--stzh-color-secondary60);
+  padding: var(--stzh-space-xsmall);
+  margin: 0 0 var(--stzh-space-large);
+}
+
+
+/* Buttons*/
+.survey-section-buttons.layout-aside__ctas-buttons {
+  justify-content: flex-end;
+  gap: var(--stzh-space-medium);
+}
+
+.survey-section-buttons > button:first-child:not(:only-child) {
+  margin-right: auto;
+}
+
+.form.response-questionnaire .survey-section-buttons > .button.button__transparent-secondary:not([disabled]):hover svg,
+.form.response-questionnaire .survey-section-buttons > .button.button__transparent-secondary:not([disabled]):hover use,
+.form.response-questionnaire .survey-section-buttons > .button.button__transparent-secondary:not([disabled]).is-hover svg,
+.form.response-questionnaire .survey-section-buttons > .button.button__transparent-secondary:not([disabled]).is-hover use,
+.form.answer-questionnaire .survey-section-buttons > .button.button__transparent-secondary:not([disabled]):hover svg,
+.form.answer-questionnaire .survey-section-buttons > .button.button__transparent-secondary:not([disabled]):hover use,
+.form.answer-questionnaire .survey-section-buttons > .button.button__transparent-secondary:not([disabled]).is-hover svg,
+.form.answer-questionnaire .survey-section-buttons > .button.button__transparent-secondary:not([disabled]).is-hover use {
+  fill: currentColor;
+  color: inherit;
+}
+
+.survey-section-buttons>button:last-child, .survey-section-buttons>button:first-child {
+  font-weight: var(--stzh-font-weight-heavy);
+}
+
+@media (min-width: 768px){
+  .survey-section-buttons>button:last-child, .survey-section-buttons>button:first-child {
+  padding: var(--stzh-space-medium);
+  font-size: var(--stzh-font-centi-font-size);
+  line-height: var(--stzh-font-centi-text-line-height);
+}
+}
+
+/*Number (legacy 0.29 markup only; not part of the STZH eGov form) */
+.answer-questionnaire__question-label::before {
+  content: attr(data-answer-idx);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  background-color: var(--stzh-link-color);
+  border: 1px solid var(--stzh-link-color);
+  color: var(--stzh-color-white);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  margin-right: 0.5rem;
+}
+
+/*Spacings*/
+.row.column.answer.question,
+label[for="questionnaire_email"],
+label[for="questionnaire_name"]{
+  padding-top: var(--stzh-space-large);
+}
+
+.questionnaire-question {
+  margin-top: var(--stzh-space-medium);
+}
+
+.form.response-questionnaire .questionnaire-question,
+.form.answer-questionnaire .questionnaire-question {
+  margin-top: 0;
+}
+
+.tos-agreement,
+.response-questionnaire__tos,
+.answer-questionnaire__tos,
+label[for="questionnaire_tos_agreement"] {
+  padding-top: var(--stzh-space-xxlarge);
+}
+
+.response-questionnaire__tos label,
+.answer-questionnaire__tos label {
+  display: flex;
+  align-items: center;
+  gap: var(--stzh-space-small);
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-style: var(--stzh-font-style-medium);
+  font-size: var(--stzh-font-milli-font-size);
+  line-height: var(--stzh-font-milli-text-line-height);
+  color: var(--stzh-base-color);
+  margin: 0;
+}
+
+/*Text-fields*/
+.form-defaults :is(
+  input[type="date"],
+  input[type="datetime-local"],
+  input[type="email"],
+  input[type="month"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="text"],
+  input[type="time"],
+  input[type="url"],
+  input[type="week"],
+  select,
+  textarea
+):not(.reset-defaults) {
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-style: var(--stzh-font-style-medium);
+  font-size: var(--stzh-font-milli-font-size);
+  line-height: var(--stzh-font-milli-text-line-height);
+  letter-spacing: var(--stzh-font-curve---text-letter-spacing);
+  border: 0.125rem solid var(--stzh-color-grey70);
+  transition-property: color, border-color, background-color;
+  transition-duration: var(--stzh-base-transition-animation-speed);
+  border-radius: 0;
+  padding-top: var(--stzh-space-xsmall);
+  padding-bottom: var(--stzh-space-xsmall);
+  padding-left: var(--stzh-space-medium);
+  padding-right: var(--stzh-space-medium);
+  margin: 0;
+  color: var(--stzh-color-secondary60);
+  background-color: var(--stzh-color-white);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+/* Safari: hide number input spin buttons */
+.form-defaults input[type="number"]:not(.reset-defaults)::-webkit-inner-spin-button,
+.form-defaults input[type="number"]:not(.reset-defaults)::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.form-defaults input[type="number"]:not(.reset-defaults) {
+  -moz-appearance: textfield;
+}
+
+/* Safari: remove search input default styling */
+.form-defaults input[type="search"]:not(.reset-defaults)::-webkit-search-decoration,
+.form-defaults input[type="search"]:not(.reset-defaults)::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+/*Text-fields focus*/
+.form-defaults
+  :is(
+    input[type="date"],
+    input[type="datetime-local"],
+    input[type="email"],
+    input[type="month"],
+    input[type="number"],
+    input[type="password"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="text"],
+    input[type="time"],
+    input[type="url"],
+    input[type="week"],
+    select,
+    textarea
+  ):not(.reset-defaults):focus {
+  color: var(--stzh-base-color);
+  border-color: var(--stzh-color-secondary50);
+  background-color: var(--stzh-color-secondary20);
+  outline-width: 0;
+  outline-color: 0;
+}
+
+/*Text-fields invalid input*/
+.form-defaults
+  :is(
+    input[type="date"],
+    input[type="datetime-local"],
+    input[type="email"],
+    input[type="month"],
+    input[type="number"],
+    input[type="password"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="text"],
+    input[type="time"],
+    input[type="url"],
+    input[type="week"],
+    select,
+    textarea
+  ):not(.reset-defaults).is-invalid-input:not(:focus) {
+  color: var(--stzh-color-error60);
+  border-color: var(--stzh-color-error60);
+  background-color: var(--stzh-color-white);
+  outline-width: 0;
+  outline-color: 0;
+}
+
+/* Password SVG*/
+.input-group__password button {
+  width: auto;
+  top: 1rem;
+  color: var(--stzh-link-color);
+}
+
+
+.form-error.is-visible, .is-invalid-input, .is-invalid-label, .form__wrapper label:not(.form__wrapper-checkbox-label).is-invalid-label, .form__wrapper-block label:not(.form__wrapper-checkbox-label).is-invalid-label {
+  color: var(--stzh-color-error60);
+}
+
+.form-error {
+  font-family: var(--stzh-font-family-regular);
+  font-weight: var(--stzh-font-weight-regular);
+  font-style: var(--stzh-font-style-regular);
 }

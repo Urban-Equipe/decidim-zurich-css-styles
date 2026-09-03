@@ -96,7 +96,7 @@ The file naming convention follows a hierarchy:
 - **Class C** – Functional and design adjustments
 - **Class D** – Process-specific customizations
 
-Each file uses its class prefix (lowercase letter), a number, and a descriptive name (e.g. `a1_variables.css`, `c3_forms.css`).
+Each file uses its class prefix (lowercase letter), a number, and a descriptive name (e.g. `a1_variables.css`, `c1_functionalAdjustments.css`).
 
 ## File organization
 
@@ -115,9 +115,9 @@ Global application of the design system across the platform.
 
 | File | Box Name | Description |
 |------|----------|-------------|
-| `b1_reskin_updated.css` | B1 | Main reskin: typography, buttons, cards, navigation, layouts |
+| `b1_reskin_updated.css` | B1 | Main reskin: typography, buttons, cards, navigation, layouts, forms |
 
-**Note:** By naming, B2 would be VBZ reskin; VBZ-specific visual tweaks live in **`c2_VBZ_adjustments.css`** (Class C).
+**Note:** By naming, B2 would be VBZ reskin; VBZ-specific visual tweaks live in **`c2_VBZ_adjustments.css`** (Class C). Form styling previously lived in `c3_forms.css` and is now part of B1.
 
 ### Class C – Functional and design adjustments
 
@@ -125,7 +125,6 @@ Global application of the design system across the platform.
 |------|----------|-------------|
 | `c1_functionalAdjustments.css` | C1 | Functional tweaks (hide elements, layout fixes) independent of the reskin |
 | `c2_VBZ_adjustments.css` | C2 | VBZ-specific design adjustments |
-| `c3_forms.css` | C3 | Form styling |
 | `c4_mapSize.css` | C4 | Map size and layout |
 | `c5_hideGeo.css` | C5 | Hide geo-related UI |
 | `c6_hideProcesses.css` | C6 | Hide process-related UI |
