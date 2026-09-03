@@ -370,3 +370,12 @@ div [data-endorsements-count] {
 li:has(a[href*="/processes/pilotquartier/f/707/posts"]) {
   display: none;
 }
+
+/* Budgets index (/f/.../budgets): hide "n Budget(s)" heading and sort chips.
+   Projects list (/f/.../budgets/:id/projects) uses controller-name="projects"
+   and keeps its own Zufällige / Höchste Kosten / Niedrigste Kosten chips. */
+html[data-rails-controller-name="budgets"] #budgets > h2.decorator,
+html[data-rails-controller-name="budgets"] #dropdown-trigger-order,
+html[data-rails-controller-name="budgets"] #dropdown-menu-order {
+  display: none;
+}
