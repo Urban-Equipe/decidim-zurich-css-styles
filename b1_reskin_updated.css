@@ -350,9 +350,10 @@ a:hover{
   color: var(--stzh-link-hover-color);
 }
 
-/* Default link styling (STZH Design System) for links in body text and forms */
+/* Default link styling (STZH Design System) for links in body text and forms.
+   Exclude .button so form footers (Zurück, etc.) keep button colour, not body-link underline. */
 :is(.editor-content, .content-block__description) :is(a),
-form a {
+form a:not(.button) {
   color: var(--stzh-link-color);
   font-weight: var(--stzh-font-weight-regular);
   transition: color var(--stzh-base-transition-animation-speed);
@@ -365,7 +366,7 @@ form a {
 }
 
 :is(.editor-content, .content-block__description) :is(a):hover,
-form a:hover {
+form a:not(.button):hover {
   color: var(--stzh-link-hover-color);
 }
 
@@ -474,10 +475,40 @@ abbr:where([title]) {
   z-index: 1001;
 }
 
-/* Remove border from Login button parent (form__wrapper / form__wrapper-block around submit) */
+/* Remove fieldset chrome from action rows and checkbox-only blocks
+   (authorizations perimeter/TOS, login submit, survey footers). */
 .form__wrapper:has(button[type="submit"]),
-.form__wrapper-block:has(button[type="submit"]) {
+.form__wrapper-block:has(button[type="submit"]),
+.form__wrapper-block.flex-col-reverse,
+.form__wrapper-block.justify-between,
+.form__wrapper-block:has(.form__wrapper-checkbox-label),
+.form__wrapper-block:has(input[type="checkbox"]),
+fieldset:has(> .form__wrapper-checkbox-label),
+fieldset:has(> label.form__wrapper-checkbox-label) {
   border: none;
+  padding: 0;
+  margin-bottom: var(--stzh-space-medium);
+}
+
+/* Space before a following section (e.g. "Nutzungsbedingungen") */
+.form__wrapper-block + .form__wrapper-block,
+.form__wrapper + .form__wrapper-block,
+.form__wrapper-block + fieldset,
+.form__wrapper-block + label:not(.form__wrapper-checkbox-label),
+.form__wrapper-checkbox-label + label:not(.form__wrapper-checkbox-label),
+label:not(.form__wrapper-checkbox-label):has(+ .form__wrapper-checkbox-label),
+form fieldset + fieldset,
+form legend {
+  margin-top: var(--stzh-space-xlarge);
+}
+
+/* Space before the submit row ("SMS senden") */
+.form__wrapper:has(button[type="submit"]),
+.form__wrapper-block:has(button[type="submit"]),
+.form__wrapper-block.flex-col-reverse,
+.form__wrapper-block.justify-between {
+  margin-top: var(--stzh-space-xlarge);
+  margin-bottom: 0;
 }
 
 /* ===== ADMIN MENU ===== */
@@ -1403,7 +1434,7 @@ header .menu-bar__actions-mobile .button__transparent:hover {
         border: none;
     }
 
-    [aria-label="Legal"] a,
+    /* Legal / social links on the dark bar — restore light grey (beats global `a`). */
     footer .main-footer__down a {
         font-family: var(--stzh-font-family-medium);
         font-weight: var(--stzh-font-weight-medium);
@@ -1413,8 +1444,20 @@ header .menu-bar__actions-mobile .button__transparent:hover {
         text-decoration-line: none;
     }
 
-    [aria-label="Legal"] a:hover,
     footer .main-footer__down a:hover {
+        color: var(--stzh-color-white);
+    }
+
+    /* Language menu opens a white panel — keep heading colour, not footer-text. */
+    footer .main-footer__language a,
+    footer .main-footer__down .main-footer__language a {
+        color: var(--stzh-heading-color);
+        text-decoration-line: none;
+    }
+
+    footer .main-footer__language li:hover a,
+    footer .main-footer__language a:hover,
+    footer .main-footer__down .main-footer__language a:hover {
         color: var(--stzh-color-white);
     }
 
@@ -2527,6 +2570,71 @@ text-decoration-line: none;
   --background-flash: var(--stzh-color-info60);
   align-items: center;
   justify-content: space-between;
+}
+
+/* Page callouts / announcements (e.g. ephemeral auth warning).
+   Keep the callout in the content column so text lines up with the form;
+   extend the colour full-bleed with box-shadow (works for left-aligned layout).
+   Awesome Sass: avoid :is() here. */
+.layout-1col,
+.layout-1col.cols-6,
+.layout-1col.cols-8,
+.layout-1col.cols-10 {
+  overflow: visible;
+}
+
+.callout,
+.flash.flex-col:not([role="alert"]) {
+  --background-flash: var(--stzh-color-warning60);
+  position: relative;
+  z-index: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: auto;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 0;
+  border-left-width: 0;
+  background-color: var(--background-flash);
+  box-shadow: 0 0 0 100vmax var(--background-flash);
+  clip-path: inset(0 -100vmax);
+  color: var(--stzh-color-white);
+  padding-top: var(--stzh-space-large);
+  padding-bottom: var(--stzh-space-large);
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.callout.warning,
+.flash.flex-col.warning {
+  --background-flash: var(--stzh-color-warning60);
+}
+
+.callout.alert,
+.flash.flex-col.alert {
+  --background-flash: var(--stzh-color-error60);
+}
+
+.callout.success,
+.flash.flex-col.success {
+  --background-flash: var(--stzh-color-success60);
+}
+
+.callout.secondary,
+.flash.flex-col.secondary {
+  --background-flash: var(--stzh-color-info60);
+}
+
+.callout .flash__message,
+.callout .flash__title,
+.flash.flex-col:not([role="alert"]) .flash__message,
+.flash.flex-col:not([role="alert"]) .flash__title {
+  color: var(--stzh-color-white);
 }
 
 /* ===== PAGE ACCORDIONS ===== */
@@ -3726,9 +3834,10 @@ path.decidimGeo__marker.leaflet-interactive {
 
 /*–––––– Forms styling–––––*/
 
-/* ===== FIELDSET (STZH Design System) ===== */
+/* ===== FIELDSET (STZH Design System) =====
+   Only real fieldsets get the eGov chrome. Plain .form__wrapper-block
+   wrappers (checkboxes, TOS, action rows) stay borderless. */
 fieldset,
-.form__wrapper-block,
 .fieldset {
   border: 0.0625rem solid var(--stzh-color-grey70);
   border-radius: 0;
@@ -3776,18 +3885,23 @@ fieldset .form__wrapper-block:first-of-type {
   margin-top: var(--stzh-space-small);
 }
 
-/*Nullify exclusive classes*/
-.form__wrapper label:not(.form__wrapper-checkbox-label), .form__wrapper-block label:not(.form__wrapper-checkbox-label) {
-font-size: inherit;
-line-height: inherit;
-font-weight: inherit;
+/* Field titles in regular forms (authorizations, Devise, SMS) = stzh-input__label.
+   This selector must stay more specific than Decidim's .form__wrapper label.
+   Keep margin-top free so section titles (e.g. Nutzungsbedingungen) can space. */
+.form__wrapper label:not(.form__wrapper-checkbox-label),
+.form__wrapper-block label:not(.form__wrapper-checkbox-label) {
+  display: block;
+  font-family: var(--stzh-font-family-heavy);
+  font-weight: var(--stzh-font-weight-heavy);
+  font-style: var(--stzh-font-style-heavy);
+  font-size: var(--stzh-font-micro-font-size);
+  line-height: var(--stzh-font-micro-text-line-height);
+  color: var(--stzh-heading-color);
+  margin-bottom: var(--stzh-space-small);
 }
 
-/* Style texts*/
+/* Checkbox / TOS copy colour (layout + size set with survey option labels below) */
 .form__wrapper-checkbox-label {
-  font-family: var(--stzh-font-family-medium);
-  font-weight: var(--stzh-font-weight-medium);
-  font-style: var(--stzh-font-style-medium);
   color: var(--stzh-base-color);
 }
 
@@ -3813,11 +3927,12 @@ font-weight: inherit;
   margin: 0 0 var(--stzh-space-large);
 }
 
-/* Field titles = stzh-input__label (micro / 14px heavy, heading colour) */
+/* Field titles = stzh-input__label (micro / 14px heavy, heading colour).
+   Exclude checkbox/radio option labels (those use milli medium below). */
 label.response-questionnaire__question-label,
 label.answer-questionnaire__question-label,
 .tos-agreement,
-label[for],
+label[for]:not(.form__wrapper-checkbox-label),
 .upload-modal__files-container.upload-container-for-documents.with-title label,
 .formbuilder-textarea-label,
 .formbuilder-text-label,
@@ -3829,7 +3944,7 @@ label[for],
   font-size: var(--stzh-font-micro-font-size);
   line-height: var(--stzh-font-micro-text-line-height);
   color: var(--stzh-heading-color);
-  margin: 0 0 var(--stzh-space-small);
+  margin-bottom: var(--stzh-space-small);
 }
 
 /* Descriptions = STZH caption / input description */
@@ -3882,7 +3997,8 @@ label[for],
 .response-questionnaire__single-option label,
 .answer-questionnaire__multiple-option label,
 .answer-questionnaire__single-option label,
-.js-collection-input label {
+.js-collection-input label,
+.form__wrapper-checkbox-label {
   display: flex;
   align-items: center;
   gap: var(--stzh-space-small);
@@ -3896,7 +4012,7 @@ label[for],
   margin: 0;
 }
 
-/* STZH radio / checkbox marks (24px, 2px black stroke) */
+/* STZH radio / checkbox marks (24px, 2px black stroke) — surveys and all forms */
 .form.response-questionnaire input[type="radio"]:not(.reset-defaults),
 .form.response-questionnaire input[type="checkbox"]:not(.reset-defaults),
 .form.answer-questionnaire input[type="radio"]:not(.reset-defaults),
@@ -3904,7 +4020,11 @@ label[for],
 .form.response-questionnaire label > input[type="radio"]:not(.reset-defaults),
 .form.response-questionnaire label > input[type="checkbox"]:not(.reset-defaults),
 .form.answer-questionnaire label > input[type="radio"]:not(.reset-defaults),
-.form.answer-questionnaire label > input[type="checkbox"]:not(.reset-defaults) {
+.form.answer-questionnaire label > input[type="checkbox"]:not(.reset-defaults),
+.form-defaults input[type="radio"]:not(.reset-defaults),
+.form-defaults input[type="checkbox"]:not(.reset-defaults),
+.form__wrapper-checkbox-label input[type="checkbox"]:not(.reset-defaults),
+.form__wrapper-checkbox-label input[type="radio"]:not(.reset-defaults) {
   appearance: none;
   -webkit-appearance: none;
   flex-shrink: 0;
@@ -3927,17 +4047,23 @@ label[for],
 }
 
 .form.response-questionnaire input[type="radio"]:not(.reset-defaults),
-.form.answer-questionnaire input[type="radio"]:not(.reset-defaults) {
+.form.answer-questionnaire input[type="radio"]:not(.reset-defaults),
+.form-defaults input[type="radio"]:not(.reset-defaults),
+.form__wrapper-checkbox-label input[type="radio"]:not(.reset-defaults) {
   border-radius: 50%;
 }
 
 .form.response-questionnaire input[type="checkbox"]:not(.reset-defaults),
-.form.answer-questionnaire input[type="checkbox"]:not(.reset-defaults) {
+.form.answer-questionnaire input[type="checkbox"]:not(.reset-defaults),
+.form-defaults input[type="checkbox"]:not(.reset-defaults),
+.form__wrapper-checkbox-label input[type="checkbox"]:not(.reset-defaults) {
   border-radius: 0;
 }
 
 .form.response-questionnaire input[type="radio"]:not(.reset-defaults):checked,
-.form.answer-questionnaire input[type="radio"]:not(.reset-defaults):checked {
+.form.answer-questionnaire input[type="radio"]:not(.reset-defaults):checked,
+.form-defaults input[type="radio"]:not(.reset-defaults):checked,
+.form__wrapper-checkbox-label input[type="radio"]:not(.reset-defaults):checked {
   background-image: radial-gradient(
     circle at center,
     var(--stzh-heading-color) 0.5rem,
@@ -3946,21 +4072,31 @@ label[for],
 }
 
 .form.response-questionnaire input[type="checkbox"]:not(.reset-defaults):checked,
-.form.answer-questionnaire input[type="checkbox"]:not(.reset-defaults):checked {
+.form.answer-questionnaire input[type="checkbox"]:not(.reset-defaults):checked,
+.form-defaults input[type="checkbox"]:not(.reset-defaults):checked,
+.form__wrapper-checkbox-label input[type="checkbox"]:not(.reset-defaults):checked {
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='currentColor' d='M10 15.172l9.192-9.193 1.415 1.414L10 18 3.636 11.636l1.414-1.414z'/%3E%3C/svg%3E");
 }
 
 .form.response-questionnaire input[type="radio"]:not(.reset-defaults):hover:not(:disabled),
 .form.response-questionnaire input[type="checkbox"]:not(.reset-defaults):hover:not(:disabled),
 .form.answer-questionnaire input[type="radio"]:not(.reset-defaults):hover:not(:disabled),
-.form.answer-questionnaire input[type="checkbox"]:not(.reset-defaults):hover:not(:disabled) {
+.form.answer-questionnaire input[type="checkbox"]:not(.reset-defaults):hover:not(:disabled),
+.form-defaults input[type="radio"]:not(.reset-defaults):hover:not(:disabled),
+.form-defaults input[type="checkbox"]:not(.reset-defaults):hover:not(:disabled),
+.form__wrapper-checkbox-label input[type="checkbox"]:not(.reset-defaults):hover:not(:disabled),
+.form__wrapper-checkbox-label input[type="radio"]:not(.reset-defaults):hover:not(:disabled) {
   border-color: var(--stzh-heading-color);
 }
 
 .form.response-questionnaire input[type="radio"]:not(.reset-defaults):focus-visible,
 .form.response-questionnaire input[type="checkbox"]:not(.reset-defaults):focus-visible,
 .form.answer-questionnaire input[type="radio"]:not(.reset-defaults):focus-visible,
-.form.answer-questionnaire input[type="checkbox"]:not(.reset-defaults):focus-visible {
+.form.answer-questionnaire input[type="checkbox"]:not(.reset-defaults):focus-visible,
+.form-defaults input[type="radio"]:not(.reset-defaults):focus-visible,
+.form-defaults input[type="checkbox"]:not(.reset-defaults):focus-visible,
+.form__wrapper-checkbox-label input[type="checkbox"]:not(.reset-defaults):focus-visible,
+.form__wrapper-checkbox-label input[type="radio"]:not(.reset-defaults):focus-visible {
   outline: 0.125rem solid var(--stzh-color-secondary50);
   outline-offset: 0.125rem;
 }
@@ -4111,23 +4247,21 @@ label[for="questionnaire_tos_agreement"] {
   margin: 0;
 }
 
-/*Text-fields*/
-.form-defaults :is(
-  input[type="date"],
-  input[type="datetime-local"],
-  input[type="email"],
-  input[type="month"],
-  input[type="number"],
-  input[type="password"],
-  input[type="search"],
-  input[type="tel"],
-  input[type="text"],
-  input[type="time"],
-  input[type="url"],
-  input[type="week"],
-  select,
-  textarea
-):not(.reset-defaults) {
+/* Text-fields — expanded selectors (Awesome Sass drops :is()) */
+.form-defaults input[type="date"]:not(.reset-defaults),
+.form-defaults input[type="datetime-local"]:not(.reset-defaults),
+.form-defaults input[type="email"]:not(.reset-defaults),
+.form-defaults input[type="month"]:not(.reset-defaults),
+.form-defaults input[type="number"]:not(.reset-defaults),
+.form-defaults input[type="password"]:not(.reset-defaults),
+.form-defaults input[type="search"]:not(.reset-defaults),
+.form-defaults input[type="tel"]:not(.reset-defaults),
+.form-defaults input[type="text"]:not(.reset-defaults),
+.form-defaults input[type="time"]:not(.reset-defaults),
+.form-defaults input[type="url"]:not(.reset-defaults),
+.form-defaults input[type="week"]:not(.reset-defaults),
+.form-defaults select:not(.reset-defaults),
+.form-defaults textarea:not(.reset-defaults) {
   font-family: var(--stzh-font-family-medium);
   font-weight: var(--stzh-font-weight-medium);
   font-style: var(--stzh-font-style-medium);
@@ -4169,24 +4303,21 @@ label[for="questionnaire_tos_agreement"] {
   -webkit-appearance: none;
 }
 
-/*Text-fields focus*/
-.form-defaults
-  :is(
-    input[type="date"],
-    input[type="datetime-local"],
-    input[type="email"],
-    input[type="month"],
-    input[type="number"],
-    input[type="password"],
-    input[type="search"],
-    input[type="tel"],
-    input[type="text"],
-    input[type="time"],
-    input[type="url"],
-    input[type="week"],
-    select,
-    textarea
-  ):not(.reset-defaults):focus {
+/* Text-fields focus */
+.form-defaults input[type="date"]:not(.reset-defaults):focus,
+.form-defaults input[type="datetime-local"]:not(.reset-defaults):focus,
+.form-defaults input[type="email"]:not(.reset-defaults):focus,
+.form-defaults input[type="month"]:not(.reset-defaults):focus,
+.form-defaults input[type="number"]:not(.reset-defaults):focus,
+.form-defaults input[type="password"]:not(.reset-defaults):focus,
+.form-defaults input[type="search"]:not(.reset-defaults):focus,
+.form-defaults input[type="tel"]:not(.reset-defaults):focus,
+.form-defaults input[type="text"]:not(.reset-defaults):focus,
+.form-defaults input[type="time"]:not(.reset-defaults):focus,
+.form-defaults input[type="url"]:not(.reset-defaults):focus,
+.form-defaults input[type="week"]:not(.reset-defaults):focus,
+.form-defaults select:not(.reset-defaults):focus,
+.form-defaults textarea:not(.reset-defaults):focus {
   color: var(--stzh-base-color);
   border-color: var(--stzh-color-secondary50);
   background-color: var(--stzh-color-secondary20);
@@ -4194,24 +4325,21 @@ label[for="questionnaire_tos_agreement"] {
   outline-color: 0;
 }
 
-/*Text-fields invalid input*/
-.form-defaults
-  :is(
-    input[type="date"],
-    input[type="datetime-local"],
-    input[type="email"],
-    input[type="month"],
-    input[type="number"],
-    input[type="password"],
-    input[type="search"],
-    input[type="tel"],
-    input[type="text"],
-    input[type="time"],
-    input[type="url"],
-    input[type="week"],
-    select,
-    textarea
-  ):not(.reset-defaults).is-invalid-input:not(:focus) {
+/* Text-fields invalid input */
+.form-defaults input[type="date"]:not(.reset-defaults).is-invalid-input:not(:focus),
+.form-defaults input[type="datetime-local"]:not(.reset-defaults).is-invalid-input:not(:focus),
+.form-defaults input[type="email"]:not(.reset-defaults).is-invalid-input:not(:focus),
+.form-defaults input[type="month"]:not(.reset-defaults).is-invalid-input:not(:focus),
+.form-defaults input[type="number"]:not(.reset-defaults).is-invalid-input:not(:focus),
+.form-defaults input[type="password"]:not(.reset-defaults).is-invalid-input:not(:focus),
+.form-defaults input[type="search"]:not(.reset-defaults).is-invalid-input:not(:focus),
+.form-defaults input[type="tel"]:not(.reset-defaults).is-invalid-input:not(:focus),
+.form-defaults input[type="text"]:not(.reset-defaults).is-invalid-input:not(:focus),
+.form-defaults input[type="time"]:not(.reset-defaults).is-invalid-input:not(:focus),
+.form-defaults input[type="url"]:not(.reset-defaults).is-invalid-input:not(:focus),
+.form-defaults input[type="week"]:not(.reset-defaults).is-invalid-input:not(:focus),
+.form-defaults select:not(.reset-defaults).is-invalid-input:not(:focus),
+.form-defaults textarea:not(.reset-defaults).is-invalid-input:not(:focus) {
   color: var(--stzh-color-error60);
   border-color: var(--stzh-color-error60);
   background-color: var(--stzh-color-white);
