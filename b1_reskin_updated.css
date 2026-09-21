@@ -1912,6 +1912,85 @@ header .menu-bar__breadcrumb-mobile button svg {
   color: inherit;
 }
 
+/*
+ * Below Decidim’s 1024px switch the desktop trail is still shown (display:flex
+ * above overrides core’s display:none) and shares one nowrap row with the
+ * follow button, so both overflow and the button is clipped.
+ * STZH’s middle-crumb ellipsis is a measured web component; CSS cannot collapse
+ * a variable set of crumbs into one "…" control. Stack the trail instead.
+ */
+@media (max-width: 1023px) {
+  header .menu-bar {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    row-gap: var(--stzh-space-small, 0.75rem);
+  }
+
+  header .menu-bar__breadcrumb-desktop {
+    flex: 1 0 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    white-space: normal;
+    row-gap: var(--stzh-space-xxsmall, 0.25rem);
+  }
+
+  header .menu-bar__breadcrumb-desktop > span {
+    display: none;
+  }
+
+  header .menu-bar__breadcrumb-desktop > .menu-bar__breadcrumb-desktop__dropdown-wrapper,
+  header .menu-bar__breadcrumb-desktop > a,
+  header .menu-bar__breadcrumb-desktop > .relative {
+    align-items: flex-start;
+    max-width: 100%;
+    min-width: 0;
+    white-space: normal;
+  }
+
+  header .menu-bar__breadcrumb-desktop > a::before,
+  header .menu-bar__breadcrumb-desktop > .relative::before {
+    content: ">";
+    flex: 0 0 auto;
+    margin-right: var(--stzh-space-xsmall, 0.5rem);
+    font-family: var(--stzh-font-family-medium);
+    font-weight: var(--stzh-font-weight-medium);
+    font-size: var(--stzh-font-milli-font-size) !important;
+    line-height: var(--stzh-font-milli-text-line-height);
+    color: inherit;
+  }
+
+  header .menu-bar__breadcrumb-desktop a,
+  header .menu-bar__breadcrumb-desktop__dropdown-trigger {
+    white-space: normal;
+    min-width: 0;
+  }
+
+  header .menu-bar__breadcrumb-mobile,
+  header .menu-bar__actions {
+    flex: 1 0 100%;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  /* Compact mobile trail repeats the stacked crumbs; keep its menu + follow button. */
+  header .menu-bar__breadcrumb-mobile__dropdown-trigger {
+    justify-content: flex-start;
+    gap: var(--stzh-space-small, 0.75rem);
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  header .menu-bar__breadcrumb-mobile__dropdown-trigger > span {
+    display: none;
+  }
+}
+
 /*Enlarge dropdown menu width*/
 @media (min-width: 768px) {
   header .menu-bar__secondary-dropdown nav {
