@@ -1267,6 +1267,36 @@ header .main-bar__dropdown>:not([hidden])~:not([hidden]){
   color: var(--stzh-base-invert-color);
 }
 
+/* Focus-mode "Zurück": same filled primary as .button__primary */
+header .main-bar--focus-mode-back-button a.main-bar__links-desktop__item,
+.main-bar--focus-mode-back-button a.main-bar__links-desktop__item {
+  background-color: var(--stzh-link-color);
+  color: var(--stzh-base-invert-color);
+  font-family: var(--stzh-font-family-heavy);
+  font-weight: var(--stzh-font-weight-heavy);
+  font-style: var(--stzh-font-style-heavy);
+  padding: var(--stzh-space-small) var(--stzh-space-xlarge);
+  border-radius: 0;
+  transition-duration: var(--stzh-base-transition-animation-speed);
+}
+
+header .main-bar--focus-mode-back-button a.main-bar__links-desktop__item svg,
+.main-bar--focus-mode-back-button a.main-bar__links-desktop__item svg {
+  color: inherit;
+  fill: currentColor;
+}
+
+header .main-bar--focus-mode-back-button a.main-bar__links-desktop__item:hover,
+.main-bar--focus-mode-back-button a.main-bar__links-desktop__item:hover {
+  background-color: var(--stzh-link-secondary-color);
+  color: var(--stzh-base-invert-color);
+}
+
+header .main-bar--focus-mode-back-button a.main-bar__links-desktop__item:hover svg,
+.main-bar--focus-mode-back-button a.main-bar__links-desktop__item:hover svg {
+  animation: stzh-cta-effect 1s;
+}
+
 /*Match transparent buttons to STZH secondary buttons*/
 .button__transparent-primary, .button__transparent-secondary, .button__transparent-tertiary {
   color: var(--stzh-link-color);
@@ -2245,6 +2275,21 @@ text-decoration-line: none;
 .card__list-title {
   font-family: var(--stzh-font-family-heavy);
   font-weight: var(--stzh-font-weight-heavy);
+}
+
+/* Voted budget rows: title on the same vertical axis as the amount,
+   inset from the card edge. */
+.card__list.card__list__project-voted {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.card__list.card__list__project-voted .card__list-content,
+.card__list.card__list__project-voted .card__list__content {
+  display: flex;
+  align-items: center;
+  padding-left: var(--stzh-space-xlarge);
 }
 
 /* ===== DATE ENTRY STYLES ===== */
