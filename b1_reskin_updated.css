@@ -2651,19 +2651,19 @@ text-decoration-line: none;
   justify-content: space-between;
 }
 
-/* Page callouts / announcements (e.g. ephemeral auth warning).
-   Keep the callout in the content column so text lines up with the form;
-   extend the colour full-bleed with box-shadow (works for left-aligned layout).
+/* Ephemeral SMS identity banner only.
+   Component announcements ([data-announcement], e.g. proposals) stay the
+   regular .flash.flex-col box: grey, in the content column, stacked text.
    Awesome Sass: avoid :is() here. */
-.layout-1col,
-.layout-1col.cols-6,
-.layout-1col.cols-8,
-.layout-1col.cols-10 {
+html[data-rails-controller-path*="ephemeral_sms"] .layout-1col,
+html[data-rails-controller-path*="ephemeral_sms"] .layout-1col.cols-6,
+html[data-rails-controller-path*="ephemeral_sms"] .layout-1col.cols-8,
+html[data-rails-controller-path*="ephemeral_sms"] .layout-1col.cols-10 {
   overflow: visible;
 }
 
-.callout,
-.flash.flex-col:not([role="alert"]) {
+html[data-rails-controller-path*="ephemeral_sms"] .callout,
+html[data-rails-controller-path*="ephemeral_sms"] .flash.flex-col:not([role="alert"]) {
   --background-flash: var(--stzh-color-warning60);
   position: relative;
   z-index: 0;
@@ -2689,30 +2689,10 @@ text-decoration-line: none;
   padding-right: 0;
 }
 
-.callout.warning,
-.flash.flex-col.warning {
-  --background-flash: var(--stzh-color-warning60);
-}
-
-.callout.alert,
-.flash.flex-col.alert {
-  --background-flash: var(--stzh-color-error60);
-}
-
-.callout.success,
-.flash.flex-col.success {
-  --background-flash: var(--stzh-color-success60);
-}
-
-.callout.secondary,
-.flash.flex-col.secondary {
-  --background-flash: var(--stzh-color-info60);
-}
-
-.callout .flash__message,
-.callout .flash__title,
-.flash.flex-col:not([role="alert"]) .flash__message,
-.flash.flex-col:not([role="alert"]) .flash__title {
+html[data-rails-controller-path*="ephemeral_sms"] .callout .flash__message,
+html[data-rails-controller-path*="ephemeral_sms"] .callout .flash__title,
+html[data-rails-controller-path*="ephemeral_sms"] .flash.flex-col:not([role="alert"]) .flash__message,
+html[data-rails-controller-path*="ephemeral_sms"] .flash.flex-col:not([role="alert"]) .flash__title {
   color: var(--stzh-color-white);
 }
 
@@ -4089,6 +4069,40 @@ label[for]:not(.form__wrapper-checkbox-label),
   letter-spacing: var(--stzh-font-curve---text-letter-spacing);
   color: var(--stzh-base-color);
   margin: 0;
+}
+
+/* Inline links in checkbox copy (ephemeral SMS "Spielregeln").
+   Flex treats the <a> as its own item and splits the sentence.
+   Keep the box on the left and all wrapping text in a column to its right. */
+.form__wrapper-checkbox-label:has(a),
+html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label {
+  display: block;
+  position: relative;
+  padding-left: calc(1.5rem + var(--stzh-space-small));
+}
+
+.form__wrapper-checkbox-label:has(a) > input[type="checkbox"]:not(.reset-defaults),
+html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label > input[type="checkbox"]:not(.reset-defaults) {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+}
+
+.form__wrapper-checkbox-label:has(a) a,
+html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label a {
+  display: inline;
+}
+
+/* SMS phone form only: drop the leftover "Nutzungsbedingungen" heading. */
+.form__wrapper-block:has(label[for*="mobile_phone"]) + label:not(.form__wrapper-checkbox-label),
+form:has(label[for*="mobile_phone"]) > label:not(.form__wrapper-checkbox-label):has(+ .form__wrapper-checkbox-label) {
+  display: none;
+}
+
+.form__wrapper-block:has(label[for*="mobile_phone"]) + label:not(.form__wrapper-checkbox-label) + .form__wrapper-checkbox-label,
+form:has(label[for*="mobile_phone"]) > label:not(.form__wrapper-checkbox-label):has(+ .form__wrapper-checkbox-label) + .form__wrapper-checkbox-label {
+  margin-top: var(--stzh-space-xlarge);
 }
 
 /* STZH radio / checkbox marks (24px, 2px black stroke) — surveys and all forms */
