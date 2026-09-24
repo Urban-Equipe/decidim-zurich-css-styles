@@ -3041,18 +3041,15 @@ section:has(.participatory-space__hero) {
     margin-bottom: 0;
   }
 
-  /* Blue overlay positioned at the top, above where the image displays */
-  /* This creates the light blue background that sits above the image */
+  /* Blue overlay covers the full hero/text block so the slogan never sits on the image */
   .participatory-space__hero::before {
     width: 100%;
-    /* Height should accommodate text content comfortably */
-    min-height: 240px;
     height: auto;
-    /* Position at the top of the hero container */
+    min-height: 0;
     top: 0;
     left: 0;
     right: 0;
-    bottom: auto;
+    bottom: 0;
     transform: none; /* Remove negative transform that was causing issues */
     /* Ensure it sits above the background image in z-index stacking */
     z-index: 1;
@@ -3066,10 +3063,11 @@ section:has(.participatory-space__hero) {
     max-width: 640px;
     transform: none; /* Remove negative transform */
     height: auto;
-    min-height: 240px; /* Match blue overlay minimum height to ensure full coverage */
+    min-height: 240px; /* Keep a minimum blue field for short titles */
     margin-right: auto;
     margin-left: auto;
-    padding: 2rem 1.5rem; /* Add padding for text readability */
+    /* Extra bottom padding separates the slogan from the image */
+    padding: var(--stzh-space-xxlarge, 2rem) var(--stzh-space-xlarge, 1.5rem) var(--stzh-space-xxxxlarge, 3rem);
     gap: 1rem;
     /* Ensure text is above the blue overlay in stacking order */
     z-index: 2;
