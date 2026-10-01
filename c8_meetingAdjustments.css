@@ -7,12 +7,17 @@
  * USAGE: Load after a1_variables.css and b1_reskin_updated.css.
  */
 
-#panel-participants, #trigger-participants {
+ #panel-participants, #trigger-participants {
   display: none;
 }
 
 .layout-author {
   display: none;
+}
+
+/*Hide public participation*/
+.public-participation {
+    display: none;
 }
 
 /* ===== Global form rhythm ===== */
