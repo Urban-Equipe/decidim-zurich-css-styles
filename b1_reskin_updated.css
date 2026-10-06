@@ -2007,7 +2007,7 @@ header .menu-bar__breadcrumb-mobile button svg {
     min-width: 0;
   }
 
-  /* Compact mobile trail repeats the stacked crumbs; keep its menu + follow button. */
+  /* Compact trail + process menu chevron; keep labels so the dropdown trigger stays usable. */
   header .menu-bar__breadcrumb-mobile__dropdown-trigger {
     justify-content: flex-start;
     gap: var(--stzh-space-small, 0.75rem);
@@ -2017,7 +2017,67 @@ header .menu-bar__breadcrumb-mobile button svg {
   }
 
   header .menu-bar__breadcrumb-mobile__dropdown-trigger > span {
-    display: none;
+    display: inline-block;
+    min-width: 0;
+    flex: 1 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /*
+   * Decidim core sets [id*="dropdown-menu"][aria-hidden="true"] { hidden md:flex }.
+   * From 768px the process menu stays in-flow while aria-hidden never appears to
+   * toggle. Hide it when closed and show it as an overlay when open.
+   */
+  header .menu-bar__container,
+  header .menu-bar,
+  header .menu-bar__breadcrumb-mobile {
+    overflow: visible;
+    position: relative;
+  }
+
+  header .menu-bar__breadcrumb-mobile #secondary-dropdown-menu-mobile[aria-hidden="true"] {
+    display: none !important;
+    visibility: hidden;
+  }
+
+  header .menu-bar__breadcrumb-mobile__dropdown-trigger:has(#secondary-dropdown-trigger-mobile:is(:focus, [aria-expanded="true"])) + #secondary-dropdown-menu-mobile,
+  header .menu-bar__breadcrumb-mobile #secondary-dropdown-menu-mobile[aria-hidden="false"],
+  header .menu-bar__breadcrumb-mobile #secondary-dropdown-menu-mobile:not([aria-hidden]) {
+    display: flex !important;
+    flex-direction: column;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    z-index: 50;
+    margin: 0;
+  }
+
+  header .menu-bar__breadcrumb-mobile #secondary-dropdown-menu-mobile .menu-bar__secondary-dropdown {
+    position: relative;
+    top: auto;
+    left: auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  header .menu-bar__breadcrumb-mobile #secondary-dropdown-menu-mobile .menu-bar__secondary-dropdown nav,
+  header .menu-bar__breadcrumb-mobile #secondary-dropdown-menu-mobile .menu-bar__secondary-dropdown__menu {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  header .menu-bar__breadcrumb-mobile #secondary-dropdown-menu-mobile .menu-bar__dropdown-menu,
+  header .menu-bar__breadcrumb-mobile #secondary-dropdown-menu-mobile .menu-bar__secondary-dropdown > nav[role="navigation"] {
+    padding: var(--stzh-space-medium);
   }
 }
 
