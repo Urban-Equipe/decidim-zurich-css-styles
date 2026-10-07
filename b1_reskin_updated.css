@@ -3566,6 +3566,93 @@ background-color: transparent;
   background-color: var(--stzh-color-success60);
 }
 
+/* Phone: stack each project, keep the summary bar off the list, 44px targets.
+   Active sort chip uses primary70 so white text clears 4.5:1. */
+@media (max-width: 767px) {
+  body:has(.budget-list) #content {
+    padding-bottom: 6rem;
+  }
+
+  body:has(.budget-list) #progress-summary-button {
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  body:has(.budget-list) #dropdown-trigger-filters,
+  body:has(.budget-list) #dropdown-trigger-order {
+    min-height: 44px;
+    align-items: center;
+  }
+
+  body:has(.budget-list) .filter-search button[type="submit"] {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  body.form-defaults:has(.budget-list) .filter-search input[type="search"] {
+    padding-inline-end: 44px;
+  }
+
+  body:has(.budget-list) .budget__list--header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--stzh-space-small);
+  }
+
+  body:has(.budget-list) .budget__list--header > * {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  body:has(.budget-list) #dropdown-menu-order.order-by {
+    width: 100%;
+    margin-left: 0;
+    padding-left: 0;
+    align-items: stretch;
+  }
+
+  body:has(.budget-list) #dropdown-menu-order .button {
+    width: 100%;
+    height: auto;
+    min-height: 44px;
+    justify-content: flex-start;
+  }
+
+  body:has(.budget-list) #dropdown-menu-order .button.underline {
+    color: var(--stzh-color-white);
+    background-color: var(--stzh-color-primary70);
+  }
+
+  .budget-list .project-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--stzh-space-xsmall);
+  }
+
+  .budget-list .project-item .card__list,
+  .budget-list .project-item .budget__card__list-project {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .budget-list .project-item .budget__card__list-project {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--stzh-space-xsmall);
+  }
+
+  .budget-list .budget-list__action {
+    flex: 1 1 100%;
+    height: auto;
+    min-height: 44px;
+    justify-content: center;
+  }
+}
+
 
 /* ===== COMMENTS MODULE ===== */
 
