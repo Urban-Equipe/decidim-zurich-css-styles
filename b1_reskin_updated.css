@@ -1278,6 +1278,28 @@ header .main-bar--focus-mode-back-button a.main-bar__links-desktop__item,
   padding: var(--stzh-space-small) var(--stzh-space-xlarge);
   border-radius: 0;
   transition-duration: var(--stzh-base-transition-animation-speed);
+  /*
+   * Size the filled box to its label so the background always wraps the text.
+   * As a flex child of .main-bar__links-desktop the anchor could otherwise be
+   * shrunk below its content width, leaving the nowrap label overflowing the
+   * colored box. Prevent shrinking and include padding in the box.
+   */
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  width: auto;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+/* Keep the inner label span within the padded anchor (no overflow clipping). */
+header .main-bar--focus-mode-back-button a.main-bar__links-desktop__item > span,
+.main-bar--focus-mode-back-button a.main-bar__links-desktop__item > span {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  min-width: 0;
 }
 
 header .main-bar--focus-mode-back-button a.main-bar__links-desktop__item svg,
