@@ -1267,6 +1267,16 @@ header .main-bar__dropdown>:not([hidden])~:not([hidden]){
   color: var(--stzh-base-invert-color);
 }
 
+/* Focus-mode "Zurück": the whole control is a flex child of
+   .main-bar__links-desktop and was being compressed below its content width on
+   narrow viewports, so the filled box shrank while the nowrap label spilled
+   out. Stop the box (and its wrapper) from shrinking at all. */
+header .main-bar--focus-mode-back-button,
+.main-bar--focus-mode-back-button {
+  flex: 0 0 auto;
+  min-width: max-content;
+}
+
 /* Focus-mode "Zurück": same filled primary as .button__primary */
 header .main-bar--focus-mode-back-button a.main-bar__links-desktop__item,
 .main-bar--focus-mode-back-button a.main-bar__links-desktop__item {
@@ -1288,18 +1298,18 @@ header .main-bar--focus-mode-back-button a.main-bar__links-desktop__item,
   align-items: center;
   flex: 0 0 auto;
   width: auto;
-  max-width: 100%;
   box-sizing: border-box;
   overflow: visible;
+  white-space: nowrap;
 }
 
-/* Keep the inner label span within the padded anchor (no overflow clipping). */
+/* Keep the inner label span sized to its content so the box wraps it fully. */
 header .main-bar--focus-mode-back-button a.main-bar__links-desktop__item > span,
 .main-bar--focus-mode-back-button a.main-bar__links-desktop__item > span {
   display: inline-flex;
   align-items: center;
-  max-width: 100%;
-  min-width: 0;
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 header .main-bar--focus-mode-back-button a.main-bar__links-desktop__item svg,
