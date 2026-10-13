@@ -38,20 +38,25 @@ section:has(.participatory-space__hero) {
   background-color: var(--stzh-color-coolgrey20);
 }
 
-/* Hero h1 typography – primary60 text on light cyan, not fat */
+/* Hero title + subtitle: primary60 on light cyan, not fat.
+   Do not share title (hecto/hero) sizes with .participatory-space__hero-slogan
+   ("Untertitel") — B1 already sets that to STZH lead/milli–deci. */
 .participatory-space__hero-slogan,
 .participatory-space__hero-text h1,
 .participatory-space__hero-text .h1 {
   color: var(--stzh-color-primary60);
   font-family: var(--stzh-font-family-medium);
   font-weight: 400;
+}
+
+.participatory-space__hero-text h1,
+.participatory-space__hero-text .h1 {
   font-size: var(--stzh-font-hecto-font-size);
   line-height: var(--stzh-font-hecto-text-line-height);
   letter-spacing: var(--stzh-font-hecto-text-letter-spacing);
 }
 
 @media screen and (min-width: 1280px) {
-  .participatory-space__hero-slogan,
   .participatory-space__hero-text h1,
   .participatory-space__hero-text .h1 {
     font-size: var(--stzh-font-hero-font-size);
