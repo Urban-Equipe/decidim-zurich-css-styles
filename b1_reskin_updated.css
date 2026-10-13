@@ -4238,6 +4238,9 @@ html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label 
   display: block;
   position: relative;
   padding-left: calc(1.5rem + var(--stzh-space-small));
+  /* Match the first text line to the box height so the two sit on the
+     same level; the box top-aligns with (and centres on) the first line. */
+  line-height: 1.5rem;
 }
 
 .form__wrapper-checkbox-label:has(a) > input[type="checkbox"]:not(.reset-defaults),
@@ -4251,6 +4254,16 @@ html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label 
 .form__wrapper-checkbox-label:has(a) a,
 html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label a {
   display: inline;
+}
+
+/* Validation hint ("muss akzeptiert werden") renders as a sibling after the
+   label, so it starts under the box. Indent it to the text column so it lines
+   up with the copy next to the box. */
+.form__wrapper-checkbox-label:has(a) + .form-error,
+.form__wrapper-checkbox-label:has(a) ~ .form-error,
+html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label + .form-error,
+html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label ~ .form-error {
+  margin-left: calc(1.5rem + var(--stzh-space-small));
 }
 
 /* SMS phone form only: drop the leftover "Nutzungsbedingungen" heading. */
