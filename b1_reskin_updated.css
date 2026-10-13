@@ -4234,14 +4234,16 @@ label[for]:not(.form__wrapper-checkbox-label),
    Flex treats the <a> as its own item and splits the sentence.
    Keep the box on the left and all wrapping text in a column to its right. */
 .form__wrapper-checkbox-label:has(a),
-html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label {
+html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label,
+html[data-rails-controller-path*="ephemeral_verifications"] .form__wrapper-checkbox-label {
   display: block;
   position: relative;
   padding-left: calc(1.5rem + var(--stzh-space-small));
 }
 
 .form__wrapper-checkbox-label:has(a) > input[type="checkbox"]:not(.reset-defaults),
-html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label > input[type="checkbox"]:not(.reset-defaults) {
+html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label > input[type="checkbox"]:not(.reset-defaults),
+html[data-rails-controller-path*="ephemeral_verifications"] .form__wrapper-checkbox-label > input[type="checkbox"]:not(.reset-defaults) {
   position: absolute;
   left: 0;
   top: 0;
@@ -4249,27 +4251,53 @@ html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label 
 }
 
 .form__wrapper-checkbox-label:has(a) a,
-html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label a {
+html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label a,
+html[data-rails-controller-path*="ephemeral_verifications"] .form__wrapper-checkbox-label a {
   display: inline;
 }
 
-/* Validation copy ("muss akzeptiert werden") lives next to / under the
-   checkbox *label text*, not under the box. Sibling .form-error is outside
-   the padded label, so it needs the same left offset as the TOS sentence.
-   Do not set display here — Foundation keeps .form-error hidden until .is-visible. */
-.form__wrapper-checkbox-label:has(a) > .form-error,
-html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label > .form-error {
+/*
+ * SMS / authorization checkbox + server error:
+ *   div.form__wrapper-block
+ *     label.form__wrapper-checkbox-label  (copy)
+ *     small.form-error.is-visible         ("muss akzeptiert werden")
+ * Indent the WRAPPER so the error shares the copy column. The box is
+ * pulled out to the wrapper's left edge. Beats the earlier padding:0
+ * on .form__wrapper-block:has(.form__wrapper-checkbox-label).
+ */
+.form__wrapper-block:has(> .form__wrapper-checkbox-label),
+.form__wrapper:has(> .form__wrapper-checkbox-label) {
+  position: relative;
+  padding-left: calc(1.5rem + var(--stzh-space-small));
+}
+
+.form__wrapper-block:has(> .form__wrapper-checkbox-label) > .form__wrapper-checkbox-label,
+.form__wrapper:has(> .form__wrapper-checkbox-label) > .form__wrapper-checkbox-label {
+  padding-left: 0;
+  position: static;
+}
+
+.form__wrapper-block:has(> .form__wrapper-checkbox-label) > .form__wrapper-checkbox-label > input[type="checkbox"]:not(.reset-defaults),
+.form__wrapper:has(> .form__wrapper-checkbox-label) > .form__wrapper-checkbox-label > input[type="checkbox"]:not(.reset-defaults) {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+}
+
+.form__wrapper-checkbox-label + .form-error,
+.form__wrapper-checkbox-label .form-error {
   margin-top: var(--stzh-space-xsmall, 0.25rem);
-  margin-left: 0;
+  margin-left: calc(1.5rem + var(--stzh-space-small));
   min-height: 0;
 }
 
-.form__wrapper-checkbox-label:has(a) + .form-error,
-html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label + .form-error,
-.form__wrapper-block:has(> .form__wrapper-checkbox-label:has(a)) > .form-error,
-html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-block > .form-error {
-  margin-top: var(--stzh-space-xsmall, 0.25rem);
-  margin-left: calc(1.5rem + var(--stzh-space-small));
+/* Error is already in the padded wrapper column — do not indent twice. */
+.form__wrapper-block:has(> .form__wrapper-checkbox-label) > .form-error,
+.form__wrapper:has(> .form__wrapper-checkbox-label) > .form-error,
+.form__wrapper-block:has(> .form__wrapper-checkbox-label) .form__wrapper-checkbox-label .form-error,
+.form__wrapper:has(> .form__wrapper-checkbox-label) .form__wrapper-checkbox-label .form-error {
+  margin-left: 0;
   min-height: 0;
 }
 
