@@ -4253,6 +4253,26 @@ html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label 
   display: inline;
 }
 
+/* Validation copy ("muss akzeptiert werden") lives next to / under the
+   checkbox *label text*, not under the box. Sibling .form-error is outside
+   the padded label, so it needs the same left offset as the TOS sentence.
+   Do not set display here — Foundation keeps .form-error hidden until .is-visible. */
+.form__wrapper-checkbox-label:has(a) > .form-error,
+html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label > .form-error {
+  margin-top: var(--stzh-space-xsmall, 0.25rem);
+  margin-left: 0;
+  min-height: 0;
+}
+
+.form__wrapper-checkbox-label:has(a) + .form-error,
+html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label + .form-error,
+.form__wrapper-block:has(> .form__wrapper-checkbox-label:has(a)) > .form-error,
+html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-block > .form-error {
+  margin-top: var(--stzh-space-xsmall, 0.25rem);
+  margin-left: calc(1.5rem + var(--stzh-space-small));
+  min-height: 0;
+}
+
 /* SMS phone form only: drop the leftover "Nutzungsbedingungen" heading. */
 .form__wrapper-block:has(label[for*="mobile_phone"]) + label:not(.form__wrapper-checkbox-label),
 form:has(label[for*="mobile_phone"]) > label:not(.form__wrapper-checkbox-label):has(+ .form__wrapper-checkbox-label) {
