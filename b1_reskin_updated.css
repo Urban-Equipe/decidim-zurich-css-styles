@@ -4266,6 +4266,21 @@ html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label 
   margin-left: calc(1.5rem + var(--stzh-space-small));
 }
 
+/* Keep the ephemeral TOS checkbox box flush-left like the login page
+   "Angemeldet bleiben" box. The box is positioned at left:0 of its label,
+   so any padding/border on the wrapping fieldset/block insets the whole
+   label and pushes the box to the right. The generic fieldset reset above
+   only matches a checkbox label that is a DIRECT child, so a nested TOS
+   checkbox keeps its fieldset chrome. Strip it here (scoped to ephemeral)
+   so the box aligns with the other form fields. Text/hint alignment is
+   unaffected because they move together with the label. */
+html[data-rails-controller-path*="ephemeral_sms"] fieldset:has(.form__wrapper-checkbox-label),
+html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-block:has(.form__wrapper-checkbox-label) {
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
 /* SMS phone form only: drop the leftover "Nutzungsbedingungen" heading. */
 .form__wrapper-block:has(label[for*="mobile_phone"]) + label:not(.form__wrapper-checkbox-label),
 form:has(label[for*="mobile_phone"]) > label:not(.form__wrapper-checkbox-label):has(+ .form__wrapper-checkbox-label) {
