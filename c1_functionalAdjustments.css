@@ -194,3 +194,17 @@ label.form__wrapper-checkbox-label:has(input#public_participation)
 .layout-aside__ctas-buttons {
   justify-content: flex-end;
 }
+
+/* SMS eligibility checkbox: keep "muss akzeptiert werden" in the copy
+   column (right of the box, under the Spielregeln sentence). */
+.form__wrapper-block > .form-error,
+.form__wrapper-block > small,
+.form__wrapper-checkbox-label ~ .form-error,
+label[for*="eligible_confirmation"] ~ .form-error,
+label[for*="eligible_confirmation"] ~ small,
+label[for*="tos_agreement"] ~ .form-error,
+form[action*="ephemeral_sms"] .form__wrapper-block .form-error {
+  margin-left: calc(1.5rem + var(--stzh-space-small)) !important;
+  margin-top: 0.25rem !important;
+  min-height: 0 !important;
+}
