@@ -1267,6 +1267,16 @@ header .main-bar__dropdown>:not([hidden])~:not([hidden]){
   color: var(--stzh-base-invert-color);
 }
 
+/* Focus-mode "Zurück": the whole control is a flex child of
+   .main-bar__links-desktop and was being compressed below its content width on
+   narrow viewports, so the filled box shrank while the nowrap label spilled
+   out. Stop the box (and its wrapper) from shrinking at all. */
+header .main-bar--focus-mode-back-button,
+.main-bar--focus-mode-back-button {
+  flex: 0 0 auto;
+  min-width: max-content;
+}
+
 /* Focus-mode "Zurück": same filled primary as .button__primary */
 header .main-bar--focus-mode-back-button a.main-bar__links-desktop__item,
 .main-bar--focus-mode-back-button a.main-bar__links-desktop__item {
@@ -1278,6 +1288,28 @@ header .main-bar--focus-mode-back-button a.main-bar__links-desktop__item,
   padding: var(--stzh-space-small) var(--stzh-space-xlarge);
   border-radius: 0;
   transition-duration: var(--stzh-base-transition-animation-speed);
+  /*
+   * Size the filled box to its label so the background always wraps the text.
+   * As a flex child of .main-bar__links-desktop the anchor could otherwise be
+   * shrunk below its content width, leaving the nowrap label overflowing the
+   * colored box. Prevent shrinking and include padding in the box.
+   */
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  width: auto;
+  box-sizing: border-box;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+/* Keep the inner label span sized to its content so the box wraps it fully. */
+header .main-bar--focus-mode-back-button a.main-bar__links-desktop__item > span,
+.main-bar--focus-mode-back-button a.main-bar__links-desktop__item > span {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 header .main-bar--focus-mode-back-button a.main-bar__links-desktop__item svg,
@@ -4238,19 +4270,60 @@ html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label 
   display: block;
   position: relative;
   padding-left: calc(1.5rem + var(--stzh-space-small));
+  /* Match the first text line to the box height so the two sit on the
+     same level; the box top-aligns with (and centres on) the first line. */
+  line-height: 1.5rem;
 }
 
 .form__wrapper-checkbox-label:has(a) > input[type="checkbox"]:not(.reset-defaults),
-html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label > input[type="checkbox"]:not(.reset-defaults) {
+html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label > input[type="checkbox"]:not(.reset-defaults),
+/* Error state: Rails wraps the checkbox in <div class="field_with_errors">,
+   so the direct-child combinator above no longer matches and the box falls
+   back into flow inside the label's padding-left (pushing it right). Pin the
+   box to the left edge in that wrapped case too. */
+.form__wrapper-checkbox-label:has(a) .field_with_errors input[type="checkbox"]:not(.reset-defaults),
+html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label .field_with_errors input[type="checkbox"]:not(.reset-defaults) {
   position: absolute;
   left: 0;
   top: 0;
   margin: 0;
 }
 
+/* The field_with_errors wrapper must not occupy flow space or offset the copy;
+   collapse it so only the (absolutely positioned) box inside it renders. */
+.form__wrapper-checkbox-label:has(a) .field_with_errors,
+html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label .field_with_errors {
+  display: contents;
+}
+
 .form__wrapper-checkbox-label:has(a) a,
 html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label a {
   display: inline;
+}
+
+/* Validation hint ("muss akzeptiert werden") renders as a sibling after the
+   label, so it starts under the box. Indent it to the text column so it lines
+   up with the copy next to the box. */
+.form__wrapper-checkbox-label:has(a) + .form-error,
+.form__wrapper-checkbox-label:has(a) ~ .form-error,
+html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label + .form-error,
+html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-checkbox-label ~ .form-error {
+  margin-left: calc(1.5rem + var(--stzh-space-small));
+}
+
+/* Keep the ephemeral TOS checkbox box flush-left like the login page
+   "Angemeldet bleiben" box. The box is positioned at left:0 of its label,
+   so any padding/border on the wrapping fieldset/block insets the whole
+   label and pushes the box to the right. The generic fieldset reset above
+   only matches a checkbox label that is a DIRECT child, so a nested TOS
+   checkbox keeps its fieldset chrome. Strip it here (scoped to ephemeral)
+   so the box aligns with the other form fields. Text/hint alignment is
+   unaffected because they move together with the label. */
+html[data-rails-controller-path*="ephemeral_sms"] fieldset:has(.form__wrapper-checkbox-label),
+html[data-rails-controller-path*="ephemeral_sms"] .form__wrapper-block:has(.form__wrapper-checkbox-label) {
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 /* SMS phone form only: drop the leftover "Nutzungsbedingungen" heading. */
