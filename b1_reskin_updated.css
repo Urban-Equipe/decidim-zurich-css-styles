@@ -4178,11 +4178,13 @@ fieldset .form__wrapper-block:first-of-type {
 }
 
 /* Field titles = stzh-input__label (micro / 14px heavy, heading colour).
-   Exclude checkbox/radio option labels (those use milli medium below). */
+   Exclude checkbox/radio option labels (those use milli medium below).
+   Survey radios wrap the input *and* set for=, so label[for] would otherwise
+   style them as field titles. */
 label.response-questionnaire__question-label,
 label.answer-questionnaire__question-label,
 .tos-agreement,
-label[for]:not(.form__wrapper-checkbox-label),
+label[for]:not(.form__wrapper-checkbox-label):not(:has(> input[type="radio"], > input[type="checkbox"])),
 .upload-modal__files-container.upload-container-for-documents.with-title label,
 .formbuilder-textarea-label,
 .formbuilder-text-label,
@@ -4250,16 +4252,59 @@ label[for]:not(.form__wrapper-checkbox-label),
 .js-collection-input label,
 .form__wrapper-checkbox-label {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--stzh-space-small);
   font-family: var(--stzh-font-family-medium);
   font-weight: var(--stzh-font-weight-medium);
   font-style: var(--stzh-font-style-medium);
   font-size: var(--stzh-font-milli-font-size);
-  line-height: var(--stzh-font-milli-text-line-height);
+  line-height: 1.5rem;
   letter-spacing: var(--stzh-font-curve---text-letter-spacing);
   color: var(--stzh-base-color);
+  --choice-color: var(--stzh-color-black);
   margin: 0;
+}
+
+/* One spacer: flex gap. Defeat later margin-right on the control. */
+.response-questionnaire__multiple-option label > input[type="radio"]:not(.reset-defaults),
+.response-questionnaire__multiple-option label > input[type="checkbox"]:not(.reset-defaults),
+.response-questionnaire__single-option label > input[type="radio"]:not(.reset-defaults),
+.response-questionnaire__single-option label > input[type="checkbox"]:not(.reset-defaults),
+.answer-questionnaire__multiple-option label > input[type="radio"]:not(.reset-defaults),
+.answer-questionnaire__multiple-option label > input[type="checkbox"]:not(.reset-defaults),
+.answer-questionnaire__single-option label > input[type="radio"]:not(.reset-defaults),
+.answer-questionnaire__single-option label > input[type="checkbox"]:not(.reset-defaults),
+.js-collection-input label > input[type="radio"]:not(.reset-defaults),
+.js-collection-input label > input[type="checkbox"]:not(.reset-defaults) {
+  margin: 0;
+}
+
+/* STZH radio/checkbox: idle black; hover/selected primary70; selected+hover primary90.
+   --choice-color inherits to the control (border + fill). */
+.response-questionnaire__multiple-option label:hover:not(:has(input:disabled)),
+.response-questionnaire__single-option label:hover:not(:has(input:disabled)),
+.answer-questionnaire__multiple-option label:hover:not(:has(input:disabled)),
+.answer-questionnaire__single-option label:hover:not(:has(input:disabled)),
+.js-collection-input label:hover:not(:has(input:disabled)),
+.form__wrapper-checkbox-label:hover:not(:has(input:disabled)),
+.response-questionnaire__multiple-option label:has(input:checked),
+.response-questionnaire__single-option label:has(input:checked),
+.answer-questionnaire__multiple-option label:has(input:checked),
+.answer-questionnaire__single-option label:has(input:checked),
+.js-collection-input label:has(input:checked),
+.form__wrapper-checkbox-label:has(input:checked) {
+  color: var(--stzh-color-primary70);
+  --choice-color: var(--stzh-color-primary70);
+}
+
+.response-questionnaire__multiple-option label:hover:has(input:checked),
+.response-questionnaire__single-option label:hover:has(input:checked),
+.answer-questionnaire__multiple-option label:hover:has(input:checked),
+.answer-questionnaire__single-option label:hover:has(input:checked),
+.js-collection-input label:hover:has(input:checked),
+.form__wrapper-checkbox-label:hover:has(input:checked) {
+  color: var(--stzh-color-primary90);
+  --choice-color: var(--stzh-color-primary90);
 }
 
 /* Inline links in checkbox copy (ephemeral SMS "Spielregeln").
@@ -4358,7 +4403,7 @@ form:has(label[for*="mobile_phone"]) > label:not(.form__wrapper-checkbox-label):
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  border: 0.125rem solid var(--stzh-color-black);
+  border: 0.125rem solid var(--choice-color, var(--stzh-color-black));
   background-color: var(--stzh-color-white);
   background-repeat: no-repeat;
   background-position: center;
@@ -4385,13 +4430,47 @@ form:has(label[for*="mobile_phone"]) > label:not(.form__wrapper-checkbox-label):
   border-radius: 0;
 }
 
+.form.response-questionnaire input[type="radio"]:not(.reset-defaults):hover:not(:disabled),
+.form.response-questionnaire input[type="checkbox"]:not(.reset-defaults):hover:not(:disabled),
+.form.answer-questionnaire input[type="radio"]:not(.reset-defaults):hover:not(:disabled),
+.form.answer-questionnaire input[type="checkbox"]:not(.reset-defaults):hover:not(:disabled),
+.form-defaults input[type="radio"]:not(.reset-defaults):hover:not(:disabled),
+.form-defaults input[type="checkbox"]:not(.reset-defaults):hover:not(:disabled),
+.form__wrapper-checkbox-label input[type="checkbox"]:not(.reset-defaults):hover:not(:disabled),
+.form__wrapper-checkbox-label input[type="radio"]:not(.reset-defaults):hover:not(:disabled),
+.form.response-questionnaire input[type="radio"]:not(.reset-defaults):checked,
+.form.response-questionnaire input[type="checkbox"]:not(.reset-defaults):checked,
+.form.answer-questionnaire input[type="radio"]:not(.reset-defaults):checked,
+.form.answer-questionnaire input[type="checkbox"]:not(.reset-defaults):checked,
+.form-defaults input[type="radio"]:not(.reset-defaults):checked,
+.form-defaults input[type="checkbox"]:not(.reset-defaults):checked,
+.form__wrapper-checkbox-label input[type="radio"]:not(.reset-defaults):checked,
+.form__wrapper-checkbox-label input[type="checkbox"]:not(.reset-defaults):checked {
+  --choice-color: var(--stzh-color-primary70);
+}
+
+.form.response-questionnaire input[type="radio"]:not(.reset-defaults):checked:hover:not(:disabled),
+.form.response-questionnaire input[type="checkbox"]:not(.reset-defaults):checked:hover:not(:disabled),
+.form.answer-questionnaire input[type="radio"]:not(.reset-defaults):checked:hover:not(:disabled),
+.form.answer-questionnaire input[type="checkbox"]:not(.reset-defaults):checked:hover:not(:disabled),
+.form-defaults input[type="radio"]:not(.reset-defaults):checked:hover:not(:disabled),
+.form-defaults input[type="checkbox"]:not(.reset-defaults):checked:hover:not(:disabled),
+.form__wrapper-checkbox-label input[type="radio"]:not(.reset-defaults):checked:hover:not(:disabled),
+.form__wrapper-checkbox-label input[type="checkbox"]:not(.reset-defaults):checked:hover:not(:disabled),
+.form.response-questionnaire label:hover:has(input:checked) input:is([type="radio"], [type="checkbox"]):not(.reset-defaults),
+.form.answer-questionnaire label:hover:has(input:checked) input:is([type="radio"], [type="checkbox"]):not(.reset-defaults),
+.js-collection-input label:hover:has(input:checked) input:is([type="radio"], [type="checkbox"]):not(.reset-defaults),
+.form__wrapper-checkbox-label:hover:has(input:checked) input:is([type="radio"], [type="checkbox"]):not(.reset-defaults) {
+  --choice-color: var(--stzh-color-primary90);
+}
+
 .form.response-questionnaire input[type="radio"]:not(.reset-defaults):checked,
 .form.answer-questionnaire input[type="radio"]:not(.reset-defaults):checked,
 .form-defaults input[type="radio"]:not(.reset-defaults):checked,
 .form__wrapper-checkbox-label input[type="radio"]:not(.reset-defaults):checked {
   background-image: radial-gradient(
     circle at center,
-    var(--stzh-heading-color) 0.5rem,
+    var(--choice-color, var(--stzh-color-primary70)) 0.5rem,
     transparent 0.51rem
   );
 }
@@ -4400,18 +4479,24 @@ form:has(label[for*="mobile_phone"]) > label:not(.form__wrapper-checkbox-label):
 .form.answer-questionnaire input[type="checkbox"]:not(.reset-defaults):checked,
 .form-defaults input[type="checkbox"]:not(.reset-defaults):checked,
 .form__wrapper-checkbox-label input[type="checkbox"]:not(.reset-defaults):checked {
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='currentColor' d='M10 15.172l9.192-9.193 1.415 1.414L10 18 3.636 11.636l1.414-1.414z'/%3E%3C/svg%3E");
+  /* currentColor in a data-URI SVG does not inherit; paint via mask + token. */
+  background-image: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.form.response-questionnaire input[type="radio"]:not(.reset-defaults):hover:not(:disabled),
-.form.response-questionnaire input[type="checkbox"]:not(.reset-defaults):hover:not(:disabled),
-.form.answer-questionnaire input[type="radio"]:not(.reset-defaults):hover:not(:disabled),
-.form.answer-questionnaire input[type="checkbox"]:not(.reset-defaults):hover:not(:disabled),
-.form-defaults input[type="radio"]:not(.reset-defaults):hover:not(:disabled),
-.form-defaults input[type="checkbox"]:not(.reset-defaults):hover:not(:disabled),
-.form__wrapper-checkbox-label input[type="checkbox"]:not(.reset-defaults):hover:not(:disabled),
-.form__wrapper-checkbox-label input[type="radio"]:not(.reset-defaults):hover:not(:disabled) {
-  border-color: var(--stzh-heading-color);
+.form.response-questionnaire input[type="checkbox"]:not(.reset-defaults):checked::after,
+.form.answer-questionnaire input[type="checkbox"]:not(.reset-defaults):checked::after,
+.form-defaults input[type="checkbox"]:not(.reset-defaults):checked::after,
+.form__wrapper-checkbox-label input[type="checkbox"]:not(.reset-defaults):checked::after {
+  content: "";
+  width: 1.25rem;
+  height: 1.25rem;
+  background-color: var(--choice-color, var(--stzh-color-primary70));
+  transition: background-color var(--stzh-base-transition-animation-speed);
+  -webkit-mask: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M10 15.172l9.192-9.193 1.415 1.414L10 18 3.636 11.636l1.414-1.414z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M10 15.172l9.192-9.193 1.415 1.414L10 18 3.636 11.636l1.414-1.414z'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
 .form.response-questionnaire input[type="radio"]:not(.reset-defaults):focus-visible,
