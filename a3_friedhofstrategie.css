@@ -86,4 +86,6 @@ body {
   --stzh-cardlist-description-color: var(--stzh-color-primary80);
   --stzh-heading-color: var(--stzh-color-primary80);
   --stzh-topnews-background-color: var(--stzh-color-secondary30);
+
+  --primary: var(--stzh-color-primary70);
 }

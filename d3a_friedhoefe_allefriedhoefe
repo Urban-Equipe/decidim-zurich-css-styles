@@ -1,0 +1,8 @@
+.layout-2col__aside {
+    display: none;
+}
+
+@media (min-width:1024px){
+  .layout-2col__main {
+     grid-column: span 12 / span 12;
+}}
