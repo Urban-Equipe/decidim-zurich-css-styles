@@ -77,7 +77,7 @@ body {
   --stzh-button-tertiary-disabled-color: var(--stzh-color-grey70);
   --stzh-link-color: var(--stzh-color-primary70);
   --stzh-link-hover-color: var(--stzh-color-primary80);
-  --stzh-header-logobar-background-color: transparent;
+  --stzh-header-logobar-background-color: var(--stzh-color-primary70);
   --stzh-tooltip-color: var(--stzh-color-secondary70);
   --stzh-tooltip-background-color: var(--stzh-color-secondary10);
   --stzh-tooltip-link-color: var(--stzh-color-primary60);
@@ -88,4 +88,44 @@ body {
   --stzh-topnews-background-color: var(--stzh-color-secondary30);
 
   --primary: var(--stzh-color-primary70);
+
+  /* Aliases and component tokens are computed on :root, so they keep midnight/cobalt. */
+  --stzh-color-primary-rgb: var(--stzh-color-primary70-rgb);
+  --stzh-color-primary: rgba(var(--stzh-color-primary-rgb) / 1);
+  --stzh-color-primary-hover-rgb: var(--stzh-color-primary90-rgb);
+  --stzh-color-primary-hover: rgba(var(--stzh-color-primary-hover-rgb) / 1);
+  --stzh-color-old-primary48: rgba(var(--stzh-color-primary-rgb) / 0.48);
+  --stzh-color-old-primary32: rgba(var(--stzh-color-primary-rgb) / 0.32);
+  --stzh-color-old-primary8: rgba(var(--stzh-color-primary-rgb) / 0.08);
+  --stzh-color-old-primary4: rgba(var(--stzh-color-primary-rgb) / 0.04);
+  --stzh-base-invert-background-color: var(--stzh-color-primary70);
+  --stzh-selection-background-color: var(--stzh-color-secondary20);
+  --stzh-flyingfocus-color: var(--stzh-color-secondary60);
+  --stzh-link-secondary-color: var(--stzh-color-secondary60);
+  --stzh-link-secondary-hover-color: var(--stzh-color-primary70);
+  --stzh-section-highlight-background-color: var(--stzh-color-secondary10);
+  --stzh-footer-background-color: var(--stzh-color-primary100);
+  --stzh-accordion-content-background: var(--stzh-color-secondary10);
+  --stzh-pagetitle-background-color: var(--stzh-color-secondary30);
+  --stzh-mostsearched-background-color: var(--stzh-color-secondary40);
+
+  /* Decidim tokens, same :root bake. */
+  --primary-rgb: var(--stzh-color-primary70-rgb);
+  --secondary: var(--stzh-color-primary70);
+  --secondary-rgb: var(--stzh-color-primary70-rgb);
+  --tertiary: var(--stzh-color-primary10);
+  --tertiary-rgb: var(--stzh-color-primary10-rgb);
+
+  --button-background-color: var(--stzh-color-secondary30);
+  --hover-button-background-color: var(--stzh-color-secondary40);
+  --tw-prose-headings: var(--stzh-heading-color);
+  --tw-ring-color: rgba(var(--stzh-color-primary70-rgb) / 0.5);
+
+  --marker-color-small: var(--stzh-color-primary70);
+  --marker-color-semitransparent: rgba(var(--stzh-color-primary70-rgb) / 0.5);
+  --marker-color-small-semitransparent: var(--marker-color-semitransparent);
+  --marker-color-medium: var(--stzh-color-secondary60);
+  --marker-color-medium-semitransparent: rgba(var(--stzh-color-secondary60-rgb) / 0.5);
+
+  --stzh-mitwirken-logobar-bg: var(--stzh-color-primary70);
 }
