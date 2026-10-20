@@ -548,17 +548,17 @@ header #sticky-header-container {
  */
 
 :root {
-  /* Decidim header .main-bar content box (see decidim_core) */
-  --stzh-mitwirken-content-max: 100%;
-  --stzh-mitwirken-content-side: max(
-    0px,
-    (100vw - var(--stzh-mitwirken-content-max)) / 2
-  );
+  /*
+   * stzh-header on stadt-zuerich.ch (components 4.16).
+   * Below 1600px the white logo plate starts at the viewport edge and the
+   * mark is inset by the container margin. From 1600px the plate sits on a
+   * centered 84.25rem column and the mark is flush with that column.
+   */
+  --stzh-mitwirken-content-side: 0px;
 
-  /* STZH logobar geometry */
+  /* STZH logobar geometry — base, up to 599px */
   --stzh-mitwirken-logobar-height: 4.125rem;
   --stzh-mitwirken-logobar-logo-width: 18rem;
-  /* STZH logo-link padding-left: --stzh-container-margin (20px) */
   --stzh-mitwirken-logobar-pad-x: var(--stzh-container-margin, 1.25rem);
   --stzh-mitwirken-logobar-pad-y: 0.875rem;
   --stzh-mitwirken-logobar-pad-y-bottom: 0.6875rem;
@@ -568,7 +568,6 @@ header #sticky-header-container {
   );
   --stzh-mitwirken-logobar-logo-url: url("https://www.stadt-zuerich.ch/content/dam/corporate-design/de/logos/stadt-zuerich.svg");
 
-  /* White plate starts at content column; logo inset by STZH pad within it */
   --stzh-mitwirken-logobar-white-start: var(--stzh-mitwirken-content-side);
   --stzh-mitwirken-logobar-blue-start: calc(
     var(--stzh-mitwirken-content-side) + var(--stzh-mitwirken-logobar-logo-width)
@@ -578,55 +577,42 @@ header #sticky-header-container {
   );
 }
 
-@media screen and (min-width: 640px) {
+@media screen and (min-width: 600px) {
   :root {
-    --stzh-mitwirken-content-max: 640px;
     --stzh-mitwirken-logobar-logo-width: 18.75rem;
-    /* STZH ≥600: --stzh-container-margin-small (32px) */
     --stzh-mitwirken-logobar-pad-x: var(--stzh-container-margin-small, 2rem);
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 900px) {
   :root {
-    --stzh-mitwirken-content-max: 768px;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  :root {
-    --stzh-mitwirken-content-max: 1024px;
     --stzh-mitwirken-logobar-height: 5.5rem;
     --stzh-mitwirken-logobar-logo-width: 24.9375rem;
-    /* STZH ≥900: --stzh-container-margin-medium (40px) */
     --stzh-mitwirken-logobar-pad-x: var(--stzh-container-margin-medium, 2.5rem);
     --stzh-mitwirken-logobar-pad-y: 1.125rem;
     --stzh-mitwirken-logobar-pad-y-bottom: 1.125rem;
   }
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1260px) {
   :root {
-    --stzh-mitwirken-content-max: 1280px;
     --stzh-mitwirken-logobar-height: 8.4375rem;
     --stzh-mitwirken-logobar-logo-width: 38.5625rem;
-    /* STZH ≥1260: --stzh-container-margin-large (64px) */
     --stzh-mitwirken-logobar-pad-x: var(--stzh-container-margin-large, 4rem);
     --stzh-mitwirken-logobar-pad-y: 1.75rem;
     --stzh-mitwirken-logobar-pad-y-bottom: 1.5rem;
   }
 }
 
-@media screen and (min-width: 1536px) {
+@media screen and (min-width: 1600px) {
   :root {
-    --stzh-mitwirken-content-max: 1536px;
+    --stzh-mitwirken-logobar-column: 84.25rem;
+    --stzh-mitwirken-content-side: max(
+      0px,
+      (100vw - var(--stzh-mitwirken-logobar-column) - var(--stzh-scrollbar-width, 0px)) / 2
+    );
     --stzh-mitwirken-logobar-logo-width: 34.5625rem;
-    /**
-     * STZH ≥1600 sets logo-link padding-left: 0 (flush to content column).
-     * Decidim’s main-bar still uses 4rem horizontal padding — keep that inset
-     * so the logo left-aligns with page content.
-     */
-    --stzh-mitwirken-logobar-pad-x: 4rem;
+    --stzh-mitwirken-logobar-pad-x: 0px;
   }
 }
 
@@ -755,7 +741,7 @@ header .main-bar__logo-desktop {
 header .main-bar__logo-desktop a {
   position: absolute;
   top: calc(-1 * var(--stzh-mitwirken-logobar-height));
-  left: 0;
+  left: var(--stzh-mitwirken-logobar-white-start);
   width: var(--stzh-mitwirken-logobar-logo-width);
   height: var(--stzh-mitwirken-logobar-height);
   z-index: 5;
@@ -2186,32 +2172,89 @@ header .menu-bar__breadcrumb-mobile button svg {
   box-sizing: border-box;
 }
 
-/* Hero title styling */
+/*
+ * Home hero type, matched to stadt-zuerich.ch pagetitle-home
+ * (stzh-heading curve h1home + stzh-text curve hero, lead).
+ * The live site’s font scale is smaller than the npm tokens A1 imports,
+ * so these steps are the measured sizes, not var(--stzh-font-mega-font-size).
+ */
 .hero__title {
   font-family: var(--stzh-font-family-title);
   font-weight: var(--stzh-font-weight-heavy);
   font-style: normal;
-  font-size: clamp(2.5rem, 6vw, 5.625rem);
-  line-height: 1.1;
-  letter-spacing: normal;
-  color: var(--stzh-color-lemonyellow50, #fff);
+  font-size: 2.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--stzh-color-lemonyellow50, #fde828);
   margin: 0;
   text-align: left;
   max-width: 60ch;
+}
+
+@media screen and (min-width: 600px) {
+  .hero__title {
+    font-size: 3rem;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .hero__title {
+    font-size: 4rem;
+  }
+}
+
+@media screen and (min-width: 1260px) {
+  .hero__title {
+    font-size: 5rem;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .hero__title {
+    font-size: 5.625rem;
+  }
 }
 
 .hero__title::after {
   content: "Willkommen im Partizipationsportal der Stadt Zürich!";
 
   display: block;
-  margin-top: var(--stzh-space-small);
+  margin-top: 0.25rem;
   font-family: var(--stzh-font-family-heavy);
-  font-weight: var(--stzh-font-weight-regular);
+  font-weight: var(--stzh-font-weight-heavy);
   font-style: normal;
-  font-size: clamp(2rem, 2.2vw, 3.5rem);
-  line-height: 1.4;
-  color: var(--stzh-base-invert-color);
+  font-size: 2rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--stzh-color-white, #fff);
   max-width: 60ch;
+}
+
+@media screen and (min-width: 600px) {
+  .hero__title::after {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .hero__title::after {
+    margin-top: 0.5rem;
+  }
+}
+
+@media screen and (min-width: 1260px) {
+  .hero__title::after {
+    margin-top: 0.75rem;
+    font-size: 3rem;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .hero__title::after {
+    font-size: 3.5rem;
+  }
 }
 
 
@@ -3596,6 +3639,22 @@ background-color: transparent;
 
 .budget-summary__progressbar--meter {
   background-color: var(--stzh-color-success60);
+}
+
+/*
+ * Decidim lays this legend out as 70% | 1fr | 1fr and then shifts the
+ * minimum label left by half its own width, so "CHF 10'000 / Minimum"
+ * sits on the 70% mark. Keep the assigned amount at the start, the
+ * minimum in the middle of the bar, and the total at the end.
+ */
+.budget-summary__progressbar-marks {
+  grid-template-columns: 1fr auto 1fr;
+}
+
+.budget-summary__progressbar-marks_center {
+  justify-self: center;
+  text-align: center;
+  transform: none;
 }
 
 /* Phone: stack each project, keep the summary bar off the list, 44px targets.
