@@ -160,17 +160,13 @@ body {
 
 /* ==========================================================================
    Proposal map
-   On a wide proposal page the geo map sits to the right of the text, under
-   the title. The proposal column is a little narrower, and the map uses that
-   space plus a little of the margin to the right of the layout. It stays
-   square. On a narrow page it stays above the text at a fixed size instead
-   of the full-width banner.
+   Wide pages: a square to the right of the text, under the title. The
+   proposal column gives up 3rem. --friedhof-map-size is the square.
+   --friedhof-map-inset holds the right edge on the layout frame, then 2rem
+   past it once the page has room. Narrow pages keep a centered 16rem square.
 
-   Decidim Awesome saves this file with libsass and ships the pasted source
-   to the browser. Keep every value a plain length or a calc(). Libsass
-   rejects mixed units inside its own math functions, and the browser drops
-   Sass interpolation. A length on margin-right is required. An auto right
-   margin pins the map to the left of the grid.
+   Paste plain lengths and calc() only. Decidim Awesome compiles with libsass
+   and serves this source as written. An auto right margin pins the map left.
    ========================================================================== */
 
 #GeoProposalsItem.decidimGeo__container--proposals_item {
@@ -191,6 +187,8 @@ body {
 
 @media screen and (min-width: 1024px) {
   #content:has(#GeoProposalsItem) {
+    --friedhof-map-size: 23rem;
+    --friedhof-map-inset: 0px;
     display: grid;
   }
 
@@ -200,18 +198,14 @@ body {
     grid-row: 2;
   }
 
-  /* 23rem fills the column once the proposal text gives up 3rem. */
   #GeoProposalsItem.decidimGeo__container--proposals_item {
     justify-self: end;
     align-self: start;
     z-index: 2;
-    width: 23rem;
+    width: var(--friedhof-map-size);
     max-width: none;
-    height: 23rem;
-    margin-top: 10.5rem;
-    margin-right: 0;
-    margin-bottom: 0;
-    margin-left: 0;
+    height: var(--friedhof-map-size);
+    margin: 10.5rem var(--friedhof-map-inset) 0 0;
   }
 
   #content:has(#GeoProposalsItem) > .layout-item > .layout-item__main {
@@ -219,75 +213,47 @@ body {
   }
 
   #content:has(#GeoProposalsItem) > .layout-item > main.layout-item__main {
-    min-height: 35rem;
+    min-height: calc(var(--friedhof-map-size) + 12rem);
   }
 }
 
+/* Inset follows the centered layout: 64rem, then 80rem, then 96rem. */
 @media screen and (min-width: 1056px) {
-  /* Layout is a centered 64rem column until 1280. */
-  #GeoProposalsItem.decidimGeo__container--proposals_item {
-    margin-right: calc((100% - 64rem) / 2);
-  }
+  #content:has(#GeoProposalsItem) { --friedhof-map-inset: calc((100% - 64rem) / 2); }
 }
 
 @media screen and (min-width: 1280px) {
-  #GeoProposalsItem.decidimGeo__container--proposals_item {
-    width: 29rem;
-    height: 29rem;
-    margin-right: 0;
-  }
-
-  #content:has(#GeoProposalsItem) > .layout-item > main.layout-item__main {
-    min-height: 41rem;
+  #content:has(#GeoProposalsItem) {
+    --friedhof-map-size: 29rem;
+    --friedhof-map-inset: 0px;
   }
 }
 
 @media screen and (min-width: 1296px) {
-  /* Layout is a centered 80rem column. 100% is past that even with a scrollbar. */
-  #GeoProposalsItem.decidimGeo__container--proposals_item {
-    margin-right: calc((100% - 80rem) / 2);
-  }
+  #content:has(#GeoProposalsItem) { --friedhof-map-inset: calc((100% - 80rem) / 2); }
 }
 
 @media screen and (min-width: 1400px) {
-  /* Use 2rem of the page margin to the right of the frame. */
-  #GeoProposalsItem.decidimGeo__container--proposals_item {
-    width: 31rem;
-    height: 31rem;
-    margin-right: calc((100% - 80rem) / 2 - 2rem);
-  }
-
-  #content:has(#GeoProposalsItem) > .layout-item > main.layout-item__main {
-    min-height: 43rem;
+  #content:has(#GeoProposalsItem) {
+    --friedhof-map-size: 31rem;
+    --friedhof-map-inset: calc((100% - 80rem) / 2 - 2rem);
   }
 }
 
 @media screen and (min-width: 1536px) {
-  #GeoProposalsItem.decidimGeo__container--proposals_item {
-    width: 33rem;
-    height: 33rem;
-    margin-right: 0;
-  }
-
-  #content:has(#GeoProposalsItem) > .layout-item > main.layout-item__main {
-    min-height: 45rem;
+  #content:has(#GeoProposalsItem) {
+    --friedhof-map-size: 33rem;
+    --friedhof-map-inset: 0px;
   }
 }
 
 @media screen and (min-width: 1568px) {
-  #GeoProposalsItem.decidimGeo__container--proposals_item {
-    margin-right: calc((100% - 96rem) / 2);
-  }
+  #content:has(#GeoProposalsItem) { --friedhof-map-inset: calc((100% - 96rem) / 2); }
 }
 
 @media screen and (min-width: 1664px) {
-  #GeoProposalsItem.decidimGeo__container--proposals_item {
-    width: 35rem;
-    height: 35rem;
-    margin-right: calc((100% - 96rem) / 2 - 2rem);
-  }
-
-  #content:has(#GeoProposalsItem) > .layout-item > main.layout-item__main {
-    min-height: 47rem;
+  #content:has(#GeoProposalsItem) {
+    --friedhof-map-size: 35rem;
+    --friedhof-map-inset: calc((100% - 96rem) / 2 - 2rem);
   }
 }
