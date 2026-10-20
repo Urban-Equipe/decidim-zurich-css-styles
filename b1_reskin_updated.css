@@ -3598,6 +3598,22 @@ background-color: transparent;
   background-color: var(--stzh-color-success60);
 }
 
+/*
+ * Decidim lays this legend out as 70% | 1fr | 1fr and then shifts the
+ * minimum label left by half its own width, so "CHF 10'000 / Minimum"
+ * sits on the 70% mark. Keep the assigned amount at the start, the
+ * minimum in the middle of the bar, and the total at the end.
+ */
+.budget-summary__progressbar-marks {
+  grid-template-columns: 1fr auto 1fr;
+}
+
+.budget-summary__progressbar-marks_center {
+  justify-self: center;
+  text-align: center;
+  transform: none;
+}
+
 /* Phone: stack each project, keep the summary bar off the list, 44px targets.
    Active sort chip uses primary70 so white text clears 4.5:1. */
 @media (max-width: 767px) {
