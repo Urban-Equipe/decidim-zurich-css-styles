@@ -149,3 +149,11 @@ body {
 .card__list-metadata > div:has(img[alt="Avatar: Official proposal"]) {
   display: none;
 }
+
+/* "Friedhof" / "Standort Friedhof": hide the whole byline, including the date. */
+.author:has(img[alt="Avatar: Friedhof"]),
+.author:has(img[alt="Avatar: Standort Friedhof"]),
+.card__list-metadata > div:has(img[alt="Avatar: Friedhof"]),
+.card__list-metadata > div:has(img[alt="Avatar: Standort Friedhof"]) {
+  display: none;
+}
