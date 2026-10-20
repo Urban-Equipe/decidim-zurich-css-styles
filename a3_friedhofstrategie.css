@@ -161,9 +161,10 @@ body {
 /* ==========================================================================
    Proposal map
    On a wide proposal page the geo map sits to the right of the text, under
-   the title, with its right edge on the layout frame. It stays square. On a
-   narrow page it stays above the text at a fixed size instead of the
-   full-width banner.
+   the title. The proposal column is a little narrower, and the map uses that
+   space plus a little of the margin to the right of the layout. It stays
+   square. On a narrow page it stays above the text at a fixed size instead
+   of the full-width banner.
 
    Decidim Awesome saves this file with libsass and ships the pasted source
    to the browser. Keep every value a plain length or a calc(). Libsass
@@ -199,22 +200,26 @@ body {
     grid-row: 2;
   }
 
-  /* Right edge meets the layout frame. 20rem fills the space beside the text. */
+  /* 23rem fills the column once the proposal text gives up 3rem. */
   #GeoProposalsItem.decidimGeo__container--proposals_item {
     justify-self: end;
     align-self: start;
     z-index: 2;
-    width: 20rem;
+    width: 23rem;
     max-width: none;
-    height: 20rem;
+    height: 23rem;
     margin-top: 10.5rem;
     margin-right: 0;
     margin-bottom: 0;
     margin-left: 0;
   }
 
+  #content:has(#GeoProposalsItem) > .layout-item > .layout-item__main {
+    margin-right: 3rem;
+  }
+
   #content:has(#GeoProposalsItem) > .layout-item > main.layout-item__main {
-    min-height: 32rem;
+    min-height: 35rem;
   }
 }
 
@@ -226,15 +231,14 @@ body {
 }
 
 @media screen and (min-width: 1280px) {
-  /* Free space out to the frame is about 28rem. */
   #GeoProposalsItem.decidimGeo__container--proposals_item {
-    width: 26rem;
-    height: 26rem;
+    width: 29rem;
+    height: 29rem;
     margin-right: 0;
   }
 
   #content:has(#GeoProposalsItem) > .layout-item > main.layout-item__main {
-    min-height: 38rem;
+    min-height: 41rem;
   }
 }
 
@@ -245,21 +249,45 @@ body {
   }
 }
 
-@media screen and (min-width: 1536px) {
-  /* Free space out to the frame is about 33rem. */
+@media screen and (min-width: 1400px) {
+  /* Use 2rem of the page margin to the right of the frame. */
   #GeoProposalsItem.decidimGeo__container--proposals_item {
-    width: 30rem;
-    height: 30rem;
+    width: 31rem;
+    height: 31rem;
+    margin-right: calc((100% - 80rem) / 2 - 2rem);
+  }
+
+  #content:has(#GeoProposalsItem) > .layout-item > main.layout-item__main {
+    min-height: 43rem;
+  }
+}
+
+@media screen and (min-width: 1536px) {
+  #GeoProposalsItem.decidimGeo__container--proposals_item {
+    width: 33rem;
+    height: 33rem;
     margin-right: 0;
   }
 
   #content:has(#GeoProposalsItem) > .layout-item > main.layout-item__main {
-    min-height: 42rem;
+    min-height: 45rem;
   }
 }
 
 @media screen and (min-width: 1568px) {
   #GeoProposalsItem.decidimGeo__container--proposals_item {
     margin-right: calc((100% - 96rem) / 2);
+  }
+}
+
+@media screen and (min-width: 1664px) {
+  #GeoProposalsItem.decidimGeo__container--proposals_item {
+    width: 35rem;
+    height: 35rem;
+    margin-right: calc((100% - 96rem) / 2 - 2rem);
+  }
+
+  #content:has(#GeoProposalsItem) > .layout-item > main.layout-item__main {
+    min-height: 47rem;
   }
 }
