@@ -129,3 +129,23 @@ body {
 
   --stzh-mitwirken-logobar-bg: var(--stzh-color-primary70);
 }
+
+/* ==========================================================================
+   Hide the official-proposal byline
+   The avatar alt is the only hook CSS has for this author. Citizen authors
+   stay visible. On the proposal page the date in .author__metadata stays.
+   ========================================================================== */
+
+.author:has(img[alt="Avatar: Offizieller Vorschlag"]) .author__avatar-container,
+.author:has(img[alt="Avatar: Offizieller Vorschlag"]) .author__name,
+.author:has(img[alt="Avatar: Official proposal"]) .author__avatar-container,
+.author:has(img[alt="Avatar: Official proposal"]) .author__name {
+  display: none;
+}
+
+.author:has(img[alt="Avatar: Offizieller Vorschlag"]):not(:has(.author__metadata)),
+.author:has(img[alt="Avatar: Official proposal"]):not(:has(.author__metadata)),
+.card__list-metadata > div:has(img[alt="Avatar: Offizieller Vorschlag"]),
+.card__list-metadata > div:has(img[alt="Avatar: Official proposal"]) {
+  display: none;
+}
