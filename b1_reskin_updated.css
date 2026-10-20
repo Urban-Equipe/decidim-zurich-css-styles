@@ -2172,32 +2172,89 @@ header .menu-bar__breadcrumb-mobile button svg {
   box-sizing: border-box;
 }
 
-/* Hero title styling */
+/*
+ * Home hero type, matched to stadt-zuerich.ch pagetitle-home
+ * (stzh-heading curve h1home + stzh-text curve hero, lead).
+ * The live site’s font scale is smaller than the npm tokens A1 imports,
+ * so these steps are the measured sizes, not var(--stzh-font-mega-font-size).
+ */
 .hero__title {
   font-family: var(--stzh-font-family-title);
   font-weight: var(--stzh-font-weight-heavy);
   font-style: normal;
-  font-size: clamp(2.5rem, 6vw, 5.625rem);
-  line-height: 1.1;
-  letter-spacing: normal;
-  color: var(--stzh-color-lemonyellow50, #fff);
+  font-size: 2.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--stzh-color-lemonyellow50, #fde828);
   margin: 0;
   text-align: left;
   max-width: 60ch;
+}
+
+@media screen and (min-width: 600px) {
+  .hero__title {
+    font-size: 3rem;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .hero__title {
+    font-size: 4rem;
+  }
+}
+
+@media screen and (min-width: 1260px) {
+  .hero__title {
+    font-size: 5rem;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .hero__title {
+    font-size: 5.625rem;
+  }
 }
 
 .hero__title::after {
   content: "Willkommen im Partizipationsportal der Stadt Zürich!";
 
   display: block;
-  margin-top: var(--stzh-space-small);
+  margin-top: 0.25rem;
   font-family: var(--stzh-font-family-heavy);
-  font-weight: var(--stzh-font-weight-regular);
+  font-weight: var(--stzh-font-weight-heavy);
   font-style: normal;
-  font-size: clamp(2rem, 2.2vw, 3.5rem);
-  line-height: 1.4;
-  color: var(--stzh-base-invert-color);
+  font-size: 2rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--stzh-color-white, #fff);
   max-width: 60ch;
+}
+
+@media screen and (min-width: 600px) {
+  .hero__title::after {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .hero__title::after {
+    margin-top: 0.5rem;
+  }
+}
+
+@media screen and (min-width: 1260px) {
+  .hero__title::after {
+    margin-top: 0.75rem;
+    font-size: 3rem;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .hero__title::after {
+    font-size: 3.5rem;
+  }
 }
 
 
