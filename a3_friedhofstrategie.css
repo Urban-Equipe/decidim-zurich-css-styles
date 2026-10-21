@@ -129,3 +129,131 @@ body {
 
   --stzh-mitwirken-logobar-bg: var(--stzh-color-primary70);
 }
+
+/* ==========================================================================
+   Hide the official-proposal byline
+   The avatar alt is the only hook CSS has for this author. Citizen authors
+   stay visible. On the proposal page the date in .author__metadata stays.
+   ========================================================================== */
+
+.author:has(img[alt="Avatar: Offizieller Vorschlag"]) .author__avatar-container,
+.author:has(img[alt="Avatar: Offizieller Vorschlag"]) .author__name,
+.author:has(img[alt="Avatar: Official proposal"]) .author__avatar-container,
+.author:has(img[alt="Avatar: Official proposal"]) .author__name {
+  display: none;
+}
+
+.author:has(img[alt="Avatar: Offizieller Vorschlag"]):not(:has(.author__metadata)),
+.author:has(img[alt="Avatar: Official proposal"]):not(:has(.author__metadata)),
+.card__list-metadata > div:has(img[alt="Avatar: Offizieller Vorschlag"]),
+.card__list-metadata > div:has(img[alt="Avatar: Official proposal"]) {
+  display: none;
+}
+
+/* "Friedhof" / "Standort Friedhof": hide the whole byline, including the date. */
+.author:has(img[alt="Avatar: Friedhof"]),
+.author:has(img[alt="Avatar: Standort Friedhof"]),
+.card__list-metadata > div:has(img[alt="Avatar: Friedhof"]),
+.card__list-metadata > div:has(img[alt="Avatar: Standort Friedhof"]) {
+  display: none;
+}
+
+/* ==========================================================================
+   Proposal map
+   Wide pages: a square to the right of the text, under the title. The
+   proposal column gives up 3rem. --friedhof-map-size is the square.
+   --friedhof-map-inset holds the right edge on the layout frame, then 2rem
+   past it once the page has room. Narrow pages keep a centered 16rem square.
+
+   Paste plain lengths and calc() only. Decidim Awesome compiles with libsass
+   and serves this source as written. An auto right margin pins the map left.
+   ========================================================================== */
+
+#GeoProposalsItem.decidimGeo__container--proposals_item {
+  box-sizing: border-box;
+  width: 16rem;
+  max-width: 100%;
+  height: 16rem;
+  margin: 0 auto 1rem;
+  padding: 0;
+}
+
+#GeoProposalsItem.decidimGeo__container--proposals_item .decidimgeo__map--proposals_item {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  max-height: none;
+}
+
+@media screen and (min-width: 1024px) {
+  #content:has(#GeoProposalsItem) {
+    --friedhof-map-size: 23rem;
+    --friedhof-map-inset: 0px;
+    display: grid;
+  }
+
+  #content:has(#GeoProposalsItem) > #GeoProposalsItem,
+  #content:has(#GeoProposalsItem) > .layout-item {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  #GeoProposalsItem.decidimGeo__container--proposals_item {
+    justify-self: end;
+    align-self: start;
+    z-index: 2;
+    width: var(--friedhof-map-size);
+    max-width: none;
+    height: var(--friedhof-map-size);
+    margin: 10.5rem var(--friedhof-map-inset) 0 0;
+  }
+
+  #content:has(#GeoProposalsItem) > .layout-item > .layout-item__main {
+    margin-right: 3rem;
+  }
+
+  #content:has(#GeoProposalsItem) > .layout-item > main.layout-item__main {
+    min-height: calc(var(--friedhof-map-size) + 12rem);
+  }
+}
+
+/* Inset follows the centered layout: 64rem, then 80rem, then 96rem. */
+@media screen and (min-width: 1056px) {
+  #content:has(#GeoProposalsItem) { --friedhof-map-inset: calc((100% - 64rem) / 2); }
+}
+
+@media screen and (min-width: 1280px) {
+  #content:has(#GeoProposalsItem) {
+    --friedhof-map-size: 29rem;
+    --friedhof-map-inset: 0px;
+  }
+}
+
+@media screen and (min-width: 1296px) {
+  #content:has(#GeoProposalsItem) { --friedhof-map-inset: calc((100% - 80rem) / 2); }
+}
+
+@media screen and (min-width: 1400px) {
+  #content:has(#GeoProposalsItem) {
+    --friedhof-map-size: 31rem;
+    --friedhof-map-inset: calc((100% - 80rem) / 2 - 2rem);
+  }
+}
+
+@media screen and (min-width: 1536px) {
+  #content:has(#GeoProposalsItem) {
+    --friedhof-map-size: 33rem;
+    --friedhof-map-inset: 0px;
+  }
+}
+
+@media screen and (min-width: 1568px) {
+  #content:has(#GeoProposalsItem) { --friedhof-map-inset: calc((100% - 96rem) / 2); }
+}
+
+@media screen and (min-width: 1664px) {
+  #content:has(#GeoProposalsItem) {
+    --friedhof-map-size: 35rem;
+    --friedhof-map-inset: calc((100% - 96rem) / 2 - 2rem);
+  }
+}
