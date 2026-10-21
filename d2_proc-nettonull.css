@@ -371,6 +371,17 @@ li:has(a[href*="/processes/pilotquartier/f/707/posts"]) {
   display: none;
 }
 
+/* Project list: "Projekt hinzufügen" is only a label above the filters.
+   Match that block only; a single project's description uses the same section class. */
+html[data-rails-controller-name="projects"] section.layout-main__section:has(> .flex > .flex > .text-xl.font-semibold) {
+  display: none;
+}
+
+/* Project list: hide "Projekte für {budget}" in the filter column. */
+html[data-rails-controller-name="projects"] .layout-2col__aside > h1 {
+  display: none;
+}
+
 /* Budgets index (/f/.../budgets): hide "n Budget(s)" heading and sort chips.
    Projects list (/f/.../budgets/:id/projects) uses controller-name="projects"
    and keeps its own Zufällige / Höchste Kosten / Niedrigste Kosten chips. */
@@ -378,4 +389,76 @@ html[data-rails-controller-name="budgets"] #budgets > h2.decorator,
 html[data-rails-controller-name="budgets"] #dropdown-trigger-order,
 html[data-rails-controller-name="budgets"] #dropdown-menu-order {
   display: none;
+}
+
+/* Order status: hide Decidim's download / homepage / share row.
+   The term-customizer copies of those classes sit inside the message, not as direct children of the column. */
+html[data-rails-controller-name="orders"][data-rails-action-name="status"] main.layout-1col > .form__wrapper-block,
+html[data-rails-controller-name="orders"][data-rails-action-name="status"] main.layout-1col > .text-center:not(.flex) {
+  display: none;
+}
+
+html[data-rails-controller-name="orders"][data-rails-action-name="status"] main.layout-1col .flex > a.button__secondary {
+  margin-bottom: var(--stzh-space-large);
+}
+
+/* Voted budget summary: hide "Budgets / {budget title}". The name is a text node, so collapse the header and restore the description. */
+.budget-summary__content__header {
+  font-size: 0;
+  line-height: 0;
+}
+
+.budget-summary__content__header--description {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.budget-summary__progressbox--checked_out {
+  font-family: var(--stzh-font-family-heavy);
+  font-weight: var(--stzh-font-weight-heavy);
+}
+
+#progress-summary-dropdown-menu ul {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+#progress-summary-dropdown-menu li {
+  font-family: var(--stzh-font-family-heavy);
+  font-weight: var(--stzh-font-weight-heavy);
+}
+
+#progress-summary-button {
+  display: none;
+}
+
+#progress-summary-dropdown-menu {
+  display: block !important;
+}
+
+.budget-summary__content,
+.progressbox-fixed-wrapper {
+  background-color: var(--c-20);
+}
+
+.budget-summary__progressbar-marks {
+  grid-template-columns: 1fr 1fr;
+}
+
+.budget-summary__progressbar-marks_center {
+  display: none;
+}
+
+.budget-summary__progressbar-marks_right {
+  grid-column: 2;
+  justify-self: end;
+}
+
+@media (max-width: 1023px) {
+  .budget-summary__progressbar-legend,
+  .budget-summary__progressbar-legend-strong {
+    font-size: 14px;
+    line-height: 18px;
+  }
 }
