@@ -454,6 +454,7 @@ abbr:where([title]) {
 /*Wrap and auto-adjust H1 text on overview pages (i.e. /processes)*/
 .layout-2col__aside > h1 {
   font-size:var(--stzh-font-kilo-font-size);
+  color: var(--stzh-color-primary70);
 }
 
 @media (min-width: 640px) and (max-width: 1536px){
@@ -3572,15 +3573,180 @@ a.tabs-title:hover {
 
 
 /* ===== LEFT SIDEBAR FILTERS ===== */
+/* Section headers match stzh-accordion / stzh-accordion-item (default variant):
+   https://designsystem.stadt-zuerich.ch/current/?path=/docs/components-accordionitem--docs
+   Same markup on /processes, /assemblies, and component sidebars. */
 
 /*Change background*/
 .layout-2col__aside:before {
 background-color: transparent;
 }
 
+#dropdown-menu-filters > .filter-container,
+#dropdown-trigger-filters {
+  --stzh-filter-accordion-pad-x: var(--stzh-space-medium, 16px);
+  --stzh-filter-accordion-pad-y: var(--stzh-space-xsmall, 8px);
+  margin-top: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+@media screen and (min-width: 600px) {
+  #dropdown-menu-filters > .filter-container,
+  #dropdown-trigger-filters {
+    --stzh-filter-accordion-pad-x: var(--stzh-space-large, 20px);
+    --stzh-filter-accordion-pad-y: var(--stzh-space-small, 12px);
+  }
+}
+
+@media screen and (min-width: 900px) {
+  #dropdown-menu-filters > .filter-container,
+  #dropdown-trigger-filters {
+    --stzh-filter-accordion-pad-x: var(--stzh-space-xlarge, 24px);
+    --stzh-filter-accordion-pad-y: var(--stzh-space-medium, 16px);
+  }
+}
+
+@media screen and (min-width: 1260px) {
+  #dropdown-menu-filters > .filter-container,
+  #dropdown-trigger-filters {
+    --stzh-filter-accordion-pad-x: var(--stzh-space-xxlarge, 32px);
+    --stzh-filter-accordion-pad-y: var(--stzh-space-xlarge, 24px);
+  }
+}
+
+#dropdown-menu-filters > .filter-container + .filter-container {
+  margin-top: var(--stzh-space-xsmall, 8px);
+}
+
+#dropdown-menu-filters > .filter-help,
+#dropdown-menu-filters > .filter-search {
+  margin-bottom: var(--stzh-space-small, 12px);
+}
+
+#dropdown-menu-filters > .filter-container > button[data-controls],
+#dropdown-trigger-filters {
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  width: 100%;
+  min-height: 3.75rem;
+  margin: 0;
+  padding: var(--stzh-filter-accordion-pad-y) var(--stzh-filter-accordion-pad-x);
+  border: 0;
+  border-radius: 0;
+  appearance: none;
+  background-color: var(--stzh-color-secondary30);
+  color: var(--stzh-color-primary70);
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-style: var(--stzh-font-style-medium);
+  font-size: var(--stzh-font-curve-p1-default-font-size, var(--stzh-font-milli-font-size));
+  line-height: var(--stzh-font-curve-p1-default-text-line-height, var(--stzh-font-milli-text-line-height));
+  letter-spacing: var(--stzh-font-curve-p1-default-text-letter-spacing);
+  text-align: left;
+  text-transform: none;
+  cursor: pointer;
+  transition: background-color 200ms;
+}
+
+@media screen and (min-width: 900px) {
+  #dropdown-menu-filters > .filter-container > button[data-controls],
+  #dropdown-trigger-filters {
+    font-size: var(--stzh-font-curve-p1-medium-font-size, var(--stzh-font-centi-font-size));
+    line-height: var(--stzh-font-curve-p1-medium-text-line-height, var(--stzh-font-centi-text-line-height));
+    letter-spacing: var(--stzh-font-curve-p1-medium-text-letter-spacing);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #dropdown-menu-filters > .filter-container > button[data-controls],
+  #dropdown-trigger-filters {
+    transition: none;
+  }
+}
+
+#dropdown-menu-filters > .filter-container > button[data-controls] {
+  display: flex;
+}
+
+#dropdown-menu-filters > .filter-container > button[data-controls]:hover,
+#dropdown-trigger-filters:hover {
+  background-color: var(--stzh-color-secondary40);
+  color: var(--stzh-color-primary70);
+}
+
+#dropdown-menu-filters > .filter-container > button[data-controls][aria-expanded="true"],
+#dropdown-trigger-filters[aria-expanded="true"] {
+  background-color: var(--stzh-color-secondary30);
+  color: var(--stzh-color-primary70);
+}
+
+#dropdown-menu-filters > .filter-container > button[data-controls]:focus-visible,
+#dropdown-trigger-filters:focus-visible {
+  outline: var(--stzh-flyingfocus-color, var(--stzh-color-primary70)) solid 0.125rem;
+  outline-offset: 0.125rem;
+}
+
+#dropdown-menu-filters > .filter-container > button[data-controls] > span,
+#dropdown-trigger-filters > span {
+  flex: 1 1 auto;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: none;
+}
+
+#dropdown-menu-filters > .filter-container > button[data-controls] > svg,
+#dropdown-trigger-filters > svg {
+  display: none;
+}
+
+#dropdown-menu-filters > .filter-container > button[data-controls]::after,
+#dropdown-trigger-filters::after {
+  content: "";
+  flex: 0 0 auto;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-left: var(--stzh-space-medium, 16px);
+  background-color: transparent;
+  background-image:
+    linear-gradient(currentColor, currentColor),
+    linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 1.125rem 0.15625rem, 0.15625rem 1.125rem;
+  transition: background-size 200ms;
+}
+
+#dropdown-menu-filters > .filter-container > button[data-controls][aria-expanded="true"]::after,
+#dropdown-trigger-filters[aria-expanded="true"]::after {
+  background-size: 1.125rem 0.15625rem, 0.15625rem 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #dropdown-menu-filters > .filter-container > button[data-controls]::after,
+  #dropdown-trigger-filters::after {
+    transition: none;
+  }
+}
+
+#dropdown-menu-filters > .filter-container > [id^="panel-dropdown-menu-"] {
+  padding: var(--stzh-space-small, 12px) var(--stzh-filter-accordion-pad-x) var(--stzh-space-medium, 16px);
+  background-color: var(--stzh-color-secondary10);
+}
+
+@media (forced-colors: active) {
+  #dropdown-menu-filters > .filter-container > button[data-controls],
+  #dropdown-trigger-filters {
+    border: 0.125rem solid ButtonText;
+  }
+}
+
 /*Text adjustments*/
 
-.filter-container [data-controls*=panel]>span, .filter span, .filter-help {
+.filter span, .filter-help {
   font-family: var(--stzh-font-family-medium);
   font-weight: var(--stzh-font-weight-medium);
   font-style: var(--stzh-font-style-medium);
@@ -3609,6 +3775,101 @@ background-color: transparent;
 
 .filter:hover > label > span {
   color: var(--stzh-link-color);
+}
+
+/* Filter choices use the same mark as form checkboxes/radios.
+   These inputs carry .reset-defaults, which the form rules exclude. */
+#dropdown-menu-filters .filter label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--stzh-space-small);
+  margin: 0;
+  color: var(--stzh-base-color);
+  --choice-color: var(--stzh-color-black);
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-style: var(--stzh-font-style-medium);
+  font-size: var(--stzh-font-milli-font-size);
+  line-height: 1.5rem;
+}
+
+#dropdown-menu-filters .filter label > span {
+  color: inherit;
+  font: inherit;
+  background-color: transparent;
+}
+
+#dropdown-menu-filters .filter label:hover,
+#dropdown-menu-filters .filter label:has(:checked) {
+  color: var(--stzh-color-primary70);
+  --choice-color: var(--stzh-color-primary70);
+}
+
+#dropdown-menu-filters .filter label:hover:has(:checked) {
+  color: var(--stzh-color-primary90);
+  --choice-color: var(--stzh-color-primary90);
+}
+
+#dropdown-menu-filters .filter input[type="checkbox"],
+#dropdown-menu-filters .filter input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0.125rem solid var(--choice-color, var(--stzh-color-black));
+  background-color: var(--stzh-color-white);
+  background-image: none;
+  accent-color: auto;
+  cursor: pointer;
+}
+
+#dropdown-menu-filters .filter input[type="checkbox"] {
+  border-radius: 0;
+}
+
+#dropdown-menu-filters .filter input[type="radio"] {
+  border-radius: 50%;
+}
+
+#dropdown-menu-filters .filter input[type="radio"]:checked {
+  background-image: radial-gradient(
+    circle at center,
+    var(--choice-color, var(--stzh-color-primary70)) 0.5rem,
+    transparent 0.51rem
+  );
+}
+
+#dropdown-menu-filters .filter input[type="checkbox"]:checked,
+#dropdown-menu-filters .filter input[type="checkbox"]:indeterminate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#dropdown-menu-filters .filter input[type="checkbox"]:checked::after {
+  content: "";
+  width: 1.25rem;
+  height: 1.25rem;
+  background-color: var(--choice-color, var(--stzh-color-primary70));
+  -webkit-mask: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M10 15.172l9.192-9.193 1.415 1.414L10 18 3.636 11.636l1.414-1.414z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M10 15.172l9.192-9.193 1.415 1.414L10 18 3.636 11.636l1.414-1.414z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+#dropdown-menu-filters .filter input[type="checkbox"]:indeterminate::after {
+  content: "";
+  width: 0.75rem;
+  height: 0.125rem;
+  background-color: var(--choice-color, var(--stzh-color-primary70));
+}
+
+#dropdown-menu-filters .filter input[type="checkbox"]:focus-visible,
+#dropdown-menu-filters .filter input[type="radio"]:focus-visible {
+  outline: 0.125rem solid var(--stzh-color-secondary50);
+  outline-offset: 0.125rem;
 }
 
 /*––Secondary actions–––*/
@@ -3657,8 +3918,7 @@ background-color: transparent;
   transform: none;
 }
 
-/* Phone: stack each project, keep the summary bar off the list, 44px targets.
-   Active sort chip uses primary70 so white text clears 4.5:1. */
+/* Phone: search stays visible, categories stay closed, sort options stay a row of chips. */
 @media (max-width: 767px) {
   body:has(.budget-list) #content {
     padding-bottom: 6rem;
@@ -3671,18 +3931,34 @@ background-color: transparent;
     justify-content: center;
   }
 
-  body:has(.budget-list) #dropdown-trigger-filters,
-  body:has(.budget-list) #dropdown-trigger-order {
-    min-height: 44px;
+  #dropdown-trigger-filters {
+    display: none;
+  }
+
+  #dropdown-menu-filters {
+    display: block !important;
+  }
+
+  #filter-help-text {
+    display: none;
+  }
+
+  .layout-2col__aside button[aria-expanded="false"] + [id^="panel-dropdown-menu-"] {
+    display: none !important;
+  }
+
+  .filter-search button[type="submit"] {
+    top: 0;
+    bottom: 0;
+    height: auto;
+    min-height: 0;
+    display: flex;
     align-items: center;
+    justify-content: center;
+    padding: 0;
   }
 
-  body:has(.budget-list) .filter-search button[type="submit"] {
-    min-width: 44px;
-    min-height: 44px;
-  }
-
-  body.form-defaults:has(.budget-list) .filter-search input[type="search"] {
+  body.form-defaults .filter-search input[type="search"] {
     padding-inline-end: 44px;
   }
 
@@ -3697,23 +3973,39 @@ background-color: transparent;
     max-width: 100%;
   }
 
-  body:has(.budget-list) #dropdown-menu-order.order-by {
+  #dropdown-trigger-order {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  #dropdown-trigger-order > svg {
+    display: none;
+  }
+
+  #dropdown-menu-order.order-by {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
     width: 100%;
     margin-left: 0;
     padding-left: 0;
-    align-items: stretch;
+    gap: 0.5rem;
   }
 
-  body:has(.budget-list) #dropdown-menu-order .button {
-    width: 100%;
-    height: auto;
-    min-height: 44px;
-    justify-content: flex-start;
+  #dropdown-menu-order .button {
+    width: auto;
+    height: 2rem;
+    min-height: 2rem;
+    justify-content: center;
   }
 
-  body:has(.budget-list) #dropdown-menu-order .button.underline {
-    color: var(--stzh-color-white);
-    background-color: var(--stzh-color-primary70);
+  #dropdown-menu-order .button.underline {
+    color: var(--stzh-color-primary70);
+    background-color: var(--stzh-color-secondary30);
+    font-family: var(--stzh-font-family-heavy);
+    font-weight: var(--stzh-font-weight-heavy);
   }
 
   .budget-list .project-item {
