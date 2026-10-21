@@ -1,0 +1,40 @@
+/**
+ * d6_friedhofstrategie.css
+ *
+ * Friedhofstrategie process adjustments.
+ *
+ * USAGE: Load after a3_friedhofstrategie.css. Enable only for Friedhofstrategie-scoped processes.
+ */
+
+/* ==========================================================================
+   Hide the official-proposal byline
+   The avatar alt is the only hook CSS has for this author. Citizen authors
+   stay visible. On the proposal page the date in .author__metadata stays.
+   ========================================================================== */
+
+.author:has(img[alt="Avatar: Offizieller Vorschlag"]) .author__avatar-container,
+.author:has(img[alt="Avatar: Offizieller Vorschlag"]) .author__name,
+.author:has(img[alt="Avatar: Official proposal"]) .author__avatar-container,
+.author:has(img[alt="Avatar: Official proposal"]) .author__name {
+  display: none;
+}
+
+.author:has(img[alt="Avatar: Offizieller Vorschlag"]):not(:has(.author__metadata)),
+.author:has(img[alt="Avatar: Official proposal"]):not(:has(.author__metadata)),
+.card__list-metadata > div:has(img[alt="Avatar: Offizieller Vorschlag"]),
+.card__list-metadata > div:has(img[alt="Avatar: Official proposal"]) {
+  display: none;
+}
+
+/* "Friedhof" / "Standort Friedhof": hide the whole byline, including the date. */
+.author:has(img[alt="Avatar: Friedhof"]),
+.author:has(img[alt="Avatar: Standort Friedhof"]),
+.card__list-metadata > div:has(img[alt="Avatar: Friedhof"]),
+.card__list-metadata > div:has(img[alt="Avatar: Standort Friedhof"]) {
+  display: none;
+}
+
+/* Hide the Decidim Geo map on proposal item pages. */
+#GeoProposalsItem.decidimGeo__container--proposals_item {
+  display: none;
+}

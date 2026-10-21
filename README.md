@@ -108,6 +108,7 @@ Foundation: CSS custom properties (variables).
 |------|----------|-------------|
 | `a1_variables.css` | A1 | Imports STZH variables from `stzh-components` and defines Decidim-specific token overrides |
 | `a2_VBZ_variables.css` | A2 | VBZ (Verkehrsbetriebe Zürich) design tokens (enable only for VBZ-scoped content) |
+| `a3_friedhofstrategie.css` | A3 | Friedhofstrategie theme tokens (enable only for Friedhofstrategie-scoped processes) |
 
 ### Class B – Reskins
 
@@ -142,6 +143,7 @@ Global application of the design system across the platform.
 | `d3_proc_Quartierblöcke.css` | D3 | “Quartierblöcke” process |
 | `d4_klimainstitutionen.css` | D4 | Climate institutions |
 | `d5_archivierteProzesse.css` | D5 | Archived processes |
+| `d6_friedhofstrategie.css` | D6 | Friedhofstrategie byline and proposal-item map |
 
 ## Installation in Decidim Awesome
 
