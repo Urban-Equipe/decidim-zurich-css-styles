@@ -1645,6 +1645,11 @@ header .menu-bar__dropdown-menu a svg, header .menu-bar__secondary-dropdown__men
 
 /* ===== MOBILE MENU STYLES ===== */
 
+/* Decidim's white notch sits over the avatar when this menu is open. */
+header .main-bar__links-mobile__dropdown-before::before {
+  content: none;
+}
+
 .menu-bar__main-dropdown__top {
   background-color: var(--stzh-color-secondary30);
 }
@@ -1687,12 +1692,11 @@ header .main-bar__links-mobile__account ul > li:last-child {
   background-color: var(--stzh-link-color);
 }
 
-li:last-child .dropdown__item .dropdown__button {
+/* Beats .dropdown__item .dropdown__button { color: base } and span.text-secondary. */
+header .main-bar__links-mobile__account ul > li:last-child,
+header .main-bar__links-mobile__account ul > li:last-child * {
   color: var(--stzh-color-white);
-}
-
-.account-container ul li:last-child a.dropdown__item svg {
-  fill: var(--stzh-color-white);
+  fill: currentColor;
 }
 
 
