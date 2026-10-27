@@ -5389,15 +5389,19 @@ html[data-rails-controller-name="notifications_settings"] .space-y-4 {
 }
 
 /* Frequency radios: keep all options on one horizontal baseline, evenly spaced.
-   Decidim adds negative top margins (md:-mt-4) that knock them out of line. */
+   Decidim stamps negative top margins (md:-mt-4 / first-of-type:mt-0) on every
+   option except the first, which knocks them out of line and leaves uneven
+   spacing. Target the labels directly (any nesting) so the override always wins. */
+html[data-rails-controller-name="notifications_settings"] .flex:has(> label.form__wrapper-checkbox-label[for*="sending_frequency"]),
 html[data-rails-controller-name="notifications_settings"] .form__wrapper > .flex {
   align-items: center;
   gap: var(--stzh-space-xlarge);
   margin-top: 0;
 }
 
+html[data-rails-controller-name="notifications_settings"] label.form__wrapper-checkbox-label[for*="sending_frequency"],
 html[data-rails-controller-name="notifications_settings"] .form__wrapper > .flex > .form__wrapper-checkbox-label {
-  margin: 0;
+  margin: 0 !important;
   align-items: center;
 }
 
