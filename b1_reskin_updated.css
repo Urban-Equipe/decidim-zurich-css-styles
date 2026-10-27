@@ -4493,8 +4493,8 @@ fieldset .form__wrapper-block:first-of-type {
 /* Field titles in regular forms (authorizations, Devise, SMS) = stzh-input__label.
    This selector must stay more specific than Decidim's .form__wrapper label.
    Keep margin-top free so section titles (e.g. Nutzungsbedingungen) can space. */
-.form__wrapper label:not(.form__wrapper-checkbox-label),
-.form__wrapper-block label:not(.form__wrapper-checkbox-label) {
+.form__wrapper label:not(.form__wrapper-checkbox-label):not(.toggle__switch-toggle),
+.form__wrapper-block label:not(.form__wrapper-checkbox-label):not(.toggle__switch-toggle) {
   display: block;
   font-family: var(--stzh-font-family-heavy);
   font-weight: var(--stzh-font-weight-heavy);
@@ -5120,8 +5120,211 @@ label[for="questionnaire_tos_agreement"] {
 }
 
 
-.form-error.is-visible, .is-invalid-input, .is-invalid-label, .form__wrapper label:not(.form__wrapper-checkbox-label).is-invalid-label, .form__wrapper-block label:not(.form__wrapper-checkbox-label).is-invalid-label {
+.form-error.is-visible, .is-invalid-input, .is-invalid-label, .form__wrapper label:not(.form__wrapper-checkbox-label):not(.toggle__switch-toggle).is-invalid-label, .form__wrapper-block label:not(.form__wrapper-checkbox-label):not(.toggle__switch-toggle).is-invalid-label {
   color: var(--stzh-color-error60);
+}
+
+/* ==========================================================================
+   STZH toggle (stzh-toggle default)
+   https://designsystem.stadt-zuerich.ch/current/?path=/story/components-toggle--default
+   Maps Decidim .toggle__switch-* markup (notifications settings, etc.).
+   Track 2.75×1rem, knob 1.5rem; off black10op, on primary48 + primary knob.
+   ========================================================================== */
+
+.toggle__switch-toggle {
+  --toggle-check-size: 1.5rem;
+  --toggle-track-width: 2.75rem;
+  --toggle-track-height: 1rem;
+  --toggle-knob-on: var(--stzh-color-primary, var(--stzh-color-primary70));
+  --toggle-knob-hover: var(--stzh-color-primary-hover, var(--stzh-color-primary90));
+  display: inline-flex;
+  align-items: center;
+  gap: var(--stzh-space-xsmall, 8px);
+  cursor: pointer;
+  user-select: none;
+  margin: 0;
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-style: var(--stzh-font-style-medium);
+  font-size: var(--stzh-font-milli-font-size);
+  line-height: var(--stzh-font-milli-text-line-height);
+  letter-spacing: var(--stzh-font-curve---text-letter-spacing);
+  color: var(--stzh-base-color);
+}
+
+.toggle__switch-toggle:hover {
+  color: var(--toggle-knob-hover);
+}
+
+.toggle__switch-toggle:has(input:checked) {
+  color: var(--toggle-knob-on);
+}
+
+.toggle__switch-toggle:has(input:checked):hover {
+  color: var(--toggle-knob-hover);
+}
+
+.toggle__switch-toggle > span:first-child {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: var(--toggle-track-width);
+  height: var(--toggle-check-size);
+}
+
+.toggle__switch-toggle input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
+  border: 0;
+  background: none;
+  border-radius: 0;
+  transform: none;
+}
+
+.toggle__switch-toggle input[type="checkbox"]::after {
+  content: none;
+  display: none;
+}
+
+.toggle__switch-toggle-content {
+  position: relative;
+  display: block;
+  width: var(--toggle-track-width);
+  height: var(--toggle-track-height);
+  flex-shrink: 0;
+  border-radius: 0.75rem;
+  background-color: var(--stzh-color-black10op, rgba(0 0 0 / 0.1));
+  transition: background-color var(--stzh-base-transition-animation-speed);
+}
+
+.toggle__switch-toggle-content::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: var(--toggle-check-size);
+  height: var(--toggle-check-size);
+  border-radius: 50%;
+  box-sizing: border-box;
+  border: 0.125rem solid var(--stzh-base-color);
+  background-color: var(--stzh-color-white);
+  transform: translateY(-50%);
+  transition-property: border-color, background-color, transform;
+  transition-duration: var(--stzh-base-transition-animation-speed);
+}
+
+.toggle__switch-toggle input:checked ~ .toggle__switch-toggle-content {
+  background-color: var(--stzh-color-old-primary48, rgba(var(--stzh-color-primary-rgb, 0 80 141) / 0.48));
+}
+
+.toggle__switch-toggle input:checked ~ .toggle__switch-toggle-content::after {
+  border-color: var(--toggle-knob-on);
+  background-color: var(--toggle-knob-on);
+  transform: translateY(-50%) translateX(calc(var(--toggle-track-width) - var(--toggle-check-size)));
+}
+
+.toggle__switch-toggle:hover .toggle__switch-toggle-content::after,
+.toggle__switch-toggle input:checked:hover ~ .toggle__switch-toggle-content::after {
+  border-color: var(--toggle-knob-hover);
+}
+
+.toggle__switch-toggle input:checked:hover ~ .toggle__switch-toggle-content::after {
+  background-color: var(--toggle-knob-hover);
+}
+
+.toggle__switch-toggle input:focus-visible ~ .toggle__switch-toggle-content {
+  outline: 0.125rem solid var(--stzh-color-secondary50, var(--stzh-color-primary50));
+  outline-offset: 0.125rem;
+}
+
+.toggle__switch-toggle input:disabled {
+  cursor: not-allowed;
+}
+
+.toggle__switch-toggle:has(input:disabled) {
+  cursor: not-allowed;
+  color: var(--stzh-color-grey70);
+}
+
+.toggle__switch-toggle-icon {
+  display: none;
+}
+
+.toggle__switch-trigger-text {
+  min-width: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toggle__switch-toggle-content,
+  .toggle__switch-toggle-content::after {
+    transition: none;
+  }
+}
+
+/* Notifications settings: STZH form rhythm (section title → control). */
+html[data-rails-controller-name="notifications_settings"] .form__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
+html[data-rails-controller-name="notifications_settings"] .form__wrapper > label:not(.toggle__switch-toggle) {
+  margin-top: var(--stzh-space-xlarge);
+  margin-bottom: var(--stzh-space-small);
+}
+
+html[data-rails-controller-name="notifications_settings"] .form__wrapper > label:not(.toggle__switch-toggle):first-child {
+  margin-top: 0;
+}
+
+html[data-rails-controller-name="notifications_settings"] .toggle__switch-trigger,
+html[data-rails-controller-name="notifications_settings"] .space-y-4 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--stzh-space-small);
+  width: 100%;
+}
+
+html[data-rails-controller-name="notifications_settings"] .space-y-4 > * + * {
+  margin-top: 0;
+}
+
+html[data-rails-controller-name="notifications_settings"] .space-y-4 > .toggle__switch-trigger {
+  gap: 0;
+}
+
+html[data-rails-controller-name="notifications_settings"] .form__wrapper > .flex {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--stzh-space-small);
+  margin-top: 0;
+}
+
+html[data-rails-controller-name="notifications_settings"] .form__wrapper-checkbox-label {
+  margin-top: 0;
+}
+
+html[data-rails-controller-name="notifications_settings"] .push-notifications__reminder {
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-size: var(--stzh-font-nano-font-size);
+  line-height: var(--stzh-font-nano-text-line-height);
+  color: var(--stzh-input-description-color, var(--stzh-color-coolgrey70));
+  margin: 0 0 var(--stzh-space-small);
 }
 
 .form-error {
