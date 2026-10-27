@@ -5347,9 +5347,9 @@ label[for="questionnaire_tos_agreement"] {
 .toggle__switch-toggle .toggle__switch-trigger-text {
   flex: 1 1 auto;
   min-width: 0;
-  font-family: var(--stzh-font-family-heavy);
-  font-weight: var(--stzh-font-weight-heavy);
-  font-style: var(--stzh-font-style-heavy);
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-style: var(--stzh-font-style-medium);
   font-size: var(--stzh-font-micro-font-size);
   line-height: 1.5rem;
   letter-spacing: var(--stzh-font-curve---text-letter-spacing);
