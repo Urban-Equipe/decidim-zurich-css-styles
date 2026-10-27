@@ -4493,8 +4493,8 @@ fieldset .form__wrapper-block:first-of-type {
 /* Field titles in regular forms (authorizations, Devise, SMS) = stzh-input__label.
    This selector must stay more specific than Decidim's .form__wrapper label.
    Keep margin-top free so section titles (e.g. Nutzungsbedingungen) can space. */
-.form__wrapper label:not(.form__wrapper-checkbox-label),
-.form__wrapper-block label:not(.form__wrapper-checkbox-label) {
+.form__wrapper label:not(.form__wrapper-checkbox-label):not(.toggle__switch-toggle),
+.form__wrapper-block label:not(.form__wrapper-checkbox-label):not(.toggle__switch-toggle) {
   display: block;
   font-family: var(--stzh-font-family-heavy);
   font-weight: var(--stzh-font-weight-heavy);
@@ -5128,4 +5128,177 @@ label[for="questionnaire_tos_agreement"] {
   font-family: var(--stzh-font-family-regular);
   font-weight: var(--stzh-font-weight-regular);
   font-style: var(--stzh-font-style-regular);
+}
+
+/* ==========================================================================
+   STZH toggle (stzh-toggle "default")
+   https://designsystem.stadt-zuerich.ch/current/?path=/story/components-toggle--default
+   Faithful map of stzh-toggle.css onto Decidim .toggle__switch-* markup:
+
+     <label class="toggle__switch-toggle">
+       <span>                                  <- control box
+         <input type="checkbox">
+         <span class="toggle__switch-toggle-content"></span>   <- track
+         <svg class="toggle__switch-toggle-icon">…</svg> x2    <- hidden
+       </span>
+       <span class="toggle__switch-trigger-text">…</span>      <- label text
+     </label>
+
+   Track 2.75rem × 1rem, pill. Knob 1.5rem circle overlapping the track.
+   Off: black10op track + white knob with black outline.
+   On:  primary48 track + solid primary knob, slid to the right.
+   ========================================================================== */
+.toggle__switch-toggle {
+  --toggle-track-width: 2.75rem;
+  --toggle-track-height: 1rem;
+  --toggle-knob-size: 1.5rem;
+  --toggle-knob-on: var(--stzh-color-primary, var(--stzh-color-primary70));
+  --toggle-knob-hover: var(--stzh-color-primary-hover, var(--stzh-color-primary90));
+  display: inline-flex;
+  align-items: center;
+  gap: var(--stzh-space-xsmall, 8px);
+  margin: 0;
+  cursor: pointer;
+  user-select: none;
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-style: var(--stzh-font-style-medium);
+  font-size: var(--stzh-font-milli-font-size);
+  line-height: var(--stzh-font-milli-text-line-height);
+  letter-spacing: var(--stzh-font-curve---text-letter-spacing);
+  color: var(--stzh-base-color);
+  transition: color var(--stzh-base-transition-animation-speed);
+}
+
+/* Control box: sized to the knob so the overlapping circle is not clipped. */
+.toggle__switch-toggle > span:first-child {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  width: var(--toggle-track-width);
+  height: var(--toggle-knob-size);
+}
+
+/* Hide the native checkbox but keep it clickable over the whole control box. */
+.toggle__switch-toggle input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  opacity: 0;
+  cursor: pointer;
+  transform: none;
+}
+
+.toggle__switch-toggle input[type="checkbox"]::after,
+.toggle__switch-toggle input[type="checkbox"]::before {
+  content: none;
+  display: none;
+}
+
+/* Track (stzh-toggle__mark). */
+.toggle__switch-toggle-content {
+  position: relative;
+  display: block;
+  width: var(--toggle-track-width);
+  height: var(--toggle-track-height);
+  border-radius: 0.75rem;
+  background-color: var(--stzh-color-black10op, rgba(0, 0, 0, 0.1));
+  transition: background-color var(--stzh-base-transition-animation-speed);
+}
+
+/* Knob (stzh-toggle__check): larger circle overlapping the thin track. */
+.toggle__switch-toggle-content::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: var(--toggle-knob-size);
+  height: var(--toggle-knob-size);
+  box-sizing: border-box;
+  border: 0.125rem solid var(--stzh-base-color);
+  border-radius: 50%;
+  background-color: var(--stzh-color-white);
+  transform: translateY(-50%);
+  transition-property: border-color, background-color, transform;
+  transition-duration: var(--stzh-base-transition-animation-speed);
+}
+
+/* Checked. */
+.toggle__switch-toggle input:checked ~ .toggle__switch-toggle-content {
+  background-color: var(--stzh-color-old-primary48, rgba(0, 80, 141, 0.48));
+}
+
+.toggle__switch-toggle input:checked ~ .toggle__switch-toggle-content::after {
+  border-color: var(--toggle-knob-on);
+  background-color: var(--toggle-knob-on);
+  transform: translateY(-50%) translateX(calc(var(--toggle-track-width) - var(--toggle-knob-size)));
+}
+
+/* Hover. */
+.toggle__switch-toggle:hover {
+  color: var(--toggle-knob-hover);
+}
+
+.toggle__switch-toggle:hover .toggle__switch-toggle-content::after {
+  border-color: var(--toggle-knob-hover);
+}
+
+.toggle__switch-toggle input:checked ~ .toggle__switch-trigger-text {
+  color: var(--toggle-knob-on);
+}
+
+.toggle__switch-toggle:hover input:checked ~ .toggle__switch-toggle-content::after {
+  border-color: var(--toggle-knob-hover);
+  background-color: var(--toggle-knob-hover);
+}
+
+/* Focus. */
+.toggle__switch-toggle input:focus-visible ~ .toggle__switch-toggle-content {
+  outline: 0.125rem solid var(--stzh-color-secondary50, var(--stzh-color-primary50));
+  outline-offset: 0.125rem;
+}
+
+/* Disabled. */
+.toggle__switch-toggle:has(input:disabled) {
+  cursor: not-allowed;
+  color: var(--stzh-color-grey70);
+}
+
+.toggle__switch-toggle input:disabled ~ .toggle__switch-toggle-content::after {
+  border-color: var(--stzh-color-grey70);
+}
+
+.toggle__switch-toggle input:disabled:checked ~ .toggle__switch-toggle-content {
+  background-color: var(--stzh-color-grey10);
+}
+
+.toggle__switch-toggle input:disabled:checked ~ .toggle__switch-toggle-content::after {
+  border-color: var(--stzh-color-grey70);
+  background-color: var(--stzh-color-grey70);
+}
+
+/* Decidim ships check/close glyphs inside the control; STZH shows none. */
+.toggle__switch-toggle-icon {
+  display: none;
+}
+
+.toggle__switch-toggle .toggle__switch-trigger-text {
+  min-width: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toggle__switch-toggle-content,
+  .toggle__switch-toggle-content::after {
+    transition: none;
+  }
 }
