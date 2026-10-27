@@ -5241,15 +5241,22 @@ label[for="questionnaire_tos_agreement"] {
   transition-duration: var(--stzh-base-transition-animation-speed);
 }
 
+/* State selectors use :has() so they survive Rails' .field_with_errors wrapper
+   (which nests the input and would otherwise break ~ sibling matching). */
+
 /* Checked. */
-.toggle__switch-toggle input:checked ~ .toggle__switch-toggle-content {
+.toggle__switch-toggle:has(input:checked) .toggle__switch-toggle-content {
   background-color: var(--stzh-color-old-primary48, rgba(0, 80, 141, 0.48));
 }
 
-.toggle__switch-toggle input:checked ~ .toggle__switch-toggle-content::after {
+.toggle__switch-toggle:has(input:checked) .toggle__switch-toggle-content::after {
   border-color: var(--toggle-knob-on);
   background-color: var(--toggle-knob-on);
   transform: translateY(-50%) translateX(calc(var(--toggle-track-width) - var(--toggle-knob-size)));
+}
+
+.toggle__switch-toggle:has(input:checked) .toggle__switch-trigger-text {
+  color: var(--toggle-knob-on);
 }
 
 /* Hover. */
@@ -5261,17 +5268,13 @@ label[for="questionnaire_tos_agreement"] {
   border-color: var(--toggle-knob-hover);
 }
 
-.toggle__switch-toggle input:checked ~ .toggle__switch-trigger-text {
-  color: var(--toggle-knob-on);
-}
-
-.toggle__switch-toggle:hover input:checked ~ .toggle__switch-toggle-content::after {
+.toggle__switch-toggle:hover:has(input:checked) .toggle__switch-toggle-content::after {
   border-color: var(--toggle-knob-hover);
   background-color: var(--toggle-knob-hover);
 }
 
 /* Focus. */
-.toggle__switch-toggle input:focus-visible ~ .toggle__switch-toggle-content {
+.toggle__switch-toggle:has(input:focus-visible) .toggle__switch-toggle-content {
   outline: 0.125rem solid var(--stzh-color-secondary50, var(--stzh-color-primary50));
   outline-offset: 0.125rem;
 }
@@ -5282,17 +5285,34 @@ label[for="questionnaire_tos_agreement"] {
   color: var(--stzh-color-grey70);
 }
 
-.toggle__switch-toggle input:disabled ~ .toggle__switch-toggle-content::after {
+.toggle__switch-toggle:has(input:disabled) .toggle__switch-toggle-content::after {
   border-color: var(--stzh-color-grey70);
 }
 
-.toggle__switch-toggle input:disabled:checked ~ .toggle__switch-toggle-content {
+.toggle__switch-toggle:has(input:disabled:checked) .toggle__switch-toggle-content {
   background-color: var(--stzh-color-grey10);
 }
 
-.toggle__switch-toggle input:disabled:checked ~ .toggle__switch-toggle-content::after {
+.toggle__switch-toggle:has(input:disabled:checked) .toggle__switch-toggle-content::after {
   border-color: var(--stzh-color-grey70);
   background-color: var(--stzh-color-grey70);
+}
+
+/* Validation: Rails wraps an invalid required toggle in .field_with_errors,
+   which paints a red box/shadow and reflows the control. Collapse it and strip
+   any error outline/shadow — the toggle must look identical when left off. */
+.toggle__switch-toggle .field_with_errors {
+  display: contents;
+}
+
+.toggle__switch-toggle input[type="checkbox"],
+.toggle__switch-toggle .toggle__switch-toggle-content {
+  box-shadow: none;
+}
+
+.toggle__switch-toggle input[type="checkbox"]:not(:focus-visible) ~ .toggle__switch-toggle-content,
+.toggle__switch-toggle .field_with_errors ~ .toggle__switch-toggle-content {
+  outline: none;
 }
 
 /* Label text: identical type to .form__wrapper-checkbox-label so toggle,
