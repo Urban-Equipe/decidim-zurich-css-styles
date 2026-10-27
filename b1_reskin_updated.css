@@ -5205,7 +5205,7 @@ label[for="questionnaire_tos_agreement"] {
   height: var(--toggle-track-height);
   flex-shrink: 0;
   border-radius: 0.75rem;
-  background-color: var(--stzh-color-black10op, rgba(0 0 0 / 0.1));
+  background-color: var(--stzh-color-black10op, rgba(0, 0, 0, 0.1));
   transition: background-color var(--stzh-base-transition-animation-speed);
 }
 
@@ -5226,7 +5226,7 @@ label[for="questionnaire_tos_agreement"] {
 }
 
 .toggle__switch-toggle input:checked ~ .toggle__switch-toggle-content {
-  background-color: var(--stzh-color-old-primary48, rgba(var(--stzh-color-primary-rgb, 0 80 141) / 0.48));
+  background-color: var(--stzh-color-old-primary48, rgba(0, 80, 141, 0.48));
 }
 
 .toggle__switch-toggle input:checked ~ .toggle__switch-toggle-content::after {
