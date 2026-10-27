@@ -5396,12 +5396,11 @@ html[data-rails-controller-name="notifications_settings"] .space-y-4 {
    stack an even vertical rhythm. Keyed on the unique `for` so no container/scope
    dependency can make it miss. */
 label.form__wrapper-checkbox-label[for*="notifications_sending_frequency"] {
-  margin: 0 !important;
-  align-items: center;
-}
-
-label.form__wrapper-checkbox-label[for*="notifications_sending_frequency"] + label.form__wrapper-checkbox-label[for*="notifications_sending_frequency"] {
-  margin-top: var(--stzh-space-small) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: var(--stzh-space-small) !important;
+  margin: 0 var(--stzh-space-large) var(--stzh-space-small) 0 !important;
+  vertical-align: top;
 }
 
 html[data-rails-controller-name="notifications_settings"] .push-notifications__reminder {
