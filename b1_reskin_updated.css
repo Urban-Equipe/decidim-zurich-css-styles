@@ -5224,12 +5224,18 @@ label[for="questionnaire_tos_agreement"] {
   transition: background-color var(--stzh-base-transition-animation-speed);
 }
 
-/* Knob (stzh-toggle__check): larger circle overlapping the thin track. */
-.toggle__switch-toggle-content::after {
+/* Knob (stzh-toggle__check): larger circle overlapping the thin track.
+   Decidim paints its RED knob on .toggle__switch-toggle-content::before
+   (w-5 h-5 at bottom-0.5 left-0.5). We MUST draw on ::before and fully
+   restate size/position/color so the red knob is gone. Decidim's bottom/left
+   are overridden by setting top + height + left explicitly. */
+.toggle__switch-toggle-content::before {
   content: "";
   position: absolute;
   top: 50%;
+  bottom: auto;
   left: 0;
+  right: auto;
   width: var(--toggle-knob-size);
   height: var(--toggle-knob-size);
   box-sizing: border-box;
@@ -5241,6 +5247,12 @@ label[for="questionnaire_tos_agreement"] {
   transition-duration: var(--stzh-base-transition-animation-speed);
 }
 
+/* Neutralize any ::after knob (older B1 drew the knob there). Only ONE knob. */
+.toggle__switch-toggle-content::after {
+  content: none;
+  display: none;
+}
+
 /* State selectors use :has() so they survive Rails' .field_with_errors wrapper
    (which nests the input and would otherwise break ~ sibling matching). */
 
@@ -5249,7 +5261,7 @@ label[for="questionnaire_tos_agreement"] {
   background-color: var(--stzh-color-old-primary48, rgba(0, 80, 141, 0.48));
 }
 
-.toggle__switch-toggle:has(input:checked) .toggle__switch-toggle-content::after {
+.toggle__switch-toggle:has(input:checked) .toggle__switch-toggle-content::before {
   border-color: var(--toggle-knob-on);
   background-color: var(--toggle-knob-on);
   transform: translateY(-50%) translateX(calc(var(--toggle-track-width) - var(--toggle-knob-size)));
@@ -5264,11 +5276,11 @@ label[for="questionnaire_tos_agreement"] {
   color: var(--toggle-knob-hover);
 }
 
-.toggle__switch-toggle:hover .toggle__switch-toggle-content::after {
+.toggle__switch-toggle:hover .toggle__switch-toggle-content::before {
   border-color: var(--toggle-knob-hover);
 }
 
-.toggle__switch-toggle:hover:has(input:checked) .toggle__switch-toggle-content::after {
+.toggle__switch-toggle:hover:has(input:checked) .toggle__switch-toggle-content::before {
   border-color: var(--toggle-knob-hover);
   background-color: var(--toggle-knob-hover);
 }
@@ -5279,13 +5291,23 @@ label[for="questionnaire_tos_agreement"] {
   outline-offset: 0.125rem;
 }
 
+/* Override Decidim's red (outline-alert) focus: never red on this toggle. */
+.toggle__switch-toggle input:focus ~ .toggle__switch-toggle-content,
+.toggle__switch-toggle input:focus:not(:focus-visible) ~ .toggle__switch-toggle-content {
+  outline-color: var(--stzh-color-secondary50, var(--stzh-color-primary50));
+}
+
+.toggle__switch-toggle input:not(:focus-visible) ~ .toggle__switch-toggle-content {
+  outline: none;
+}
+
 /* Disabled. */
 .toggle__switch-toggle:has(input:disabled) {
   cursor: not-allowed;
   color: var(--stzh-color-grey70);
 }
 
-.toggle__switch-toggle:has(input:disabled) .toggle__switch-toggle-content::after {
+.toggle__switch-toggle:has(input:disabled) .toggle__switch-toggle-content::before {
   border-color: var(--stzh-color-grey70);
 }
 
@@ -5293,7 +5315,7 @@ label[for="questionnaire_tos_agreement"] {
   background-color: var(--stzh-color-grey10);
 }
 
-.toggle__switch-toggle:has(input:disabled:checked) .toggle__switch-toggle-content::after {
+.toggle__switch-toggle:has(input:disabled:checked) .toggle__switch-toggle-content::before {
   border-color: var(--stzh-color-grey70);
   background-color: var(--stzh-color-grey70);
 }
@@ -5330,7 +5352,7 @@ label[for="questionnaire_tos_agreement"] {
 
 @media (prefers-reduced-motion: reduce) {
   .toggle__switch-toggle-content,
-  .toggle__switch-toggle-content::after {
+  .toggle__switch-toggle-content::before {
     transition: none;
   }
 }
