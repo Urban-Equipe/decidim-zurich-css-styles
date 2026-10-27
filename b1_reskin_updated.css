@@ -5146,8 +5146,9 @@ label[for="questionnaire_tos_agreement"] {
   font-family: var(--stzh-font-family-medium);
   font-weight: var(--stzh-font-weight-medium);
   font-style: var(--stzh-font-style-medium);
-  font-size: var(--stzh-font-milli-font-size);
-  line-height: var(--stzh-font-milli-text-line-height);
+  /* stzh-toggle__field-wrapper: milli / 16px / 1.5 */
+  font-size: var(--stzh-font-milli-font-size, 1rem);
+  line-height: var(--stzh-font-milli-text-line-height, 1.5);
   letter-spacing: var(--stzh-font-curve---text-letter-spacing);
   color: var(--stzh-base-color);
 }
@@ -5261,8 +5262,14 @@ label[for="questionnaire_tos_agreement"] {
   display: none;
 }
 
-.toggle__switch-trigger-text {
+.toggle__switch-toggle .toggle__switch-trigger-text {
   min-width: 0;
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-style: var(--stzh-font-style-medium);
+  font-size: var(--stzh-font-milli-font-size, 1rem);
+  line-height: var(--stzh-font-milli-text-line-height, 1.5);
+  letter-spacing: var(--stzh-font-curve---text-letter-spacing);
 }
 
 @media (prefers-reduced-motion: reduce) {
