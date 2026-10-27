@@ -4493,8 +4493,8 @@ fieldset .form__wrapper-block:first-of-type {
 /* Field titles in regular forms (authorizations, Devise, SMS) = stzh-input__label.
    This selector must stay more specific than Decidim's .form__wrapper label.
    Keep margin-top free so section titles (e.g. Nutzungsbedingungen) can space. */
-.form__wrapper label:not(.form__wrapper-checkbox-label),
-.form__wrapper-block label:not(.form__wrapper-checkbox-label) {
+.form__wrapper label:not(.form__wrapper-checkbox-label):not(.toggle__switch-toggle),
+.form__wrapper-block label:not(.form__wrapper-checkbox-label):not(.toggle__switch-toggle) {
   display: block;
   font-family: var(--stzh-font-family-heavy);
   font-weight: var(--stzh-font-weight-heavy);
@@ -5128,4 +5128,291 @@ label[for="questionnaire_tos_agreement"] {
   font-family: var(--stzh-font-family-regular);
   font-weight: var(--stzh-font-weight-regular);
   font-style: var(--stzh-font-style-regular);
+}
+
+/* ==========================================================================
+   STZH toggle (stzh-toggle "default")
+   https://designsystem.stadt-zuerich.ch/current/?path=/story/components-toggle--default
+   Faithful map of stzh-toggle.css onto Decidim .toggle__switch-* markup:
+
+     <label class="toggle__switch-toggle">
+       <span>                                  <- control box
+         <input type="checkbox">
+         <span class="toggle__switch-toggle-content"></span>   <- track
+         <svg class="toggle__switch-toggle-icon">…</svg> x2    <- hidden
+       </span>
+       <span class="toggle__switch-trigger-text">…</span>      <- label text
+     </label>
+
+   Track 2.75rem × 1rem, pill. Knob 1.5rem circle overlapping the track.
+   Off: black10op track + white knob with black outline.
+   On:  primary48 track + solid primary knob, slid to the right.
+   ========================================================================== */
+.toggle__switch-toggle {
+  --toggle-track-width: 2.75rem;
+  --toggle-track-height: 1rem;
+  --toggle-knob-size: 1.5rem;
+  --toggle-knob-on: var(--stzh-color-primary, var(--stzh-color-primary70));
+  --toggle-knob-hover: var(--stzh-color-primary-hover, var(--stzh-color-primary90));
+  /* Same label row metrics as .form__wrapper-checkbox-label.
+     !important so the live theme can't collapse the flex row — otherwise the
+     control and text flow inline and a wrapped second line drops to the far
+     left instead of hanging under the first text line. */
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: var(--stzh-space-small) !important;
+  margin: 0;
+  cursor: pointer;
+  user-select: none;
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-style: var(--stzh-font-style-medium);
+  font-size: var(--stzh-font-milli-font-size);
+  line-height: 1.5rem;
+  letter-spacing: var(--stzh-font-curve---text-letter-spacing);
+  color: var(--stzh-base-color);
+  transition: color var(--stzh-base-transition-animation-speed);
+}
+
+/* Control box: 1.5rem tall so it lines up with the first text line (1.5rem),
+   and sized to the knob so the overlapping circle is not clipped. */
+.toggle__switch-toggle > span:first-child {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 auto !important;
+  align-items: center;
+  width: var(--toggle-track-width);
+  height: 1.5rem;
+}
+
+/* No check / close glyphs — the STZH toggle shows none. */
+.toggle__switch-toggle > span:first-child svg,
+.toggle__switch-toggle-icon {
+  display: none !important;
+}
+
+/* Hide the native checkbox but keep it clickable over the whole control box. */
+.toggle__switch-toggle input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  opacity: 0;
+  cursor: pointer;
+  transform: none;
+}
+
+.toggle__switch-toggle input[type="checkbox"]::after,
+.toggle__switch-toggle input[type="checkbox"]::before {
+  content: none;
+  display: none;
+}
+
+/* Track (stzh-toggle__mark). */
+.toggle__switch-toggle-content {
+  position: relative;
+  display: block;
+  width: var(--toggle-track-width);
+  height: var(--toggle-track-height);
+  border-radius: 0.75rem;
+  background-color: var(--stzh-color-black10op, rgba(0, 0, 0, 0.1));
+  transition: background-color var(--stzh-base-transition-animation-speed);
+}
+
+/* Knob (stzh-toggle__check): larger circle overlapping the thin track.
+   Decidim paints its RED knob on .toggle__switch-toggle-content::before
+   (w-5 h-5 at bottom-0.5 left-0.5). We MUST draw on ::before and fully
+   restate size/position/color so the red knob is gone. Decidim's bottom/left
+   are overridden by setting top + height + left explicitly. */
+.toggle__switch-toggle-content::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  bottom: auto;
+  left: 0;
+  right: auto;
+  width: var(--toggle-knob-size);
+  height: var(--toggle-knob-size);
+  box-sizing: border-box;
+  border: 0.125rem solid var(--stzh-base-color);
+  border-radius: 50%;
+  background-color: var(--stzh-color-white);
+  transform: translateY(-50%);
+  transition-property: border-color, background-color, transform;
+  transition-duration: var(--stzh-base-transition-animation-speed);
+}
+
+/* Neutralize any ::after knob (older B1 drew the knob there). Only ONE knob. */
+.toggle__switch-toggle-content::after {
+  content: none;
+  display: none;
+}
+
+/* State selectors use :has() so they survive Rails' .field_with_errors wrapper
+   (which nests the input and would otherwise break ~ sibling matching). */
+
+/* Checked. */
+.toggle__switch-toggle:has(input:checked) .toggle__switch-toggle-content {
+  background-color: var(--stzh-color-old-primary48, rgba(0, 80, 141, 0.48));
+}
+
+.toggle__switch-toggle:has(input:checked) .toggle__switch-toggle-content::before {
+  border-color: var(--toggle-knob-on);
+  background-color: var(--toggle-knob-on);
+  transform: translateY(-50%) translateX(calc(var(--toggle-track-width) - var(--toggle-knob-size)));
+}
+
+.toggle__switch-toggle:has(input:checked) .toggle__switch-trigger-text {
+  color: var(--toggle-knob-on);
+}
+
+/* Hover. */
+.toggle__switch-toggle:hover {
+  color: var(--toggle-knob-hover);
+}
+
+.toggle__switch-toggle:hover .toggle__switch-toggle-content::before {
+  border-color: var(--toggle-knob-hover);
+}
+
+.toggle__switch-toggle:hover:has(input:checked) .toggle__switch-toggle-content::before {
+  border-color: var(--toggle-knob-hover);
+  background-color: var(--toggle-knob-hover);
+}
+
+/* Focus. */
+.toggle__switch-toggle:has(input:focus-visible) .toggle__switch-toggle-content {
+  outline: 0.125rem solid var(--stzh-color-secondary50, var(--stzh-color-primary50));
+  outline-offset: 0.125rem;
+}
+
+/* Override Decidim's red (outline-alert) focus: never red on this toggle. */
+.toggle__switch-toggle input:focus ~ .toggle__switch-toggle-content,
+.toggle__switch-toggle input:focus:not(:focus-visible) ~ .toggle__switch-toggle-content {
+  outline-color: var(--stzh-color-secondary50, var(--stzh-color-primary50));
+}
+
+.toggle__switch-toggle input:not(:focus-visible) ~ .toggle__switch-toggle-content {
+  outline: none;
+}
+
+/* Disabled. */
+.toggle__switch-toggle:has(input:disabled) {
+  cursor: not-allowed;
+  color: var(--stzh-color-grey70);
+}
+
+.toggle__switch-toggle:has(input:disabled) .toggle__switch-toggle-content::before {
+  border-color: var(--stzh-color-grey70);
+}
+
+.toggle__switch-toggle:has(input:disabled:checked) .toggle__switch-toggle-content {
+  background-color: var(--stzh-color-grey10);
+}
+
+.toggle__switch-toggle:has(input:disabled:checked) .toggle__switch-toggle-content::before {
+  border-color: var(--stzh-color-grey70);
+  background-color: var(--stzh-color-grey70);
+}
+
+/* Validation: Rails wraps an invalid required toggle in .field_with_errors,
+   which paints a red box/shadow and reflows the control. Collapse it and strip
+   any error outline/shadow — the toggle must look identical when left off. */
+.toggle__switch-toggle .field_with_errors {
+  display: contents;
+}
+
+.toggle__switch-toggle input[type="checkbox"],
+.toggle__switch-toggle .toggle__switch-toggle-content {
+  box-shadow: none;
+}
+
+.toggle__switch-toggle input[type="checkbox"]:not(:focus-visible) ~ .toggle__switch-toggle-content,
+.toggle__switch-toggle .field_with_errors ~ .toggle__switch-toggle-content {
+  outline: none;
+}
+
+/* Label text: same font + size as the section headings ("Newsletter" etc.,
+   styled heavy/micro) so the heading and the copy next to the toggle match.
+   flex: 1 1 auto + min-width: 0 keeps the text in its own column, so a wrapped
+   second line hangs under the first text line (never under the control). */
+.toggle__switch-toggle .toggle__switch-trigger-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-style: var(--stzh-font-style-medium);
+  font-size: var(--stzh-font-micro-font-size);
+  line-height: 1.5rem;
+  letter-spacing: var(--stzh-font-curve---text-letter-spacing);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toggle__switch-toggle-content,
+  .toggle__switch-toggle-content::before {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   Notifications settings page: homogeneous spacing + aligned frequency row
+   ========================================================================== */
+
+/* Section title → controls rhythm. */
+html[data-rails-controller-name="notifications_settings"] .form__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
+html[data-rails-controller-name="notifications_settings"] .form__wrapper > label:not(.toggle__switch-toggle) {
+  margin-top: var(--stzh-space-xlarge);
+  margin-bottom: var(--stzh-space-small);
+}
+
+html[data-rails-controller-name="notifications_settings"] .form__wrapper > label:not(.toggle__switch-toggle):first-child {
+  margin-top: 0;
+}
+
+/* Equal vertical spacing between stacked toggles. */
+html[data-rails-controller-name="notifications_settings"] .toggle__switch-trigger + .toggle__switch-trigger,
+html[data-rails-controller-name="notifications_settings"] .space-y-4 > * + * {
+  margin-top: var(--stzh-space-small);
+}
+
+html[data-rails-controller-name="notifications_settings"] .space-y-4 {
+  width: 100%;
+}
+
+/* Frequency radios (notifications_sending_frequency): Rails collection_radio_buttons
+   renders the <label>s as bare siblings with no wrapper. Decidim stamps a negative
+   top margin (md:-mt-4) on every option except the first (first-of-type:mt-0), so
+   they overlap and the spacing looks broken. The first option ("Keine") is spared
+   and looks right — match it by neutralizing the margins on the rest and giving the
+   stack an even vertical rhythm. Keyed on the unique `for` so no container/scope
+   dependency can make it miss. */
+label.form__wrapper-checkbox-label[for*="notifications_sending_frequency"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: var(--stzh-space-small) !important;
+  margin: 0 var(--stzh-space-large) var(--stzh-space-small) 0 !important;
+  vertical-align: top;
+}
+
+html[data-rails-controller-name="notifications_settings"] .push-notifications__reminder {
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-size: var(--stzh-font-nano-font-size);
+  line-height: var(--stzh-font-nano-text-line-height);
+  color: var(--stzh-input-description-color, var(--stzh-color-coolgrey70));
+  margin: 0 0 var(--stzh-space-small);
 }
