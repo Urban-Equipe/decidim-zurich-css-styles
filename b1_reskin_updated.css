@@ -5154,9 +5154,10 @@ label[for="questionnaire_tos_agreement"] {
   --toggle-knob-size: 1.5rem;
   --toggle-knob-on: var(--stzh-color-primary, var(--stzh-color-primary70));
   --toggle-knob-hover: var(--stzh-color-primary-hover, var(--stzh-color-primary90));
-  display: inline-flex;
-  align-items: center;
-  gap: var(--stzh-space-xsmall, 8px);
+  /* Same label row metrics as .form__wrapper-checkbox-label. */
+  display: flex;
+  align-items: flex-start;
+  gap: var(--stzh-space-small);
   margin: 0;
   cursor: pointer;
   user-select: none;
@@ -5164,20 +5165,27 @@ label[for="questionnaire_tos_agreement"] {
   font-weight: var(--stzh-font-weight-medium);
   font-style: var(--stzh-font-style-medium);
   font-size: var(--stzh-font-milli-font-size);
-  line-height: var(--stzh-font-milli-text-line-height);
+  line-height: 1.5rem;
   letter-spacing: var(--stzh-font-curve---text-letter-spacing);
   color: var(--stzh-base-color);
   transition: color var(--stzh-base-transition-animation-speed);
 }
 
-/* Control box: sized to the knob so the overlapping circle is not clipped. */
+/* Control box: 1.5rem tall so it lines up with the first text line (1.5rem),
+   and sized to the knob so the overlapping circle is not clipped. */
 .toggle__switch-toggle > span:first-child {
   position: relative;
   display: inline-flex;
   flex-shrink: 0;
   align-items: center;
   width: var(--toggle-track-width);
-  height: var(--toggle-knob-size);
+  height: 1.5rem;
+}
+
+/* No check / close glyphs — the STZH toggle shows none. */
+.toggle__switch-toggle > span:first-child svg,
+.toggle__switch-toggle-icon {
+  display: none !important;
 }
 
 /* Hide the native checkbox but keep it clickable over the whole control box. */
@@ -5287,13 +5295,17 @@ label[for="questionnaire_tos_agreement"] {
   background-color: var(--stzh-color-grey70);
 }
 
-/* Decidim ships check/close glyphs inside the control; STZH shows none. */
-.toggle__switch-toggle-icon {
-  display: none;
-}
-
+/* Label text: identical type to .form__wrapper-checkbox-label so toggle,
+   checkbox, and radio copy are harmonized. Second line wraps under the first
+   (the control box is a separate flex item, so text starts at one indent). */
 .toggle__switch-toggle .toggle__switch-trigger-text {
   min-width: 0;
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-style: var(--stzh-font-style-medium);
+  font-size: var(--stzh-font-milli-font-size);
+  line-height: 1.5rem;
+  letter-spacing: var(--stzh-font-curve---text-letter-spacing);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -5301,4 +5313,57 @@ label[for="questionnaire_tos_agreement"] {
   .toggle__switch-toggle-content::after {
     transition: none;
   }
+}
+
+/* ==========================================================================
+   Notifications settings page: homogeneous spacing + aligned frequency row
+   ========================================================================== */
+
+/* Section title → controls rhythm. */
+html[data-rails-controller-name="notifications_settings"] .form__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
+html[data-rails-controller-name="notifications_settings"] .form__wrapper > label:not(.toggle__switch-toggle) {
+  margin-top: var(--stzh-space-xlarge);
+  margin-bottom: var(--stzh-space-small);
+}
+
+html[data-rails-controller-name="notifications_settings"] .form__wrapper > label:not(.toggle__switch-toggle):first-child {
+  margin-top: 0;
+}
+
+/* Equal vertical spacing between stacked toggles. */
+html[data-rails-controller-name="notifications_settings"] .toggle__switch-trigger + .toggle__switch-trigger,
+html[data-rails-controller-name="notifications_settings"] .space-y-4 > * + * {
+  margin-top: var(--stzh-space-small);
+}
+
+html[data-rails-controller-name="notifications_settings"] .space-y-4 {
+  width: 100%;
+}
+
+/* Frequency radios: keep all options on one horizontal baseline, evenly spaced.
+   Decidim adds negative top margins (md:-mt-4) that knock them out of line. */
+html[data-rails-controller-name="notifications_settings"] .form__wrapper > .flex {
+  align-items: center;
+  gap: var(--stzh-space-xlarge);
+  margin-top: 0;
+}
+
+html[data-rails-controller-name="notifications_settings"] .form__wrapper > .flex > .form__wrapper-checkbox-label {
+  margin: 0;
+  align-items: center;
+}
+
+html[data-rails-controller-name="notifications_settings"] .push-notifications__reminder {
+  font-family: var(--stzh-font-family-medium);
+  font-weight: var(--stzh-font-weight-medium);
+  font-size: var(--stzh-font-nano-font-size);
+  line-height: var(--stzh-font-nano-text-line-height);
+  color: var(--stzh-input-description-color, var(--stzh-color-coolgrey70));
+  margin: 0 0 var(--stzh-space-small);
 }
