@@ -5279,7 +5279,20 @@ label[for="questionnaire_tos_agreement"] {
   }
 }
 
-/* Notifications settings: STZH form rhythm (section title → control). */
+/* Notifications settings: STZH form rhythm (section title → control).
+   One type size for the whole form: stzh-toggle milli (16px / 1.5). */
+html[data-rails-controller-name="notifications_settings"] .form__wrapper,
+html[data-rails-controller-name="notifications_settings"] .form__wrapper label,
+html[data-rails-controller-name="notifications_settings"] .form__wrapper-checkbox-label,
+html[data-rails-controller-name="notifications_settings"] .toggle__switch-toggle,
+html[data-rails-controller-name="notifications_settings"] .toggle__switch-toggle .toggle__switch-trigger-text,
+html[data-rails-controller-name="notifications_settings"] .push-notifications,
+html[data-rails-controller-name="notifications_settings"] .push-notifications__reminder,
+html[data-rails-controller-name="notifications_settings"] .form__wrapper .button {
+  font-size: var(--stzh-font-milli-font-size, 1rem);
+  line-height: var(--stzh-font-milli-text-line-height, 1.5);
+}
+
 html[data-rails-controller-name="notifications_settings"] .form__wrapper {
   display: flex;
   flex-direction: column;
@@ -5328,8 +5341,6 @@ html[data-rails-controller-name="notifications_settings"] .form__wrapper-checkbo
 html[data-rails-controller-name="notifications_settings"] .push-notifications__reminder {
   font-family: var(--stzh-font-family-medium);
   font-weight: var(--stzh-font-weight-medium);
-  font-size: var(--stzh-font-nano-font-size);
-  line-height: var(--stzh-font-nano-text-line-height);
   color: var(--stzh-input-description-color, var(--stzh-color-coolgrey70));
   margin: 0 0 var(--stzh-space-small);
 }
