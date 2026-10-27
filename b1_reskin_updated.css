@@ -5154,10 +5154,13 @@ label[for="questionnaire_tos_agreement"] {
   --toggle-knob-size: 1.5rem;
   --toggle-knob-on: var(--stzh-color-primary, var(--stzh-color-primary70));
   --toggle-knob-hover: var(--stzh-color-primary-hover, var(--stzh-color-primary90));
-  /* Same label row metrics as .form__wrapper-checkbox-label. */
-  display: flex;
-  align-items: flex-start;
-  gap: var(--stzh-space-small);
+  /* Same label row metrics as .form__wrapper-checkbox-label.
+     !important so the live theme can't collapse the flex row — otherwise the
+     control and text flow inline and a wrapped second line drops to the far
+     left instead of hanging under the first text line. */
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: var(--stzh-space-small) !important;
   margin: 0;
   cursor: pointer;
   user-select: none;
@@ -5176,7 +5179,7 @@ label[for="questionnaire_tos_agreement"] {
 .toggle__switch-toggle > span:first-child {
   position: relative;
   display: inline-flex;
-  flex-shrink: 0;
+  flex: 0 0 auto !important;
   align-items: center;
   width: var(--toggle-track-width);
   height: 1.5rem;
@@ -5337,15 +5340,17 @@ label[for="questionnaire_tos_agreement"] {
   outline: none;
 }
 
-/* Label text: identical type to .form__wrapper-checkbox-label so toggle,
-   checkbox, and radio copy are harmonized. Second line wraps under the first
-   (the control box is a separate flex item, so text starts at one indent). */
+/* Label text: same font + size as the section headings ("Newsletter" etc.,
+   styled heavy/micro) so the heading and the copy next to the toggle match.
+   flex: 1 1 auto + min-width: 0 keeps the text in its own column, so a wrapped
+   second line hangs under the first text line (never under the control). */
 .toggle__switch-toggle .toggle__switch-trigger-text {
+  flex: 1 1 auto;
   min-width: 0;
-  font-family: var(--stzh-font-family-medium);
-  font-weight: var(--stzh-font-weight-medium);
-  font-style: var(--stzh-font-style-medium);
-  font-size: var(--stzh-font-milli-font-size);
+  font-family: var(--stzh-font-family-heavy);
+  font-weight: var(--stzh-font-weight-heavy);
+  font-style: var(--stzh-font-style-heavy);
+  font-size: var(--stzh-font-micro-font-size);
   line-height: 1.5rem;
   letter-spacing: var(--stzh-font-curve---text-letter-spacing);
 }
