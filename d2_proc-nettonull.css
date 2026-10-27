@@ -400,6 +400,21 @@ html[data-rails-controller-name="orders"][data-rails-action-name="status"] main.
 
 html[data-rails-controller-name="orders"][data-rails-action-name="status"] main.layout-1col .flex > a.button__secondary {
   margin-bottom: var(--stzh-space-large);
+  font-size: 0;
+  line-height: 0;
+}
+
+html[data-rails-controller-name="orders"][data-rails-action-name="status"] main.layout-1col .flex > a.button__secondary > :not(svg) {
+  font-size: 0;
+  line-height: 0;
+}
+
+html[data-rails-controller-name="orders"][data-rails-action-name="status"] main.layout-1col .flex > a.button__secondary::before {
+  content: "Zur Umfrage";
+  font-size: var(--stzh-font-milli-font-size);
+  line-height: var(--stzh-font-milli-text-line-height);
+  font-family: var(--stzh-font-family-heavy);
+  font-weight: var(--stzh-font-weight-heavy);
 }
 
 /* Order status: replace the survey heading "Evaluation" with the Netto-Null copy. */
