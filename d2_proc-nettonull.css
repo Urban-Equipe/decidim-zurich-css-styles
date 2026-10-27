@@ -402,6 +402,20 @@ html[data-rails-controller-name="orders"][data-rails-action-name="status"] main.
   margin-bottom: var(--stzh-space-large);
 }
 
+/* Order status: replace the survey heading "Evaluation" with the Netto-Null copy. */
+html[data-rails-controller-name="orders"][data-rails-action-name="status"] h2.text-2xl {
+  font-size: 0;
+  line-height: 0;
+}
+
+html[data-rails-controller-name="orders"][data-rails-action-name="status"] h2.text-2xl::before {
+  content: "Sag uns deine Meinung";
+  font-size: var(--stzh-font-deca-font-size);
+  line-height: var(--stzh-font-deca-text-line-height);
+  font-family: var(--stzh-font-family-heavy);
+  font-weight: var(--stzh-font-weight-heavy);
+}
+
 /* Voted budget summary: hide "Budgets / {budget title}". The name is a text node, so collapse the header and restore the description. */
 .budget-summary__content__header {
   font-size: 0;
