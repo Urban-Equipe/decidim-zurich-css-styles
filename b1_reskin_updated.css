@@ -5388,21 +5388,20 @@ html[data-rails-controller-name="notifications_settings"] .space-y-4 {
   width: 100%;
 }
 
-/* Frequency radios: keep all options on one horizontal baseline, evenly spaced.
-   Decidim stamps negative top margins (md:-mt-4 / first-of-type:mt-0) on every
-   option except the first, which knocks them out of line and leaves uneven
-   spacing. Target the labels directly (any nesting) so the override always wins. */
-html[data-rails-controller-name="notifications_settings"] .flex:has(> label.form__wrapper-checkbox-label[for*="sending_frequency"]),
-html[data-rails-controller-name="notifications_settings"] .form__wrapper > .flex {
-  align-items: center;
-  gap: var(--stzh-space-xlarge);
-  margin-top: 0;
-}
-
-html[data-rails-controller-name="notifications_settings"] label.form__wrapper-checkbox-label[for*="sending_frequency"],
-html[data-rails-controller-name="notifications_settings"] .form__wrapper > .flex > .form__wrapper-checkbox-label {
+/* Frequency radios (notifications_sending_frequency): Rails collection_radio_buttons
+   renders the <label>s as bare siblings with no wrapper. Decidim stamps a negative
+   top margin (md:-mt-4) on every option except the first (first-of-type:mt-0), so
+   they overlap and the spacing looks broken. The first option ("Keine") is spared
+   and looks right — match it by neutralizing the margins on the rest and giving the
+   stack an even vertical rhythm. Keyed on the unique `for` so no container/scope
+   dependency can make it miss. */
+label.form__wrapper-checkbox-label[for*="notifications_sending_frequency"] {
   margin: 0 !important;
   align-items: center;
+}
+
+label.form__wrapper-checkbox-label[for*="notifications_sending_frequency"] + label.form__wrapper-checkbox-label[for*="notifications_sending_frequency"] {
+  margin-top: var(--stzh-space-small) !important;
 }
 
 html[data-rails-controller-name="notifications_settings"] .push-notifications__reminder {
