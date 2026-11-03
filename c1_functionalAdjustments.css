@@ -194,3 +194,8 @@ label.form__wrapper-checkbox-label:has(input#public_participation)
 .layout-aside__ctas-buttons {
   justify-content: flex-end;
 }
+
+/* Hide broken Facebook share link in the share modal; the remaining icons reflow via flex */
+.share-modal__list [data-site="facebook"] {
+  display: none;
+}
