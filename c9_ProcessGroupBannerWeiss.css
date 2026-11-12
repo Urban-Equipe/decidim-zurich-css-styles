@@ -49,9 +49,51 @@ section:has(.participatory-space__hero) {
   display:none;
 }
 
+/* Banner heading colour, matching the deSy "Homepage Hauptthemen" pagetitle (cobaltblue50) */
+.participatory-space__hero-text h1,
+.participatory-space__hero-text .h1 {
+  color: var(--stzh-color-cobaltblue50);
+}
+
+/* Left-align the banner heading with the page content below it.
+   Mirrors the container sizing used by the html-block content blocks,
+   overriding the base hero's 50%-width right-offset layout. */
 .participatory-space__hero-text {
-  margin-right: auto;
   width: 100%;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--stzh-space-medium);
+  padding-right: var(--stzh-space-medium);
+}
+
+@media (min-width: 768px) {
+  .participatory-space__hero-text {
+    width: 100%;
+    max-width: 768px;
+    margin-right: auto;
+    padding-left: var(--stzh-space-medium);
+  }
+}
+
+@media (min-width: 1024px) {
+  .participatory-space__hero-text {
+    max-width: 1024px;
+    padding-left: var(--stzh-space-xxlarge);
+    padding-right: var(--stzh-space-xxlarge);
+  }
+}
+
+@media (min-width: 1280px) {
+  .participatory-space__hero-text {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .participatory-space__hero-text {
+    max-width: 1536px;
+  }
 }
 
 
