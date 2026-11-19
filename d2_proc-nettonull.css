@@ -397,6 +397,13 @@ html[data-rails-controller-name="budgets"] section.layout-main__section.layout-m
   display: none;
 }
 
+/* Budgets index: hide the standalone “Voraussetzungen … Abstimmen” CTA
+   (<p><strong>…</strong></p>). Same wording stays if it is inline in body copy. */
+html[data-rails-controller-name="budgets"] section.layout-main__section:not(.layout-main__heading) .editor-content p:has(> strong:only-child),
+html[data-rails-controller-name="budgets"] #voting-rules p:has(> strong:only-child) {
+  display: none;
+}
+
 /* Order status: hide Decidim's download / homepage / share row.
    The term-customizer copies of those classes sit inside the message, not as direct children of the column. */
 html[data-rails-controller-name="orders"][data-rails-action-name="status"] main.layout-1col > .form__wrapper-block,
