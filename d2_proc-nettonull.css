@@ -391,10 +391,9 @@ html[data-rails-controller-name="budgets"] #dropdown-menu-order {
   display: none;
 }
 
-/* Budgets index: hide "Abstimmung abgeschlossen" and the green thank-you flash.
-   Keep the “Stimme löschen” guidance and the voted budget card. */
-html[data-rails-controller-name="budgets"] section.layout-main__section.layout-main__heading:has(#voted-budgets) > h2.decorator,
-html[data-rails-controller-name="budgets"] section.layout-main__section.layout-main__heading:has(#voted-budgets) > .flash.success[data-announcement] {
+/* Budgets index: hide "Abstimmung abgeschlossen", the Stimme-anpassen copy,
+   and the green thank-you flash. Keep the voted budget card. */
+html[data-rails-controller-name="budgets"] section.layout-main__section.layout-main__heading:has(#voted-budgets) > :not(#voted-budgets) {
   display: none;
 }
 
