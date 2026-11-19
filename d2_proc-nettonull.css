@@ -391,6 +391,12 @@ html[data-rails-controller-name="budgets"] #dropdown-menu-order {
   display: none;
 }
 
+/* Budgets index: hide the completed-vote block (heading, copy, flash, voted card).
+   Scoped with :has(#voted-budgets) so other layout-main__heading sections stay. */
+html[data-rails-controller-name="budgets"] section.layout-main__section.layout-main__heading:has(#voted-budgets) {
+  display: none;
+}
+
 /* Order status: hide Decidim's download / homepage / share row.
    The term-customizer copies of those classes sit inside the message, not as direct children of the column. */
 html[data-rails-controller-name="orders"][data-rails-action-name="status"] main.layout-1col > .form__wrapper-block,
